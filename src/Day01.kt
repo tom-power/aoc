@@ -1,14 +1,12 @@
-fun main() {
-    fun part1(input: List<String>): Int = input.partitioned().max()
+object Day01 : Day {
+    override fun List<String>.part1(): Int = partitioned().max()
 
-    fun part2(input: List<String>): Int = input.partitioned().sumTop3()
+    override fun List<String>.part2(): Int = partitioned().sumTop3()
 
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 24000)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    @JvmStatic
+    fun main(args: Array<String>) {
+        super.runMeWith(partOneTestResult = 24000)
+    }
 }
 
 fun List<String>.partitioned(): List<Int> =
