@@ -5,6 +5,10 @@ object Day00 : Day {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        super.runMeWith(partOneTestResult = TODO())
+        super.runMeWith(
+            partOneTestExpected = TODO(),
+            partOneExpected = null,
+            partTwoExpected = null
+        )
     }
 }

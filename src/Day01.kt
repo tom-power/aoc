@@ -5,7 +5,11 @@ object Day01 : Day {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        super.runMeWith(partOneTestResult = 24000)
+        super.runMeWith(
+            partOneTestExpected = 24000,
+            partOneExpected = 70613,
+            partTwoExpected = 205805
+        )
     }
 }
 
