@@ -2,15 +2,6 @@ object Day01 : Day {
     override fun List<String>.part1(): Int = partitionedBy("").summed().max()
 
     override fun List<String>.part2(): Int = partitionedBy("").summed().sumOfTop3()
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        super.runMeWith(
-            partOneTestExpected = 24000,
-            partOneExpected = 70613,
-            partTwoExpected = 205805
-        )
-    }
 }
 
 fun List<String>.partitionedBy(delimiter: String): List<List<String>> =
