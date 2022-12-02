@@ -1,7 +1,6 @@
 import Common.summed
-import Common.theirMapPlays
-import Common.toKeys
-import Common.toRound
+import Common.theirPlayMap
+import Common.toRoundsUsing
 import Domain.Outcome
 import Domain.Outcome.*
 import Domain.Play
@@ -9,13 +8,11 @@ import Domain.Play.*
 import Domain.Round
 import Domain.points
 import Domain.toOutcome
-import Part1.toRounds
-import Part2.toKnownOutcomeRounds
 
 object Day02 : Day {
-    override fun List<String>.part1(): Int = toRounds().summed()
+    override fun List<String>.part1(): Int = toRoundsUsing(Part1::toPlays).summed()
 
-    override fun List<String>.part2(): Int = toKnownOutcomeRounds().summed()
+    override fun List<String>.part2(): Int = toRoundsUsing(Part2::toPlaysForOutcome).summed()
 }
 
 object Domain {
@@ -57,30 +54,39 @@ object Domain {
 }
 
 object Common {
-    val theirMapPlays = mapOf("A" to Rock, "B" to Paper, "C" to Scissors)
+    val theirPlayMap = mapOf("A" to Rock, "B" to Paper, "C" to Scissors)
 
-    fun List<String>.toKeys() = map { it.split(" ").run { this[0] to this[1] } }
+    private fun List<String>.toKeys(): Keys = map { it.split(" ").run { this[0] to this[1] } }
 
-    fun Pair<Play, Play>.toRound() = Round(first, second)
+    private fun Pair<Play, Play>.toRound() = Round(first, second)
+
+    fun List<String>.toRoundsUsing(toPlays: Keys.() -> Plays): Rounds = toKeys().toPlays().map { it.toRound() }
 
     fun List<Round>.summed() = map { it.toOutcome().points() + it.yourPlay.points() }.sum()
 }
 
+typealias Keys = List<Pair<String, String>>
+typealias Plays = List<Pair<Play, Play>>
+typealias Rounds = List<Round>
+
 object Part1 {
-    fun List<String>.toRounds() = toKeys().toPlays().map { it.toRound() }
+    private val yourPlayMap = mapOf("X" to Rock, "Y" to Paper, "Z" to Scissors)
 
-    private val yourMapPlays = mapOf("X" to Rock, "Y" to Paper, "Z" to Scissors)
-
-    private fun List<Pair<String, String>>.toPlays() = map { theirMapPlays[it.first]!! to yourMapPlays[it.second]!! }
+    fun toPlays(keys: Keys): Plays =
+        keys.map { (theirKey, yourKey) ->
+            theirPlayMap[theirKey]!! to yourPlayMap[yourKey]!!
+        }
 }
 
 object Part2 {
-    fun List<String>.toKnownOutcomeRounds() = toKeys().toKnownOutcomePlays().map { it.toRound() }
+    private val yourOutcomeMap = mapOf("X" to Lose, "Y" to Draw, "Z" to Win)
 
-    private val yourMapOutcome = mapOf("X" to Lose, "Y" to Draw, "Z" to Win)
-
-    private fun List<Pair<String, String>>.toKnownOutcomePlays() =
-        map { theirMapPlays[it.first]!!.run { this to this.playFor(yourMapOutcome[it.second]!!) } }
+    fun toPlaysForOutcome(keys: Keys): Plays =
+        keys.map { (theirKey, yourKey) ->
+            theirPlayMap[theirKey]!!.let { theirPlay ->
+                theirPlay to theirPlay.playFor(yourOutcomeMap[yourKey]!!)
+            }
+        }
 
     private fun Play.playFor(outcome: Outcome): Play =
         Play.values().first { Round(this, it).toOutcome() == outcome }
