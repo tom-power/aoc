@@ -1,29 +1,22 @@
 object Day03 : Day {
-    override fun List<String>.part1(): Int = priorities()
+    override fun List<String>.part1(): Int = prioritiesCompartments()
 
-    override fun List<String>.part2(): Int = priorities3()
+    override fun List<String>.part2(): Int = prioritiesBadges()
 }
 
-fun List<String>.priorities(): Int = 
-    map { it.chunked(it.count()/2) }
-    .map { it.first().toList().intersect(it.get(1).toList()).first()  }
-    .map { 
-        it.toInt() - (if(it.isUpperCase()) (64 -26) else 96 )
-    }
-    .sum()
+fun List<String>.prioritiesCompartments(): Int =
+    map { it.chunked(it.count() / 2) }
+        .map { it.commonItem() }
+        .sumOf { it.toPriority() }
 
-
-fun List<String>.priorities3(): Int = 
+fun List<String>.prioritiesBadges(): Int =
     chunked(3)
-    .map { 
-        val first = it.first().toList()
-        val second = it.get(1).toList()
-        val third = it.get(2).toList()
+        .map { it.commonItem() }
+        .sumOf { it.toPriority() }
 
-       first.intersect(second).intersect(third).first()
-    }
-    .map { 
-        it.toInt() - (if(it.isUpperCase()) (64 -26) else 96 )
-    }
-    .sum()
-    
+fun List<String>.commonItem(): Char =
+    fold(get(0).toSet()) { acc, s ->
+        s.toSet().intersect(acc.toSet())
+    }.first()
+
+fun Char.toPriority(): Int = code - (if (isUpperCase()) (64 - 26) else 96)
