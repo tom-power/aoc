@@ -1,6 +1,5 @@
 package aoc22
 
-import aoc22.Day04
 import aoc22.Day04.part1
 import aoc22.Day04.part2
 import org.junit.jupiter.api.Assertions.assertEquals

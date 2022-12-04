@@ -1,7 +1,12 @@
-cp src/main/kotlin/Day00.kt "src/main/kotlin/Day$1.kt" &&
-touch "src/main/resources/Day$1.txt"  &&
-touch "src/main/resources/Day$1_test.txt" &&
-cp src/test/kotlin/Day00Test.kt "src/test/kotlin/Day$1Test.kt" &&
+srcMain=src/main/kotlin/aoc22
+srcTest=src/test/kotlin/aoc22
+srcResources=src/main/resources
 
-sed -i "s/00/$1/" "src/main/kotlin/Day$1.kt" &&
-sed -i "s/00/$1/" "src/test/kotlin/Day$1Test.kt"
+cp "$srcMain/Day00.kt" "$srcMain/Day$1.kt" &&
+sed -i "s/00/$1/" "$srcMain/Day$1.kt" &&
+
+cp "$srcTest/Day00Test.kt" "$srcTest/Day$1Test.kt" &&
+sed -i "s/00/$1/" "$srcTest/Day$1Test.kt" &&
+
+touch "$srcResources/Day$1.txt"  &&
+touch "$srcResources/Day$1_test.txt"
