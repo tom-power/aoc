@@ -5,9 +5,9 @@ object Day00 : Day {
 }
 
 fun List<String>.part1Day00(): Int =
-    map { it.split(",") }
+    map { it.split(",") }.also { println(it) }
         .let { 0 }
 
 fun List<String>.part2Day00(): Int =
-    map { it.split(",") }
+    map { it.split(",") }.also { println(it) }
         .let { 0 }
