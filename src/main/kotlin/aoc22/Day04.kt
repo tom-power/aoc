@@ -6,7 +6,7 @@ object Day04 : Day {
     override fun List<String>.part2(): Int = countOfAssignmentPairsWhere(::isOverlapAny)
 }
 
-fun List<String>.countOfAssignmentPairsWhere(predicate: (Pair<IntRange, IntRange>) -> Boolean ): Int =
+fun List<String>.countOfAssignmentPairsWhere(predicate: (Pair<IntRange, IntRange>) -> Boolean): Int =
     map { it.toAssignmentPairs() }
         .filter { predicate(it) }
         .count()
