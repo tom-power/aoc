@@ -8,10 +8,25 @@ class Day00Test {
 
     @Test
     @Disabled
-    fun `is ok`() {
-        assertEquals(Day00.readDaysInputTest().part1(), 0)
-        assertEquals(Day00.readDaysInputTest().part2(), 0)
-        assertEquals(Day00.readDaysInput().part1(), 0)
-        assertEquals(Day00.readDaysInput().part2(), 0)
+    fun `part one test`() {
+        assertEquals(0, Day00.readDaysInputTest().part1())
+    }
+
+    @Test
+    @Disabled
+    fun `part one`() {
+        assertEquals(0, Day00.readDaysInput().part1())
+    }
+
+    @Test
+    @Disabled
+    fun `part two test`() {
+        assertEquals(0, Day00.readDaysInputTest().part2())
+    }
+
+    @Test
+    @Disabled
+    fun `part two`() {
+        assertEquals(0, Day00.readDaysInput().part2())
     }
 }

@@ -7,11 +7,17 @@ import org.junit.jupiter.api.Disabled
 class Day01Test {
 
     @Test
-    @Disabled
-    fun `is ok`() {
-        assertEquals(Day01.readDaysInputTest().part1(), 24000)
-//        assertEquals(Day01.readDaysInputTest().part2(), 15)
-        assertEquals(Day01.readDaysInput().part1(), 70613)
-        assertEquals(Day01.readDaysInput().part2(), 205805)
+    fun `part one test`() {
+        assertEquals(24000, Day01.readDaysInputTest().part1())
+    }
+
+    @Test
+    fun `part one`() {
+        assertEquals(70613, Day01.readDaysInput().part1())
+    }
+
+    @Test
+    fun `part two`() {
+        assertEquals(70613, Day01.readDaysInput().part2())
     }
 }
