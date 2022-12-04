@@ -1,3 +1,5 @@
+package aoc22
+
 object Day00 : Day {
     override fun List<String>.part1(): Int = part1Day00()
 

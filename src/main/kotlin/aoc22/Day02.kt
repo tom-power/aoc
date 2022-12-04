@@ -1,13 +1,15 @@
-import Common.summed
-import Common.theirPlayMap
-import Common.toRoundsUsing
-import Domain.Outcome
-import Domain.Outcome.*
-import Domain.Play
-import Domain.Play.*
-import Domain.Round
-import Domain.points
-import Domain.toOutcome
+package aoc22
+
+import aoc22.Common.summed
+import aoc22.Common.theirPlayMap
+import aoc22.Common.toRoundsUsing
+import aoc22.Domain.Outcome
+import aoc22.Domain.Outcome.*
+import aoc22.Domain.Play
+import aoc22.Domain.Play.*
+import aoc22.Domain.Round
+import aoc22.Domain.points
+import aoc22.Domain.toOutcome
 
 object Day02 : Day {
     override fun List<String>.part1(): Int = toRoundsUsing(Part1::toPlays).summed()

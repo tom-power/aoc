@@ -1,3 +1,5 @@
+package aoc22
+
 interface Day {
     fun List<String>.part1(): Int
 

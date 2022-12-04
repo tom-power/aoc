@@ -1,8 +1,10 @@
-import Day01.part1
-import Day01.part2
+package aoc22
+
+import aoc22.Day01
+import aoc22.Day01.part1
+import aoc22.Day01.part2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Disabled
 
 class Day01Test {
 
@@ -18,6 +20,6 @@ class Day01Test {
 
     @Test
     fun `part two`() {
-        assertEquals(70613, Day01.readDaysInput().part2())
+        assertEquals(205805, Day01.readDaysInput().part2())
     }
 }
