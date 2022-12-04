@@ -1,17 +1,17 @@
 package aoc22
 
 object Day04 : Day {
-    override fun List<String>.part1(): Int = day04 { it.first.containsAll(it.second) }
+    override fun List<String>.part1(): Int = countOfAssignmentPairsWhere(::isOverlapAll)
 
-    override fun List<String>.part2(): Int = day04 { it.first.containsAny(it.second) }
+    override fun List<String>.part2(): Int = countOfAssignmentPairsWhere(::isOverlapAny)
 }
 
-fun List<String>.day04(discriminator: (Pair<IntRange, IntRange>) -> Boolean ): Int =
-    map { it.toRanges() }
-        .filter { discriminator(it) }
+fun List<String>.countOfAssignmentPairsWhere(predicate: (Pair<IntRange, IntRange>) -> Boolean ): Int =
+    map { it.toAssignmentPairs() }
+        .filter { predicate(it) }
         .count()
 
-fun String.toRanges(): Pair<IntRange, IntRange> =
+fun String.toAssignmentPairs(): Pair<IntRange, IntRange> =
     split(",")
         .run { this[0].toRange() to this[1].toRange() }
 
@@ -19,11 +19,11 @@ fun String.toRange(): IntRange =
     split("-")
         .run { this[0].toInt()..this[1].toInt() }
 
-fun IntRange.containsAll(other: IntRange) =
-    this.intersect(other).let { it == this.toSet() || it == other.toSet() }
+fun isOverlapAll(ranges: Pair<IntRange, IntRange>) =
+    ranges.first.intersect(ranges.second).let { it == ranges.first.toSet() || it == ranges.second.toSet() }
 
-fun IntRange.containsAny(other: IntRange) =
-    this.intersect(other).isNotEmpty()
+fun isOverlapAny(ranges: Pair<IntRange, IntRange>) =
+    ranges.first.intersect(ranges.second).isNotEmpty()
 
 fun IntRange.intersect(other: IntRange) =
     this.toSet().intersect(other.toSet())
