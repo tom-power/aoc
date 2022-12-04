@@ -1,3 +1,5 @@
+package aoc22
+
 object Day04 : Day {
     override fun List<String>.part1(): Int = day04 { it.first.containsAll(it.second) }
 

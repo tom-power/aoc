@@ -1,3 +1,5 @@
+package aoc22
+
 object Day01 : Day {
     override fun List<String>.part1(): Int = partitionedBy("").summed().max()
 

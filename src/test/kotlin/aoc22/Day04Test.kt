@@ -1,7 +1,9 @@
-import Day04.part1
-import Day04.part2
+package aoc22
+
+import aoc22.Day04
+import aoc22.Day04.part1
+import aoc22.Day04.part2
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day04Test {
