@@ -11,7 +11,7 @@ import aoc22.Domain.Round
 import aoc22.Domain.points
 import aoc22.Domain.toOutcome
 
-object Day02 : Day {
+object Day02 : Day<String, Int> {
     override fun List<String>.part1(): Int = toRoundsUsing(Part1::toPlays).summed()
 
     override fun List<String>.part2(): Int = toRoundsUsing(Part2::toPlaysForOutcome).summed()

@@ -1,6 +1,6 @@
 package aoc22
 
-object Day00 : Day {
+object Day00 : Day<String, Int> {
     override fun List<String>.part1(): Int = part1Day00()
 
     override fun List<String>.part2(): Int = part2Day00()

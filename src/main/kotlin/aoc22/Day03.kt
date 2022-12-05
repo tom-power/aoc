@@ -1,6 +1,6 @@
 package aoc22
 
-object Day03 : Day {
+object Day03 : Day<String, Int> {
     override fun List<String>.part1(): Int = toCompartments().toSumOfCommon()
 
     override fun List<String>.part2(): Int = toTrios().toSumOfCommon()
