@@ -5,25 +5,13 @@ import java.math.BigInteger
 import java.security.MessageDigest
 
 object Input {
-
-    fun readInput(name: String) =
+   fun readInput(name: String) =
         File("src/main/resources", "$name.txt")
             .takeIf { it.isFile }
             ?.readLines()
 }
 
-object Misc {
-
-    fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
-        .toString(16)
-        .padStart(32, '0')
-
-
-    fun <T> T.log(): T = also { println(it) }
-}
-
 object Collections {
-
     inline fun <reified T> List<List<T>>.transpose(): List<List<T>> {
         val cols = this[0].size
         val rows = size
@@ -43,4 +31,12 @@ object Collections {
     private fun <T> List<T>.indexesOf(delimiter: T) = mapIndexedNotNull { index, t -> index.takeIf { t == delimiter } }
 
     private fun <T> List<T>.partitionAt(indexes: List<Int>) = indexes.zipWithNext { a, b -> this.subList(a + 1, b) }
+}
+
+object Misc {
+    fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
+        .toString(16)
+        .padStart(32, '0')
+
+    fun <T> T.log(): T = also { println(it) }
 }
