@@ -1,19 +1,17 @@
 package aoc22
 
-import aoc22.Input.readInput
+import aoc22.Input.readInputWithFallback
 
 interface Day<T, R> {
     fun List<T>.part1(): R
 
     fun List<T>.part2(): R
 
-    fun readDaysInputExample(): List<String> =
-        readInputWithFallback("${this::class.simpleName}_example", "aoc22")
+    private fun name(): String? = this::class.simpleName
 
-    fun readDaysInput(): List<String> =
-        readInputWithFallback("${this::class.simpleName}", "aoc22")
+    fun readInputExample(): List<String> =
+        readInputWithFallback("${name()}_example", "aoc22")
 
-    private fun readInputWithFallback(name: String, fallback: String): List<String> =
-        readInput(name) ?: readInput("$fallback/$name")!!
-
+    fun readInput(): List<String> =
+        readInputWithFallback("${name()}", "aoc22")
 }
