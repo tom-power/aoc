@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test
 class Day02Test {
 
     @Test
-    fun `part one test`() {
-        assertEquals(15, Day02.readDaysInputTest().part1())
+    fun `part one example`() {
+        assertEquals(15, Day02.readDaysInputExample().part1())
     }
 
     @Test
@@ -18,8 +18,8 @@ class Day02Test {
     }
 
     @Test
-    fun `part two test`() {
-        assertEquals(12, Day02.readDaysInputTest().part2())
+    fun `part two example`() {
+        assertEquals(12, Day02.readDaysInputExample().part2())
     }
 
     @Test

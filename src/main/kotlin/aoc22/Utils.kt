@@ -36,3 +36,5 @@ fun List<String>.partitionedBy(delimiter: String): List<List<String>> =
 private fun <T> List<T>.indexesOf(delimiter: T) = mapIndexedNotNull { index, t -> index.takeIf { t == delimiter } }
 
 private fun <T> List<T>.partitionAt(indexes: List<Int>) = indexes.zipWithNext { a, b -> this.subList(a + 1, b) }
+
+fun <T> T.log(): T = also { println(it) }
