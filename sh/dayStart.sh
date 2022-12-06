@@ -1,8 +1,6 @@
-srcMain=src/main/kotlin
-srcMainAoc=src/main/kotlin/aoc22
-srcTest=src/test/kotlin
-srcTestAoc=src/test/kotlin/aoc22
-srcResources=src/main/resources
+#!/bin/bash
+
+source $PWD/sh/paths.sh
 
 cp "$srcMainAoc/Day00.kt" "$srcMain/Day$1.kt" &&
 sed -i "s/00/$1/" "$srcMain/Day$1.kt" &&
