@@ -5,7 +5,7 @@ interface Day<T, R> {
 
     fun List<T>.part2(): R
 
-    fun readDaysInputTest(): List<String> = readInput("${this::class.simpleName}_test")
+    fun readDaysInputExample(): List<String> = readInput("${this::class.simpleName}_example")
     fun readDaysInput(): List<String> = readInput("${this::class.simpleName}")
 
 }

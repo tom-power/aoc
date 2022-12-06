@@ -9,4 +9,4 @@ cp "$srcTest/Day00Test.kt" "$srcTest/Day$1Test.kt" &&
 sed -i "s/00/$1/" "$srcTest/Day$1Test.kt" &&
 
 touch "$srcResources/Day$1.txt"  &&
-touch "$srcResources/Day$1_test.txt"
+touch "$srcResources/Day$1_example.txt"
