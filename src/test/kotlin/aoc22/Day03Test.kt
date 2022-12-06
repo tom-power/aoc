@@ -14,7 +14,7 @@ class Day03Test {
 
     @Test
     fun `part one`() {
-        assertEquals(Day03.readDaysInput().part1(), 7817)
+        assertEquals(Day03.readDaysInput().part1(), 7553)
     }
 
     @Test
@@ -24,6 +24,6 @@ class Day03Test {
 
     @Test
     fun `part two`() {
-        assertEquals(Day03.readDaysInput().part2(), 2444)
+        assertEquals(Day03.readDaysInput().part2(), 2758)
     }
 }
