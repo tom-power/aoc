@@ -9,21 +9,21 @@ class Day05Test {
 
     @Test
     fun `part one example`() {
-        assertEquals("CMZ", Day05.readDaysInputExample().part1())
+        assertEquals("CMZ", Day05.readInputExample().part1())
     }
 
     @Test
     fun `part one`() {
-        assertEquals("QNNTGTPFN", Day05.readDaysInput().part1())
+        assertEquals("QNNTGTPFN", Day05.readInput().part1())
     }
 
     @Test
     fun `part two example`() {
-        assertEquals("MCD", Day05.readDaysInputExample().part2())
+        assertEquals("MCD", Day05.readInputExample().part2())
     }
 
     @Test
     fun `part two`() {
-        assertEquals("GGNPJBTTR", Day05.readDaysInput().part2())
+        assertEquals("GGNPJBTTR", Day05.readInput().part2())
     }
 }

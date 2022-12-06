@@ -5,7 +5,10 @@ import java.math.BigInteger
 import java.security.MessageDigest
 
 object Input {
-   fun readInput(name: String) =
+    fun readInputWithFallback(name: String, fallback: String): List<String> =
+        readInput(name) ?: readInput("$fallback/$name")!!
+
+    private fun readInput(name: String) =
         File("src/main/resources", "$name.txt")
             .takeIf { it.isFile }
             ?.readLines()
