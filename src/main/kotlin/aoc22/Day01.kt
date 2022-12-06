@@ -1,5 +1,7 @@
 package aoc22
 
+import aoc22.Collections.partitionedBy
+
 object Day01 : Day<String, Int> {
     override fun List<String>.part1(): Int = partitionedBy("").summed().max()
 

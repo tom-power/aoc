@@ -1,5 +1,4 @@
-package aoc22
-
+import aoc22.Collections.transpose
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

@@ -1,5 +1,7 @@
 package aoc22
 
+import aoc22.Misc.log
+
 object Day00 : Day<String, Int> {
     override fun List<String>.part1(): Int = part1Day00()
 
