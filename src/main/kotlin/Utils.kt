@@ -28,12 +28,19 @@ object Collections {
     fun List<String>.splitBy(delimiter: String): List<List<String>> =
         listOf(subList(0, this.indexOf(delimiter)), subList(this.indexOf(delimiter) + 1, this.count()))
 
-    fun List<String>.partitionedBy(delimiter: String): List<List<String>> =
-        partitionAt(this.indexesOf(delimiter))
+    fun List<String>.partitionedBy(delimiter: String): List<List<String>> {
+        val indexes = this.indexesOf(delimiter)
+        return partitionAt(indexes) + listOf(this.subList(indexes.last() + 1, this.lastIndex + 1) )
+    }
 
-    private fun <T> List<T>.indexesOf(delimiter: T) = mapIndexedNotNull { index, t -> index.takeIf { t == delimiter } }
+    private fun <T> List<T>.indexesOf(delimiter: T) =
+        mapIndexedNotNull { index, t -> index.takeIf { t == delimiter } }
 
-    private fun <T> List<T>.partitionAt(indexes: List<Int>) = indexes.zipWithNext { a, b -> this.subList(a + 1, b) }
+    private fun <T> List<T>.partitionAt(indexes: List<Int>) =
+        indexes
+            .zipWithNext { a, b ->
+                this.subList(a + 1, b)
+            }
 }
 
 object Misc {
