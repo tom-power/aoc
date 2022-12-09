@@ -1,6 +1,7 @@
 package aoc22
 
 import aoc22.Matrix.Direction.*
+import aoc22.Misc.next
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -28,14 +29,12 @@ object Matrix {
             point.y - other.y,
         ).map { abs(it) }.sum()
 
-    fun hasMatchingAxis(point: Point, other: Point): Boolean = point.x == other.x || point.y == other.y
-
-    fun Set<Point>.print(): String {
-        val colMax = maxBy { it.x }.x
-        val colMin = minBy { it.x }.x
-        val rowMax = maxBy { it.y }.y
-        val rowMin = minBy { it.y }.y
-        return (rowMin..rowMax).map { y ->
+    fun Collection<Point>.print(gridHeight: Int? = null, gridWidth: Int? = null): String {
+        val colMax = gridWidth ?: maxBy { it.x }.x
+        val colMin = gridWidth?.let { 0 } ?: minBy { it.x }.x
+        val rowMax = gridHeight ?: maxBy { it.y }.y
+        val rowMin = gridHeight?.let { 0 } ?: minBy { it.y }.y
+        return (rowMin..rowMax).reversed().map { y ->
             (colMin..colMax).map { x ->
                 this.singleOrNull { it == Point(x, y) }?.let { "#" } ?: "."
             }.joinToString("")
@@ -47,10 +46,17 @@ object Matrix {
     fun Point.move(direction: Direction): Point =
         when(direction) {
             R -> copy(x = x + 1)
-            D -> copy(y = y + 1)
+            D -> copy(y = y - 1)
             L -> copy(x = x - 1)
-            U -> copy(y = y - 1)
+            U -> copy(y = y + 1)
         }
+
+
+    fun Point.getAdjacent(): Set<Matrix.Point> =
+        Direction.values()
+            .map { setOf(this.move(it)) + setOf(this.move(it).move(it.next())) }
+            .flatten()
+            .toSet()
 }
 
 object Collections {
@@ -90,4 +96,10 @@ object Misc {
         .padStart(32, '0')
 
     fun <T> T.log(): T = also { println(it) }
+
+    inline fun <reified T: Enum<T>> T.next(): T {
+        val values = enumValues<T>()
+        val nextOrdinal = (ordinal + 1) % values.size
+        return values[nextOrdinal]
+    }
 }

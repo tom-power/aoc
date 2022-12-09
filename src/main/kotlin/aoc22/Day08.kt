@@ -5,7 +5,6 @@ import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
 import aoc22.Matrix.Point
 import aoc22.Matrix.distanceBetween
-import kotlin.math.abs
 
 object Day08 : Day<String, Int> {
     override fun List<String>.part1(): Int = visibleTreeCount()
