@@ -1,8 +1,10 @@
 package aoc22
 
+import aoc22.Matrix.Direction.*
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
+import kotlin.math.abs
 
 object Input {
     fun readInputWithFallback(name: String, fallback: String): List<String> =
@@ -12,6 +14,43 @@ object Input {
         File("src/main/resources", "$name.txt")
             .takeIf { it.isFile }
             ?.readLines()
+}
+
+object Matrix {
+    data class Point(
+        val x: Int,
+        val y: Int
+    )
+
+    fun distanceBetween(point: Point, other: Point): Int =
+        listOf(
+            point.x - other.x,
+            point.y - other.y,
+        ).map { abs(it) }.sum()
+
+    fun hasMatchingAxis(point: Point, other: Point): Boolean = point.x == other.x || point.y == other.y
+
+    fun Set<Point>.print(): String {
+        val colMax = maxBy { it.x }.x
+        val colMin = minBy { it.x }.x
+        val rowMax = maxBy { it.y }.y
+        val rowMin = minBy { it.y }.y
+        return (rowMin..rowMax).map { y ->
+            (colMin..colMax).map { x ->
+                this.singleOrNull { it == Point(x, y) }?.let { "#" } ?: "."
+            }.joinToString("")
+        }.joinToString(System.lineSeparator())
+    }
+
+    enum class Direction { R, D, L, U }
+
+    fun Point.move(direction: Direction): Point =
+        when(direction) {
+            R -> copy(x = x + 1)
+            D -> copy(y = y + 1)
+            L -> copy(x = x - 1)
+            U -> copy(y = y - 1)
+        }
 }
 
 object Collections {
@@ -41,6 +80,8 @@ object Collections {
             .zipWithNext { a, b ->
                 this.subList(a + 1, b)
             }
+
+    fun List<Int>.product(): Int = reduce { acc, i -> acc * i }
 }
 
 object Misc {
