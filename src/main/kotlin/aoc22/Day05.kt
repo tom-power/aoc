@@ -8,7 +8,7 @@ import aoc22.Parser.Movement
 import aoc22.Parser.toMovements
 import aoc22.Parser.toStacks
 
-object Day05 : Day<String, String> {
+object Day05 : Day<String, String, String> {
     override fun List<String>.part1(): String = moveCratesWith(::crane9000)
 
     override fun List<String>.part2(): String = moveCratesWith(::crane9001)

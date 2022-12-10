@@ -1,6 +1,6 @@
 package aoc22
 
-object Day06 : Day<String, Int> {
+object Day06 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = detectDistinct(4)
 
     override fun List<String>.part2(): Int = detectDistinct(14)

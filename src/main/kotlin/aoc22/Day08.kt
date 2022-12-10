@@ -6,7 +6,7 @@ import aoc22.Day08Solution.maxScenicScore
 import aoc22.Matrix.Point
 import aoc22.Matrix.distanceBetween
 
-object Day08 : Day<String, Int> {
+object Day08 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = visibleTreeCount()
 
     override fun List<String>.part2(): Int = maxScenicScore()

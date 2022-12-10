@@ -95,7 +95,14 @@ object Misc {
         .toString(16)
         .padStart(32, '0')
 
-    fun <T> T.log(): T = also { println(it) }
+    fun <T> T.log(): T =
+        also {
+            if (this is Iterable<*>)
+                this.forEach {
+                    println(it)
+                }
+            else println(this)
+        }
 
     inline fun <reified T: Enum<T>> T.next(): T {
         val values = enumValues<T>()

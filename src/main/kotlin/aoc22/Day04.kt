@@ -1,6 +1,6 @@
 package aoc22
 
-object Day04 : Day<String, Int> {
+object Day04 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = countOfAssignmentPairsWhere(::isOverlapAll)
 
     override fun List<String>.part2(): Int = countOfAssignmentPairsWhere(::isOverlapAny)
