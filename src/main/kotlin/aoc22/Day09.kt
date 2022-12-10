@@ -8,7 +8,7 @@ import aoc22.Matrix.getAdjacent
 import aoc22.Matrix.move
 import kotlin.math.sign
 
-object Day09 : Day<String, Int> {
+object Day09 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = part1Day09()
 
     override fun List<String>.part2(): Int = part2Day09()

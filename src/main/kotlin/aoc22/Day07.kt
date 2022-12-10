@@ -1,6 +1,6 @@
 package aoc22
 
-object Day07 : Day<String, Int> {
+object Day07 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = with(FileSys()) { dirSizes().sumOfSmall() }
 
     override fun List<String>.part2(): Int = with(FileSys()) { dirSizes().findSmallestToDelete() }

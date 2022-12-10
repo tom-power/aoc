@@ -2,10 +2,10 @@ package aoc22
 
 import aoc22.Input.readInputWithFallback
 
-interface Day<T, R> {
+interface Day<T, R, S> {
     fun List<T>.part1(): R
 
-    fun List<T>.part2(): R
+    fun List<T>.part2(): S
 
     private fun name(): String? = this::class.simpleName
 
