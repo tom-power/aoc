@@ -19,3 +19,11 @@ object Day00Solution {
         map { it.split(",") }.log()
             .let { 0 }
 }
+
+object Day00Domain {
+
+}
+
+object Day00Parser {
+
+}
