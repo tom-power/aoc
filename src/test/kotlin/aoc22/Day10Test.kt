@@ -2,8 +2,9 @@ package aoc22
 
 import aoc22.Day10.part1
 import aoc22.Day10.part2
-import aoc22.Day10Solution.Cycle
-import aoc22.Day10Solution.Register
+import aoc22.Day10Domain.Cycle
+import aoc22.Day10Domain.Register
+import aoc22.Day10Parser.toInstructions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -34,7 +35,7 @@ class Day10Test {
         )
         assertEquals(
             expected,
-            with(Day10Solution) { input.toInstructions().toRegisters().toCycles() }
+            with(Day10Runner) { input.toInstructions().run() }
         )
     }
 

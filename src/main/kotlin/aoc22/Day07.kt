@@ -5,6 +5,7 @@ import aoc22.Day07Domain.Down
 import aoc22.Day07Domain.Ls
 import aoc22.Day07Domain.Cd
 import aoc22.Day07Domain.Up
+import aoc22.Day07Parser.parseCommands
 import aoc22.Day07Solution.part1Day07
 import aoc22.Day07Solution.part2Day07
 
@@ -29,11 +30,8 @@ object Day07Solution {
         filter { (neededSpace + max() - it) < totalSpace }.min()
 
     private fun List<String>.getDirSizes(): List<Int> =
-        with(Day07Parser) {
-            with(Day07FileSys()) {
-                parseCommands().dirSizes()
-            }
-        }
+        parseCommands()
+            .let { with(Day07FileSys()) { it.dirSizes() } }
 }
 
 class Day07FileSys {

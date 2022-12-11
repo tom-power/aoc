@@ -4,8 +4,10 @@ import aoc22.Collections.partitionedBy
 import aoc22.Collections.product
 import aoc22.Day11Solution.part1Day11
 import aoc22.Day11Solution.part2Day11
-import aoc22.MonkeyDomain.Item
-import aoc22.MonkeyDomain.Monkey
+import aoc22.Day11Domain.Item
+import aoc22.Day11Domain.Monkey
+import aoc22.Day11Parser.toMonkeys
+import aoc22.Day11Runner.doRounds
 
 object Day11 : Day<String, Long, Long> {
     override fun List<String>.part1(): Long = part1Day11()
@@ -23,60 +25,48 @@ object Day11Solution {
         toMonkeys(reliefDivisor = 1)
             .doRounds(times = 10000)
             .productOfInspectedTimes(top = 2)
+
+    private fun Monkeys.productOfInspectedTimes(top: Int): Long =
+        map { it.inspectedTimes }
+            .sortedBy { it }
+            .takeLast(top)
+            .product()
 }
-
-private fun Monkeys.productOfInspectedTimes(top: Int): Long =
-    map { it.inspectedTimes }
-        .sortedBy { it }
-        .takeLast(top)
-        .product()
-
-private fun Monkeys.doRounds(times: Int): Monkeys =
-    apply {
-        repeat(times) {
-            this.forEach { monkey ->
-                val itemsToThrow =
-                    generateSequence {
-                        monkey.items.removeFirstOrNull()?.let { item ->
-                            with(monkey) {
-                                item
-                                    .inspect()
-                                    .getBored()
-                                    .reduceWorryLevel(using = productOftestDivisibleBy())
-                                    .let { inspected -> inspected to targetMonkeyFor(inspected) }
-                            }
-                        }
-                    }
-                itemsToThrow.forEach { (item, targetMonkey) ->
-                    this.throwItem(item = item, toMonkey = targetMonkey)
-                }
-            }
-        }
-    }
-
-private fun List<String>.toMonkeys(reliefDivisor: Int): Monkeys =
-    partitionedBy("").map { monkeyText ->
-        val trimmed = monkeyText.map(String::trim)
-        Monkey(
-            items = trimmed[1].replace("Starting items: ", "").split(", ").map { Item(it.toLong()) }.toMutableList(),
-            operationParts = trimmed[2].replace("Operation: new = ", "").split(" "),
-            testDivisibleBy = trimmed[3].replace("Test: divisible by ", "").toInt(),
-            monkeyTrue = trimmed[4].replace("If true: throw to monkey ", "").toInt(),
-            monkeyFalse = trimmed[5].replace("If false: throw to monkey ", "").toInt(),
-            inspectedTimes = 0L,
-            reliefDivisor = reliefDivisor,
-        )
-    }
 
 typealias Monkeys = List<Monkey>
 
-private fun Monkeys.productOftestDivisibleBy() = map { it.testDivisibleBy }.product()
+object Day11Runner {
+    fun Monkeys.doRounds(times: Int): Monkeys =
+        apply {
+            repeat(times) {
+                this.forEach { monkey ->
+                    val itemsToThrow =
+                        generateSequence {
+                            monkey.items.removeFirstOrNull()?.let { item ->
+                                with(monkey) {
+                                    item
+                                        .inspect()
+                                        .getBored()
+                                        .reduceWorryLevel(using = productOftestDivisibleBy())
+                                        .let { inspected -> inspected to targetMonkeyFor(inspected) }
+                                }
+                            }
+                        }
+                    itemsToThrow.forEach { (item, targetMonkey) ->
+                        this.throwItem(item = item, toMonkey = targetMonkey)
+                    }
+                }
+            }
+        }
 
-private fun Monkeys.throwItem(item: Item, toMonkey: Int) {
-    this[toMonkey].items.add(item)
+    private fun Monkeys.throwItem(item: Item, toMonkey: Int) {
+        this[toMonkey].items.add(item)
+    }
+
+    private fun Monkeys.productOftestDivisibleBy() = map { it.testDivisibleBy }.product()
 }
 
-object MonkeyDomain {
+object Day11Domain {
     data class Item(
         // only used with % testDivisibleBy to work out where to throw an item
         // reduce with % of testDivisibleBy lcm to make it a manageable size in part 2
@@ -116,4 +106,20 @@ object MonkeyDomain {
             }.let(::Item)
         }
     }
+}
+
+object Day11Parser {
+    fun List<String>.toMonkeys(reliefDivisor: Int): Monkeys =
+        partitionedBy("").map { monkeyText ->
+            val trimmed = monkeyText.map(String::trim)
+            Monkey(
+                items = trimmed[1].replace("Starting items: ", "").split(", ").map { Item(it.toLong()) }.toMutableList(),
+                operationParts = trimmed[2].replace("Operation: new = ", "").split(" "),
+                testDivisibleBy = trimmed[3].replace("Test: divisible by ", "").toInt(),
+                monkeyTrue = trimmed[4].replace("If true: throw to monkey ", "").toInt(),
+                monkeyFalse = trimmed[5].replace("If false: throw to monkey ", "").toInt(),
+                inspectedTimes = 0L,
+                reliefDivisor = reliefDivisor,
+            )
+        }
 }
