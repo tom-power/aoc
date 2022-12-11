@@ -44,13 +44,12 @@ object Matrix {
     enum class Direction { R, D, L, U }
 
     fun Point.move(direction: Direction): Point =
-        when(direction) {
+        when (direction) {
             R -> copy(x = x + 1)
             D -> copy(y = y - 1)
             L -> copy(x = x - 1)
             U -> copy(y = y + 1)
         }
-
 
     fun Point.getAdjacent(): Set<Matrix.Point> =
         Direction.values()
@@ -75,7 +74,9 @@ object Collections {
 
     fun List<String>.partitionedBy(delimiter: String): List<List<String>> {
         val indexes = this.indexesOf(delimiter)
-        return partitionAt(indexes) + listOf(this.subList(indexes.last() + 1, this.lastIndex + 1) )
+        return listOf(this.subList(0, indexes.first())) +
+            partitionAt(indexes) +
+            listOf(this.subList(indexes.last() + 1, this.lastIndex + 1))
     }
 
     private fun <T> List<T>.indexesOf(delimiter: T) =
@@ -104,7 +105,7 @@ object Misc {
             else println(this)
         }
 
-    inline fun <reified T: Enum<T>> T.next(): T {
+    inline fun <reified T : Enum<T>> T.next(): T {
         val values = enumValues<T>()
         val nextOrdinal = (ordinal + 1) % values.size
         return values[nextOrdinal]
