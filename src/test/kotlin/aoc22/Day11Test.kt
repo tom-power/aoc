@@ -19,11 +19,11 @@ class Day11Test {
 
     @Test
     fun `part two example`() {
-        assertEquals(0, Day11.readInputExample().part2())
+        assertEquals(2713310158, Day11.readInputExample().part2())
     }
 
     @Test
     fun `part two`() {
-        assertEquals(0, Day11.readInput().part2())
+        assertEquals(20683044837, Day11.readInput().part2())
     }
 }

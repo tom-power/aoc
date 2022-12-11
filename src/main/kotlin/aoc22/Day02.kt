@@ -3,13 +3,13 @@ package aoc22
 import aoc22.Common.summed
 import aoc22.Common.theirPlayMap
 import aoc22.Common.toRoundsUsing
-import aoc22.Domain.Outcome
-import aoc22.Domain.Outcome.*
-import aoc22.Domain.Play
-import aoc22.Domain.Play.*
-import aoc22.Domain.Round
-import aoc22.Domain.points
-import aoc22.Domain.toOutcome
+import aoc22.RockPaperScissorsDomain.Outcome
+import aoc22.RockPaperScissorsDomain.Outcome.*
+import aoc22.RockPaperScissorsDomain.Play
+import aoc22.RockPaperScissorsDomain.Play.*
+import aoc22.RockPaperScissorsDomain.Round
+import aoc22.RockPaperScissorsDomain.points
+import aoc22.RockPaperScissorsDomain.toOutcome
 
 object Day02 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = toRoundsUsing(Part1::toPlays).summed()
@@ -17,7 +17,7 @@ object Day02 : Day<String, Int, Int> {
     override fun List<String>.part2(): Int = toRoundsUsing(Part2::toPlaysForOutcome).summed()
 }
 
-object Domain {
+object RockPaperScissorsDomain {
     enum class Play {
         Rock, Paper, Scissors
     }

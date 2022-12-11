@@ -89,6 +89,7 @@ object Collections {
             }
 
     fun List<Int>.product(): Int = reduce { acc, i -> acc * i }
+    fun List<Long>.product(): Long = reduce { acc, i -> acc * i }
 }
 
 object Misc {
