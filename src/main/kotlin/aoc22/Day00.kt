@@ -20,6 +20,10 @@ object Day00Solution {
             .let { 0 }
 }
 
+object Day00Runner {
+
+}
+
 object Day00Domain {
 
 }
