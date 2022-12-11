@@ -1,3 +1,4 @@
+import aoc22.Collections.partitionedBy
 import aoc22.Collections.transpose
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -35,6 +36,14 @@ class UtilsTest {
                 listOf("Z", "M", "P", "Q")
             ).transpose()
         )
+    }
+
+    @Test
+    fun `test partitioned`() {
+        val expected = listOf(listOf("hi"), listOf("foo", "bar"), listOf("baz"))
+        val actual = listOf("hi", "", "foo", "bar", "", "baz").partitionedBy("")
+
+        assertEquals(expected, actual)
     }
 
 }
