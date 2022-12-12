@@ -5,6 +5,7 @@ import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
 import aoc22.Matrix.Point
 import aoc22.Matrix.distanceBetween
+import aoc22.Parser.toPointish
 
 object Day08 : Day<String, Int, Int> {
     override fun List<String>.part1(): Int = visibleTreeCount()
@@ -38,12 +39,7 @@ object Day08Solution {
         }
     }
 
-    private fun List<String>.toTrees(): List<Tree> =
-        mapIndexed { y, s ->
-            s.mapIndexed { x, c ->
-                Tree(Point(x, y), c.digitToInt())
-            }
-        }.flatten()
+    private fun List<String>.toTrees(): List<Tree> = toPointish().map { (p, c) -> Tree(p, c.digitToInt()) }
 
     private data class Tree(
         val point: Point,

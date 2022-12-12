@@ -4,8 +4,6 @@ import aoc22.Day09Solution.part1Day09
 import aoc22.Day09Solution.part2Day09
 import aoc22.Matrix.Direction
 import aoc22.Matrix.Point
-import aoc22.Matrix.getAdjacent
-import aoc22.Matrix.move
 import kotlin.math.sign
 
 object Day09 : Day<String, Int, Int> {
