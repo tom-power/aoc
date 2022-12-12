@@ -1,6 +1,7 @@
 package aoc22
 
 import aoc22.Matrix.Direction.*
+import aoc22.Matrix.Point
 import aoc22.Misc.next
 import java.io.File
 import java.math.BigInteger
@@ -21,7 +22,21 @@ object Matrix {
     data class Point(
         val x: Int,
         val y: Int
-    )
+    ) {
+        fun move(direction: Direction): Point =
+            when (direction) {
+                R -> copy(x = x + 1)
+                D -> copy(y = y - 1)
+                L -> copy(x = x - 1)
+                U -> copy(y = y + 1)
+            }
+
+        fun getAdjacent(): Set<Point> =
+            Direction.values()
+                .map { setOf(this.move(it)) + setOf(this.move(it).move(it.next())) }
+                .flatten()
+                .toSet()
+    }
 
     fun distanceBetween(point: Point, other: Point): Int =
         listOf(
@@ -42,20 +57,6 @@ object Matrix {
     }
 
     enum class Direction { R, D, L, U }
-
-    fun Point.move(direction: Direction): Point =
-        when (direction) {
-            R -> copy(x = x + 1)
-            D -> copy(y = y - 1)
-            L -> copy(x = x - 1)
-            U -> copy(y = y + 1)
-        }
-
-    fun Point.getAdjacent(): Set<Matrix.Point> =
-        Direction.values()
-            .map { setOf(this.move(it)) + setOf(this.move(it).move(it.next())) }
-            .flatten()
-            .toSet()
 }
 
 object Collections {
@@ -111,4 +112,13 @@ object Misc {
         val nextOrdinal = (ordinal + 1) % values.size
         return values[nextOrdinal]
     }
+}
+
+object Parser {
+    fun List<String>.toPointish(): List<Pair<Point, Char>> =
+        mapIndexed { y, s ->
+            s.mapIndexed { x, c ->
+                Pair(Point(x, y), c)
+            }
+        }.flatten()
 }

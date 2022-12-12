@@ -2,11 +2,11 @@ package aoc22
 
 import aoc22.Collections.splitBy
 import aoc22.Collections.transpose
-import aoc22.Crane.crane9000
-import aoc22.Crane.crane9001
-import aoc22.Parser.Movement
-import aoc22.Parser.toMovements
-import aoc22.Parser.toStacks
+import aoc22.Day05Runner.crane9000
+import aoc22.Day05Runner.crane9001
+import aoc22.Day05Domain.Movement
+import aoc22.Day05Parser.toMovements
+import aoc22.Day05Parser.toStacks
 
 object Day05 : Day<String, String, String> {
     override fun List<String>.part1(): String = moveCratesWith(::crane9000)
@@ -19,9 +19,7 @@ private fun List<String>.moveCratesWith(crane: (List<Stack>, List<Movement>) -> 
         .let { crane(it[0].dropLast(1).toStacks(), it[1].toMovements()) }
         .joinToString("") { it.last().toString() }
 
-typealias Stack = List<Char>
-
-object Crane {
+object Day05Runner {
     fun crane9000(stacks: List<Stack>, movements: List<Movement>): List<Stack> =
         craneWithOrder(stacks, movements, true)
 
@@ -46,7 +44,13 @@ object Crane {
     }
 }
 
-object Parser {
+typealias Stack = List<Char>
+
+object Day05Domain {
+    data class Movement(val number: Int, val from: Int, val to: Int)
+}
+
+object Day05Parser {
     fun List<String>.toStacks(): List<Stack> {
         val max = this.maxBy { it.count() }.count()
         return map { row ->
@@ -62,8 +66,6 @@ object Parser {
             }
 
     }
-
-    data class Movement(val number: Int, val from: Int, val to: Int)
 
     fun List<String>.toMovements(): List<Movement> =
         map { it.split(" ").mapNotNull(String::toIntOrNull) }
