@@ -4,7 +4,6 @@ import aoc22.Day12Domain.HeightMap
 import aoc22.Day12Parser.toHeightMap
 import aoc22.Day12Solution.part1Day12
 import aoc22.Day12Solution.part2Day12
-import aoc22.Matrix.Direction
 import aoc22.Matrix.Point
 import aoc22.Parser.toPointish
 import java.util.*
@@ -68,7 +67,7 @@ object Day12Domain {
         }
 
         private fun neighbours(point: Point, canMove: (Int, Int) -> Boolean): List<Point> =
-            Direction.values().map { point.move(it) }
+            point.getAdjacent()
                 .filter { it !in visited }
                 .filter { it in elevations }
                 .filter { canMove(elevations.getValue(point), elevations.getValue(it)) }

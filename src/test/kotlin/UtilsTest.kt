@@ -1,5 +1,7 @@
 import aoc22.Collections.partitionedBy
 import aoc22.Collections.transpose
+import aoc22.Matrix
+import aoc22.Matrix.Point
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -46,4 +48,33 @@ class UtilsTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun `test getAdjacent`() {
+        val expected = setOf(
+            Point(x = 1, y = 0),
+            Point(x = 0, y = -1),
+            Point(x = -1, y = 0),
+            Point(x = 0, y = 1),
+        )
+        val actual = Point(0, 0).getAdjacent()
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `test getAdjacentWithDiagonal`() {
+        val expected = setOf(
+            Point(x = 1, y = 0),
+            Point(x = 1, y = -1),
+            Point(x = 0, y = -1),
+            Point(x = -1, y = -1),
+            Point(x = -1, y = 0),
+            Point(x = -1, y = 1),
+            Point(x = 0, y = 1),
+            Point(x = 1, y = 1)
+        )
+        val actual = Point(0, 0).getAdjacentWithDiagonal()
+
+        assertEquals(expected, actual)
+    }
 }

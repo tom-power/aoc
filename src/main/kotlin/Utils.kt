@@ -32,8 +32,14 @@ object Matrix {
             }
 
         fun getAdjacent(): Set<Point> =
-            Direction.values()
-                .map { setOf(this.move(it)) + setOf(this.move(it).move(it.next())) }
+            Direction.values().map { this.move(it) }.toSet()
+
+        fun getAdjacentWithDiagonal(): Set<Point> =
+            Direction.values().map { direction ->
+                this.move(direction).let { moved ->
+                    listOf(moved) + listOf(moved.move(direction.next()))
+                }
+            }
                 .flatten()
                 .toSet()
     }
