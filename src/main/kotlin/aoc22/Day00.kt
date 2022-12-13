@@ -24,10 +24,12 @@ object Day00Runner {
 
 }
 
+typealias Day00Type = Any
+
 object Day00Domain {
 
 }
 
 object Day00Parser {
-
+    fun List<String>.toDay00(): List<Day00Type> = TODO()
 }
