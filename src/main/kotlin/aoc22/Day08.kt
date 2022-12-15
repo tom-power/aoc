@@ -4,7 +4,6 @@ import aoc22.Collections.product
 import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
 import aoc22.Matrix.Point
-import aoc22.Matrix.distanceBetween
 import aoc22.Parser.toPointish
 
 object Day08 : Day<String, Int, Int> {
@@ -35,7 +34,7 @@ object Day08Solution {
         return when {
             isEmpty()                   -> 0
             tallerTreesInView.isEmpty() -> size
-            else                        -> tallerTreesInView.minOf { distanceBetween(tree.point, it.point) }
+            else                        -> tallerTreesInView.minOf { tree.point.distanceTo(it.point) }
         }
     }
 
