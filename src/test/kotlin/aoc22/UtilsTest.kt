@@ -1,6 +1,7 @@
+package aoc22
+
 import aoc22.Collections.partitionedBy
 import aoc22.Collections.transpose
-import aoc22.Matrix
 import aoc22.Matrix.Point
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
