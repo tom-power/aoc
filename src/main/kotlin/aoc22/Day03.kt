@@ -1,9 +1,9 @@
 package aoc22
 
-object Day03 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = toCompartments().toSumOfCommon()
+object Day03 : Day {
+    fun List<String>.part1(): Int = toCompartments().toSumOfCommon()
 
-    override fun List<String>.part2(): Int = toTrios().toSumOfCommon()
+    fun List<String>.part2(): Int = toTrios().toSumOfCommon()
 
     private fun List<String>.toCompartments(): List<List<String>> =
         map { rucksackItems ->

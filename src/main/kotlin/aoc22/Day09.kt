@@ -6,10 +6,10 @@ import aoc22.Matrix.Direction
 import aoc22.Matrix.Point
 import kotlin.math.sign
 
-object Day09 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = part1Day09()
+object Day09 : Day {
+    fun List<String>.part1(): Int = part1Day09()
 
-    override fun List<String>.part2(): Int = part2Day09()
+    fun List<String>.part2(): Int = part2Day09()
 }
 
 object Day09Solution {

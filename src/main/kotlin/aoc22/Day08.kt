@@ -6,10 +6,10 @@ import aoc22.Day08Solution.maxScenicScore
 import aoc22.Matrix.Point
 import aoc22.Parser.toPointish
 
-object Day08 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = visibleTreeCount()
+object Day08 : Day {
+    fun List<String>.part1(): Int = visibleTreeCount()
 
-    override fun List<String>.part2(): Int = maxScenicScore()
+    fun List<String>.part2(): Int = maxScenicScore()
 }
 
 object Day08Solution {

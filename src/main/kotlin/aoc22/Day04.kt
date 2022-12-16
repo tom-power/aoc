@@ -1,9 +1,9 @@
 package aoc22
 
-object Day04 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = countOfAssignmentPairsWhere(::isOverlapAll)
+object Day04 : Day {
+    fun List<String>.part1(): Int = countOfAssignmentPairsWhere(::isOverlapAll)
 
-    override fun List<String>.part2(): Int = countOfAssignmentPairsWhere(::isOverlapAny)
+    fun List<String>.part2(): Int = countOfAssignmentPairsWhere(::isOverlapAny)
 
     private fun List<String>.countOfAssignmentPairsWhere(predicate: (Pair<IntRange, IntRange>) -> Boolean): Int =
         map { it.toAssignmentPairs() }
