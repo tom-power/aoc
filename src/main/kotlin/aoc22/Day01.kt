@@ -2,10 +2,10 @@ package aoc22
 
 import aoc22.Collections.partitionedBy
 
-object Day01 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = partitionedBy("").summed().max()
+object Day01 : Day {
+    fun List<String>.part1(): Int = partitionedBy("").summed().max()
 
-    override fun List<String>.part2(): Int = partitionedBy("").summed().sumOfTop3()
+    fun List<String>.part2(): Int = partitionedBy("").summed().sumOfTop3()
 
     private fun List<List<String>>.summed(): List<Int> =
         this.map { it.map(String::toInt) }

@@ -8,10 +8,10 @@ import aoc22.Matrix.Point
 import aoc22.Parser.toPointish
 import java.util.*
 
-object Day12 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = part1Day12()
+object Day12 : Day {
+    fun List<String>.part1(): Int = part1Day12()
 
-    override fun List<String>.part2(): Int = part2Day12()
+    fun List<String>.part2(): Int = part2Day12()
 }
 
 object Day12Solution {

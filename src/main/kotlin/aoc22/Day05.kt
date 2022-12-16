@@ -8,10 +8,10 @@ import aoc22.Day05Domain.Movement
 import aoc22.Day05Parser.toMovements
 import aoc22.Day05Parser.toStacks
 
-object Day05 : Day<String, String, String> {
-    override fun List<String>.part1(): String = moveCratesWith(::crane9000)
+object Day05 : Day {
+    fun List<String>.part1(): String = moveCratesWith(::crane9000)
 
-    override fun List<String>.part2(): String = moveCratesWith(::crane9001)
+    fun List<String>.part2(): String = moveCratesWith(::crane9001)
 }
 
 private fun List<String>.moveCratesWith(crane: (List<Stack>, List<Movement>) -> List<Stack>): String =

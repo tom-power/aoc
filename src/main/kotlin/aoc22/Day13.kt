@@ -15,10 +15,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
-object Day13 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = part1Day13()
+object Day13 : Day {
+    fun List<String>.part1(): Int = part1Day13()
 
-    override fun List<String>.part2(): Int = part2Day13()
+    fun List<String>.part2(): Int = part2Day13()
 }
 
 object Day13Solution {

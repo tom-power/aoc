@@ -9,10 +9,10 @@ import aoc22.Day07Parser.parseCommands
 import aoc22.Day07Solution.part1Day07
 import aoc22.Day07Solution.part2Day07
 
-object Day07 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = part1Day07()
+object Day07 : Day {
+    fun List<String>.part1(): Int = part1Day07()
 
-    override fun List<String>.part2(): Int = part2Day07()
+    fun List<String>.part2(): Int = part2Day07()
 }
 
 object Day07Solution {

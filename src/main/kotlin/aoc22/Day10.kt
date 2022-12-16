@@ -10,10 +10,10 @@ import aoc22.Day10Runner.run
 import aoc22.Day10SolutionPart1.part1Day10
 import aoc22.Day10SolutionPart2.part2Day10
 
-object Day10 : Day<String, Int, String> {
-    override fun List<String>.part1(): Int = part1Day10()
+object Day10 : Day {
+    fun List<String>.part1(): Int = part1Day10()
 
-    override fun List<String>.part2(): String = part2Day10()
+    fun List<String>.part2(): String = part2Day10()
 }
 
 object Day10SolutionPart1 {

@@ -9,10 +9,10 @@ import aoc22.Day11Domain.Monkey
 import aoc22.Day11Parser.toMonkeys
 import aoc22.Day11Runner.doRounds
 
-object Day11 : Day<String, Long, Long> {
-    override fun List<String>.part1(): Long = part1Day11()
+object Day11 : Day {
+    fun List<String>.part1(): Long = part1Day11()
 
-    override fun List<String>.part2(): Long = part2Day11()
+    fun List<String>.part2(): Long = part2Day11()
 }
 
 object Day11Solution {

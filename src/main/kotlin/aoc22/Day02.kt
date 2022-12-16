@@ -10,10 +10,10 @@ import aoc22.DomainRPS.Round
 import aoc22.DomainRPS.points
 import aoc22.DomainRPS.toOutcome
 
-object Day02 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = toRoundsUsing(Day02Part1::toPlays).summed()
+object Day02 : Day {
+    fun List<String>.part1(): Int = toRoundsUsing(Day02Part1::toPlays).summed()
 
-    override fun List<String>.part2(): Int = toRoundsUsing(Day02Part2::toPlaysForOutcome).summed()
+    fun List<String>.part2(): Int = toRoundsUsing(Day02Part2::toPlaysForOutcome).summed()
 }
 
 object Day02Common {

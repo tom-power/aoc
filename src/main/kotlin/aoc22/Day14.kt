@@ -8,10 +8,10 @@ import aoc22.Day14Solution.part2Day14
 import aoc22.Matrix.Direction.*
 import aoc22.Matrix.Point
 
-object Day14 : Day<String, Int, Int> {
-    override fun List<String>.part1(): Int = part1Day14()
+object Day14 : Day {
+    fun List<String>.part1(): Int = part1Day14()
 
-    override fun List<String>.part2(): Int = part2Day14()
+    fun List<String>.part2(): Int = part2Day14()
 }
 
 object Day14Solution {
