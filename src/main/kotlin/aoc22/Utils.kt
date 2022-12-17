@@ -24,12 +24,15 @@ object Matrix {
         val x: Int, val y: Int
     ) {
 
-        fun move(direction: Direction): Point = when (direction) {
-            R -> copy(x = x + 1)
-            D -> copy(y = y + 1)
-            L -> copy(x = x - 1)
-            U -> copy(y = y - 1)
-        }
+        fun add(x: Int, y: Int) = Point(x = this.x + x, y = this.y + y)
+
+        fun move(direction: Direction): Point =
+            when (direction) {
+                R -> copy(x = x + 1)
+                D -> copy(y = y + 1)
+                L -> copy(x = x - 1)
+                U -> copy(y = y - 1)
+            }
 
         fun getAdjacent(): Set<Point> = values().map { this.move(it) }.toSet()
 
@@ -41,12 +44,7 @@ object Matrix {
             }.toSet()
 
         fun distanceTo(other: Point): Int =
-            listOf(
-                x - other.x,
-                y - other.y,
-            )
-                .map { it.absoluteValue }
-                .sum()
+            listOf(x - other.x, y - other.y).map { it.absoluteValue }.sum()
 
         fun directionTo(other: Point): Direction {
             val xDelta = (other.x - x).sign
@@ -60,17 +58,26 @@ object Matrix {
                 else -> error("no direction")
             }
         }
+
+        fun lineTo(other: Point): List<Point> {
+            val steps = this.distanceTo(other)
+            val direction = this.directionTo(other)
+            return (1..steps).scan(this) { last, _ -> last.move(direction) }
+        }
     }
 
     fun Collection<Point>.print(): String {
-        val colMax = maxByOrNull { it.x }?.x ?: 0
         val colMin = minByOrNull { it.x }?.x ?: 0
-        val rowMax = maxByOrNull { it.y }?.y ?: 0
+        val colMax = maxByOrNull { it.x }?.x ?: 0
         val rowMin = minByOrNull { it.y }?.y ?: 0
+        val rowMax = maxByOrNull { it.y }?.y ?: 0
         return (rowMin..rowMax).map { y ->
-            (colMin..colMax).map { x ->
-                this.singleOrNull { it == Point(x, y) }?.let { "#" } ?: "."
-            }.joinToString("")
+            val joinToString = (colMin..colMax)
+                .map { x ->
+                    this.firstOrNull { it == Point(x, y) }?.let { "#" } ?: "."
+                }
+                .joinToString("")
+            joinToString
         }.joinToString(System.lineSeparator())
     }
 }

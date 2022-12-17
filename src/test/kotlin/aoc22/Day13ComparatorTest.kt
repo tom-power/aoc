@@ -92,7 +92,7 @@ class Day13ComparatorTest {
                     actual = actual.getOrNull(index),
                     expected = toIsFirstSmallerExpected.getOrNull(index),
                 )
-            }.filter { it.actual != it.expected }.log()
+            }.filter { it.actual != it.expected }
 
             assertEquals(0, mismatch.size)
         }

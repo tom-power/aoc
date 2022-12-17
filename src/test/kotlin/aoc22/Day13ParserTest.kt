@@ -2,16 +2,40 @@ package aoc22
 
 import aoc22.Day13Parser.toPackets
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day13ParserTest {
 
     @Test
-    @Disabled
     fun `parse input example`() {
-        assertEquals(exampleAsPackets, Input.readInputWithFallback("Day13_example", "aoc22").toPackets())
+        assertEquals(exampleAsPackets, input.toPackets())
     }
+
+    private val input = """
+        [1,1,3,1,1]
+        [1,1,5,1,1]
+
+        [[1],[2,3,4]]
+        [[1],4]
+
+        [9]
+        [[8,7,6]]
+
+        [[4,4],4,4]
+        [[4,4],4,4,4]
+
+        [7,7,7,7]
+        [7,7,7]
+
+        []
+        [3]
+
+        [[[]]]
+        [[]]
+
+        [1,[2,[3,[4,[5,6,7]]]],8,9]
+        [1,[2,[3,[4,[5,6,0]]]],8,9]
+    """.trimIndent().split(System.lineSeparator())
 
     private val exampleAsPackets = listOf(
         listOf(1, 1, 3, 1, 1), listOf(1, 1, 5, 1, 1),
