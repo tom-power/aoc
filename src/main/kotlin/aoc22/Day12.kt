@@ -5,7 +5,7 @@ import aoc22.Day12Parser.toHeightMap
 import aoc22.Day12Solution.part1Day12
 import aoc22.Day12Solution.part2Day12
 import aoc22.Matrix.Point
-import aoc22.Parser.toPointish
+import aoc22.Parser.parsePointChars
 import java.util.*
 
 object Day12 : Day {
@@ -91,7 +91,7 @@ object Day12Parser {
         }
 
     fun List<String>.toHeightMap(): HeightMap =
-        toPointish().toMap().let { p ->
+        parsePointChars().toMap().let { p ->
             HeightMap(
                 elevations = p.mapValues { it.value.toCode() },
                 start = p.filterValues { it == 'S' }.keys.first(),

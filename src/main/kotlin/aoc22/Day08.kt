@@ -4,7 +4,7 @@ import aoc22.Collections.product
 import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
 import aoc22.Matrix.Point
-import aoc22.Parser.toPointish
+import aoc22.Parser.parsePointChars
 
 object Day08 : Day {
     fun List<String>.part1(): Int = visibleTreeCount()
@@ -38,7 +38,9 @@ object Day08Solution {
         }
     }
 
-    private fun List<String>.toTrees(): List<Tree> = toPointish().map { (p, c) -> Tree(p, c.digitToInt()) }
+    private fun List<String>.toTrees(): List<Tree> =
+        parsePointChars()
+            .map { (p, c) -> Tree(p, c.digitToInt()) }
 
     private data class Tree(
         val point: Point,
