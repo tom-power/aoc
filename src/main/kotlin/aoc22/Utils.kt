@@ -2,12 +2,11 @@ package aoc22
 
 import aoc22.Matrix.Direction.*
 import aoc22.Matrix.Point
-import aoc22.Misc.log
 import aoc22.Misc.next
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
-import kotlin.math.abs
+import kotlin.math.absoluteValue
 import kotlin.math.sign
 
 object Input {
@@ -34,16 +33,20 @@ object Matrix {
 
         fun getAdjacent(): Set<Point> = values().map { this.move(it) }.toSet()
 
-        fun getAdjacentWithDiagonal(): Set<Point> = values().map { direction ->
-            this.move(direction).let { moved ->
-                listOf(moved) + listOf(moved.move(direction.next()))
-            }
-        }.flatten().toSet()
+        fun getAdjacentWithDiagonal(): Set<Point> =
+            values().flatMap { direction ->
+                this.move(direction).let { moved ->
+                    listOf(moved) + listOf(moved.move(direction.next()))
+                }
+            }.toSet()
 
-        fun distanceTo(other: Point): Int = listOf(
-            x - other.x,
-            y - other.y,
-        ).map { abs(it) }.sum()
+        fun distanceTo(other: Point): Int =
+            listOf(
+                x - other.x,
+                y - other.y,
+            )
+                .map { it.absoluteValue }
+                .sum()
 
         fun directionTo(other: Point): Direction {
             val xDelta = (other.x - x).sign
@@ -59,11 +62,11 @@ object Matrix {
         }
     }
 
-    fun Collection<Point>.print(gridHeight: Int? = null, gridWidth: Int? = null): String {
-        val colMax = gridWidth ?: maxByOrNull { it.x }?.x ?: 0
-        val colMin = gridWidth?.let { 0 } ?: minByOrNull { it.x }?.x ?: 0
-        val rowMax = gridHeight ?: maxByOrNull { it.y }?.y ?: 0
-        val rowMin = gridHeight?.let { 0 } ?: minByOrNull { it.y }?.y ?: 0
+    fun Collection<Point>.print(): String {
+        val colMax = maxByOrNull { it.x }?.x ?: 0
+        val colMin = minByOrNull { it.x }?.x ?: 0
+        val rowMax = maxByOrNull { it.y }?.y ?: 0
+        val rowMin = minByOrNull { it.y }?.y ?: 0
         return (rowMin..rowMax).map { y ->
             (colMin..colMax).map { x ->
                 this.singleOrNull { it == Point(x, y) }?.let { "#" } ?: "."
@@ -96,9 +99,13 @@ object Collections {
         )
     }
 
-    private fun <T> List<T>.indexesOf(delimiter: T) = mapIndexedNotNull { index, t -> index.takeIf { t == delimiter } }
+    private fun <T> List<T>.indexesOf(delimiter: T) =
+        mapIndexedNotNull { index, t ->
+            index.takeIf { t == delimiter }
+        }
 
-    private fun <T> List<T>.partitionAt(indexes: List<Int>) = indexes.zipWithNext { a, b ->
+    private fun <T> List<T>.partitionAt(indexes: List<Int>) =
+        indexes.zipWithNext { a, b ->
             this.subList(a + 1, b)
         }
 
@@ -125,9 +132,15 @@ object Misc {
 }
 
 object Parser {
-    fun List<String>.toPointish(): List<Pair<Point, Char>> = mapIndexed { y, s ->
-        s.mapIndexed { x, c ->
-            Pair(Point(x, y), c)
-        }
-    }.flatten()
+    fun String.toPoint(): Point =
+        this.split(",")
+            .map { it.filter { it.isDigit() || it == '-' }.toInt() }
+            .let { Point(it[0], it[1]) }
+
+    fun List<String>.parsePointChars(): List<Pair<Point, Char>> =
+        mapIndexed { y, s ->
+            s.mapIndexed { x, c ->
+                Pair(Point(x, y), c)
+            }
+        }.flatten()
 }
