@@ -1,6 +1,5 @@
 package aoc22
 
-import aoc22.Day14.part1
 import aoc22.Day14Domain.Cave
 import aoc22.Day14Parser.toCave
 import aoc22.Day14Solution.part1Day14
@@ -97,10 +96,3 @@ object Day14Parser {
             .flatMap { (from, to) -> from.lineTo(to) }
 
 }
-
-fun Point.lineTo(other: Point): List<Point> {
-    val steps = this.distanceTo(other)
-    val direction = this.directionTo(other)
-    return (1..steps).scan(this) { last, _ -> last.move(direction) }
-}
-
