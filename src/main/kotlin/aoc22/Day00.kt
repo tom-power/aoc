@@ -24,7 +24,7 @@ object Day00Runner {
 
 }
 
-typealias Day00Type = Any
+private typealias Day00Type = Any
 
 object Day00Domain {
 

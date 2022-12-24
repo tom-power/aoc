@@ -44,7 +44,7 @@ object Day05Runner {
     }
 }
 
-typealias Stack = List<Char>
+private typealias Stack = List<Char>
 
 object Day05Domain {
     data class Movement(val number: Int, val from: Int, val to: Int)

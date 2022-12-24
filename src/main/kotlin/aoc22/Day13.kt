@@ -53,7 +53,7 @@ object Day13Runner {
             .let { (it.indexOf(divider1) + 1) * (it.indexOf(divider2) + 1) }
 }
 
-typealias Packet = List<Any>
+private typealias Packet = List<Any>
 
 object Day13Domain {
     val packetComparator = Comparator<Packet> { o1, o2 -> o1.compareTo(o2) }
