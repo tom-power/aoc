@@ -79,8 +79,8 @@ class Day13ComparatorTest {
             val actual = toPackets.toIsPairsInOrder()
 
             data class IsFirstSmaller(
-                val first: Packet,
-                val last: Packet,
+                val first: List<Any>,
+                val last: List<Any>,
                 val actual: Boolean?,
                 val expected: Boolean?,
             )

@@ -33,7 +33,7 @@ object Day11Solution {
             .product()
 }
 
-typealias Monkeys = List<Monkey>
+private typealias Monkeys = List<Monkey>
 
 object Day11Runner {
     fun Monkeys.doRounds(times: Int): Monkeys =

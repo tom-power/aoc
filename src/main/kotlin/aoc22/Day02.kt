@@ -54,9 +54,9 @@ object Day02Parser {
     fun List<String>.toKeys(): Keys = map { it.split(" ").run { this[0] to this[1] } }
 }
 
-typealias Keys = List<Pair<String, String>>
-typealias Plays = List<Pair<Play, Play>>
-typealias Rounds = List<Round>
+private typealias Keys = List<Pair<String, String>>
+private typealias Plays = List<Pair<Play, Play>>
+private typealias Rounds = List<Round>
 
 object DomainRPS {
     enum class Play {
