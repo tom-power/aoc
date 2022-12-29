@@ -17,7 +17,6 @@ object Input {
 }
 
 object Matrix {
-
     enum class Direction { R, D, L, U }
 
     data class Point(
@@ -150,4 +149,79 @@ object Parser {
                 Pair(Point(x, y), c)
             }
         }.flatten()
+}
+
+object Algorithm {
+
+    data class Cost<T>(override val node: Node<T>, override val cost: Int) : HasCost<T>
+
+    interface HasCost<T> : HasNode<T> {
+        override val node: Node<T>
+        val cost: Int
+    }
+
+    interface Node<T> {
+        val value: T
+        val neighbours: List<HasCost<T>>
+    }
+
+    interface HasNode<T> {
+        val node: Node<T>
+    }
+
+    abstract class Dijkstra<T>(private val start: Node<T>) {
+        abstract val isEnd: (HasNode<T>) -> Boolean
+        abstract fun neighbours(node: HasNode<T>): List<HasCost<T>>
+
+        private fun shortestPaths(): List<List<HasCost<T>>> {
+            val shortestDistances = shortestDistances()
+            val startCost = Cost(start, 0) as HasCost<T>
+            val shortestPaths = mutableListOf(listOf(startCost))
+
+            fun Map<Node<T>, Int>.getOrMax(node: Node<T>): Int = this.getOrDefault(node, Int.MAX_VALUE)
+            fun Map<Node<T>, Int>.matchesNext(last: HasCost<T>, next: HasCost<T>): Boolean =
+                this.getOrMax(next.node) == (this.getOrMax(last.node) + next.cost)
+
+            fun visitNext(nodes: List<HasCost<T>>) {
+                val last = nodes.last()
+                neighbours(last).forEach { next ->
+                    if (shortestDistances.matchesNext(last, next) && !isEnd(last)) {
+                        shortestPaths.add(nodes + next)
+                        visitNext(nodes + next)
+                    }
+                }
+            }
+
+            visitNext(listOf(startCost))
+
+            return shortestPaths.toList().filter { path -> path.any { isEnd(it) } }
+        }
+
+        fun shortestPath(): List<Node<T>> =
+            shortestPaths()
+                .minBy { path -> path.sumOf { it.cost } }
+                .map { it.node }
+
+        fun shortestDistances(): Map<Node<T>, Int> {
+            val shortestDistances =
+                mutableMapOf<Node<T>, Int>()
+                    .withDefault { Int.MAX_VALUE }
+                    .apply { put(start, 0) }
+
+            fun visitNext(nodes: List<HasCost<T>>) {
+                val last = nodes.last()
+                neighbours(last).forEach { next ->
+                    val nextDistance = shortestDistances[last.node]!! + next.cost
+                    if (nextDistance < shortestDistances.getValue(next.node) && !isEnd(last)) {
+                        shortestDistances[next.node] = nextDistance
+                        visitNext(nodes + next)
+                    }
+                }
+            }
+            visitNext(listOf(Cost(start, 0)))
+
+            return shortestDistances
+        }
+    }
+
 }
