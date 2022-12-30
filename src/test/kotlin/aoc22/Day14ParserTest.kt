@@ -12,11 +12,11 @@ class Day14ParserTest {
     fun `parse a cave`() {
         val expected = Cave(
             rock = mutableSetOf(
-                Point(x = 498, y = 4),
-                Point(x = 498, y = 5),
-                Point(x = 498, y = 6),
-                Point(x = 497, y = 6),
-                Point(x = 496, y = 6)
+                Point(x = 498, y = -4),
+                Point(x = 498, y = -5),
+                Point(x = 498, y = -6),
+                Point(x = 497, y = -6),
+                Point(x = 496, y = -6)
             ),
             sandStartsFrom = Point(x = 500, y = 0),
             fallingSand = Point(x = 500, y = 0),
