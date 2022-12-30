@@ -22,7 +22,7 @@ object Day14Solution {
         toCave()
             .apply {
                 rock.addAll(floor(belowLowest = 2))
-                lowestRock = rock.maxBy { it.y }
+                lowestRock = rock.minBy { it.y }
             }
             .fillUpAndCount()
 }
@@ -32,7 +32,7 @@ object Day14Domain {
         val rock: MutableSet<Point>,
         val sandStartsFrom: Point,
         var fallingSand: Point,
-        var lowestRock: Point = rock.maxBy { it.y },
+        var lowestRock: Point = rock.minBy { it.y },
         var last: Point = lowestRock,
     ) {
         private var atRest: Int = 0
@@ -59,19 +59,19 @@ object Day14Domain {
         }
 
         fun floor(belowLowest: Int): List<Point> {
-            val left: Int = rock.minOf { it.x } - lowestRock.y
-            val right: Int = rock.maxOf { it.x } + lowestRock.y
-            val down: Int = lowestRock.y + belowLowest
+            val left: Int = rock.minOf { it.x } + lowestRock.y
+            val right: Int = rock.maxOf { it.x } - lowestRock.y
+            val down: Int = lowestRock.y - belowLowest
             return Point(x = left, y = down).lineTo(Point(x = right, y = down))
         }
 
-        private fun Point.isAbove(other: Point): Boolean = this.y < other.y
+        private fun Point.isAbove(other: Point): Boolean = this.y > other.y
 
         private fun Point.movesBelow() =
             listOf(
-                move(D),
-                move(D).move(L),
-                move(D).move(R)
+                move(Down),
+                move(Down).move(Left),
+                move(Down).move(Right)
             )
     }
 }
@@ -88,7 +88,7 @@ object Day14Parser {
         split(" -> ")
             .map {
                 it.split(",")
-                    .run { Point(this[0].toInt(), this[1].toInt()) }
+                    .run { Point(this[0].toInt(), -this[1].toInt()) }
             }
 
     private fun List<Point>.toLine(): List<Point> =

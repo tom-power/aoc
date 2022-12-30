@@ -3,6 +3,7 @@ package aoc22
 import aoc22.Day09Solution.part1Day09
 import aoc22.Day09Solution.part2Day09
 import aoc22.Matrix.Direction
+import aoc22.Matrix.Direction.*
 import aoc22.Matrix.Point
 import kotlin.math.sign
 
@@ -63,10 +64,19 @@ object Day09Solution {
             y = point.y + (other.y - point.y).sign
         )
 
+    private fun String.toDirection(): Direction =
+        when (this) {
+            "U" -> Up
+            "R" -> Right
+            "D" -> Down
+            "L" -> Left
+            else -> error("don't know")
+        }
+
     private fun List<String>.toDirections(): List<Direction> =
         map {
             it.split(" ")
-                .let { (dir, times) -> Direction.valueOf(dir) to (0 until times.toInt()) }
+                .let { (dir, times) -> dir.toDirection() to (0 until times.toInt()) }
                 .let { (dir, times) -> times.map { dir } }
         }
             .flatten()

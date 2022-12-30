@@ -17,20 +17,17 @@ object Input {
 }
 
 object Matrix {
-    enum class Direction { R, D, L, U }
+    enum class Direction { Right, Down, Left, Up }
 
     data class Point(
         val x: Int, val y: Int
     ) {
-
-        fun add(x: Int, y: Int) = Point(x = this.x + x, y = this.y + y)
-
-        fun move(direction: Direction): Point =
+        fun move(direction: Direction, by: Int = 1): Point =
             when (direction) {
-                R -> copy(x = x + 1)
-                D -> copy(y = y + 1)
-                L -> copy(x = x - 1)
-                U -> copy(y = y - 1)
+                Up -> copy(y = y + by)
+                Right -> copy(x = x + by)
+                Down -> copy(y = y - by)
+                Left -> copy(x = x - by)
             }
 
         fun getAdjacent(): Set<Point> = values().map { this.move(it) }.toSet()
@@ -50,10 +47,10 @@ object Matrix {
             val yDelta = (other.y - y).sign
 
             return when {
-                xDelta > 0 -> R
-                yDelta > 0 -> D
-                xDelta < 0 -> L
-                yDelta < 0 -> U
+                yDelta > 0 -> Up
+                xDelta > 0 -> Right
+                yDelta < 0 -> Down
+                xDelta < 0 -> Left
                 else -> error("no direction")
             }
         }
@@ -65,20 +62,40 @@ object Matrix {
         }
     }
 
-    fun Collection<Point>.print(): String {
-        val colMin = minByOrNull { it.x }?.x ?: 0
-        val colMax = maxByOrNull { it.x }?.x ?: 0
-        val rowMin = minByOrNull { it.y }?.y ?: 0
-        val rowMax = maxByOrNull { it.y }?.y ?: 0
-        return (rowMin..rowMax).map { y ->
-            val joinToString = (colMin..colMax)
-                .map { x ->
-                    this.firstOrNull { it == Point(x, y) }?.let { "#" } ?: "."
-                }
-                .joinToString("")
-            joinToString
-        }.joinToString(System.lineSeparator())
+    context(Collection<Point>)
+    private fun Point.draw(): String = firstOrNull { it == this }?.let { "#" } ?: "."
+
+    enum class Axis { X, Y }
+
+    context(Collection<Point>)
+    private fun Axis.toRange(): IntRange {
+        fun Point.axisValue(axis: Axis): Int =
+            when (axis) {
+                Axis.X -> this.x
+                Axis.Y -> this.y
+            }
+
+        fun min(): Int = minByOrNull { it.axisValue(this) }?.axisValue(this) ?: 0
+        fun max(): Int = maxByOrNull { it.axisValue(this) }?.axisValue(this) ?: 0
+
+        return min()..max()
     }
+
+    fun Collection<Point>.print(): String =
+        Axis.Y.toRange().reversed().map { y ->
+            Axis.X.toRange().map { x ->
+                Point(x, y).draw()
+            }.joinToString("")
+        }.joinToString(System.lineSeparator())
+
+    interface HasPoints {
+        val points: Collection<Point>
+        fun move(direction: Direction, by: Int = 1): HasPoints
+
+        fun Collection<Point>.move(direction: Direction, by: Int = 1): Collection<Point> = map { it.move(direction, by) }
+    }
+
+    fun Collection<Point>.height(): Int = maxOf { it.y }
 }
 
 object Collections {
