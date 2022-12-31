@@ -19,14 +19,12 @@ class Day17Test {
     }
 
     @Test
-    @Disabled
     fun `part two example`() {
         assertEquals(1514285714288, Day17.readInputExample().part2())
     }
 
     @Test
-    @Disabled
     fun `part two`() {
-        assertEquals(0, Day17.readInput().part2())
+        assertEquals(1565242165201, Day17.readInput().part2())
     }
 }
