@@ -2,7 +2,7 @@ package aoc22
 
 import aoc22.Day14Domain.Cave
 import aoc22.Day14Parser.toCave
-import aoc22.Matrix.Point
+import aoc22.Space2D.Point
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

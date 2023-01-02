@@ -2,9 +2,9 @@ package aoc22
 
 import aoc22.Day09Solution.part1Day09
 import aoc22.Day09Solution.part2Day09
-import aoc22.Matrix.Direction
-import aoc22.Matrix.Direction.*
-import aoc22.Matrix.Point
+import aoc22.Space2D.Direction
+import aoc22.Space2D.Direction.*
+import aoc22.Space2D.Point
 import kotlin.math.sign
 
 object Day09 : Day {

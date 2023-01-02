@@ -4,8 +4,8 @@ import aoc22.Day12Domain.HeightMap
 import aoc22.Day12Parser.toHeightMap
 import aoc22.Day12Solution.part1Day12
 import aoc22.Day12Solution.part2Day12
-import aoc22.Matrix.Point
-import aoc22.Parser.parsePointChars
+import aoc22.Space2D.Point
+import aoc22.Space2D.Parser.parsePointChars
 import java.util.*
 
 object Day12 : Day {

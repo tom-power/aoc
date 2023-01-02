@@ -4,8 +4,8 @@ import aoc22.Day15Domain.Sensor
 import aoc22.Day15Parser.toSensors
 import aoc22.Day15RunnerPart1.part1Day15
 import aoc22.Day15RunnerPart2.part2Day15
-import aoc22.Matrix.Point
-import aoc22.Parser.toPoint
+import aoc22.Space2D.Point
+import aoc22.Space2D.Parser.toPoint
 import kotlin.math.absoluteValue
 
 object Day15 : Day {

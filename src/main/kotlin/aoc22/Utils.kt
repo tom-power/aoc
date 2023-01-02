@@ -1,7 +1,6 @@
 package aoc22
 
-import aoc22.Matrix.Direction.*
-import aoc22.Matrix.Point
+import aoc22.Space2D.Direction.*
 import aoc22.Misc.next
 import java.io.File
 import java.math.BigInteger
@@ -16,7 +15,48 @@ object Input {
     private fun readInput(name: String) = File("src/main/resources", "$name.txt").takeIf { it.isFile }?.readLines()
 }
 
-object Matrix {
+object Space3D {
+    enum class Direction3D { Right, Down, Left, Up, Forward, Back }
+
+    data class Point3D(
+        val x: Int, val y: Int, val z: Int,
+    ) {
+        fun move(direction3D: Direction3D, by: Int = 1): Point3D =
+            when (direction3D) {
+                Direction3D.Up -> copy(y = y + by)
+                Direction3D.Right -> copy(x = x + by)
+                Direction3D.Down -> copy(y = y - by)
+                Direction3D.Left -> copy(x = x - by)
+                Direction3D.Forward -> copy(z = z + by)
+                Direction3D.Back -> copy(z = z - by)
+            }
+
+        fun neighours(): Set<Point3D> = Direction3D.values().map { this.move(it) }.toSet()
+    }
+
+    object Parser {
+        fun String.toPoint3D(): Point3D =
+            this.split(",")
+                .map { it.filter { it.isDigit() || it == '-' }.toInt() }
+               .let { Point3D(it[0], it[1], it[2]) }
+    }
+}
+
+object Space2D {
+    object Parser {
+        fun String.toPoint(): Point =
+            this.split(",")
+                .map { it.filter { it.isDigit() || it == '-' }.toInt() }
+                .let { Point(it[0], it[1]) }
+
+        fun List<String>.parsePointChars(): List<Pair<Point, Char>> =
+            mapIndexed { y, s ->
+                s.mapIndexed { x, c ->
+                    Pair(Point(x, y), c)
+                }
+            }.flatten()
+    }
+
     enum class Direction { Right, Down, Left, Up }
 
     data class Point(
@@ -30,7 +70,7 @@ object Matrix {
                 Left -> copy(x = x - by)
             }
 
-        fun getAdjacent(): Set<Point> = values().map { this.move(it) }.toSet()
+        fun getAdjacent(): Set<Point> = Direction.values().map { this.move(it) }.toSet()
 
         fun getAdjacentWithDiagonal(): Set<Point> =
             values().flatMap { direction ->
@@ -152,20 +192,6 @@ object Misc {
         val nextOrdinal = (ordinal + 1) % values.size
         return values[nextOrdinal]
     }
-}
-
-object Parser {
-    fun String.toPoint(): Point =
-        this.split(",")
-            .map { it.filter { it.isDigit() || it == '-' }.toInt() }
-            .let { Point(it[0], it[1]) }
-
-    fun List<String>.parsePointChars(): List<Pair<Point, Char>> =
-        mapIndexed { y, s ->
-            s.mapIndexed { x, c ->
-                Pair(Point(x, y), c)
-            }
-        }.flatten()
 }
 
 object Algorithm {

@@ -4,8 +4,8 @@ import aoc22.Day14Domain.Cave
 import aoc22.Day14Parser.toCave
 import aoc22.Day14Solution.part1Day14
 import aoc22.Day14Solution.part2Day14
-import aoc22.Matrix.Direction.*
-import aoc22.Matrix.Point
+import aoc22.Space2D.Direction.*
+import aoc22.Space2D.Point
 
 object Day14 : Day {
     fun List<String>.part1(): Int = part1Day14()
