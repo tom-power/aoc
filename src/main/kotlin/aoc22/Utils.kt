@@ -192,6 +192,11 @@ object Misc {
         val nextOrdinal = (ordinal + 1) % values.size
         return values[nextOrdinal]
     }
+
+    fun String.assertEqualTo(other: String) {
+        // https://stackoverflow.com/questions/10934743/formatting-output-so-that-intellij-idea-shows-diffs-for-two-texts
+        error("expected: $other but was: $this")
+    }
 }
 
 object Algorithm {
@@ -267,4 +272,15 @@ object Algorithm {
         }
     }
 
+}
+
+object Maps {
+    infix fun <T> Map<T, Int>.plusInt(other: Map<T, Int>): Map<T, Int> =
+        this.operate(other) { first, second -> first + second }
+
+    infix fun <T> Map<T, Int>.minusInt(other: Map<T, Int>): Map<T, Int> =
+        this.operate(other) { first, second -> first - second }
+
+    private fun <T> Map<T, Int>.operate(other: Map<T, Int>, fn: (Int, Int) -> Int): Map<T, Int> =
+        this.map { it.key to fn(it.value, other.getOrDefault(it.key, 0)) }.toMap()
 }
