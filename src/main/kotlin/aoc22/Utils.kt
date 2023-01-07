@@ -1,7 +1,7 @@
 package aoc22
 
-import aoc22.Space2D.Direction.*
 import aoc22.Misc.next
+import aoc22.Space2D.Direction.*
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -57,7 +57,9 @@ object Space2D {
             }.flatten()
     }
 
-    enum class Direction { Right, Down, Left, Up }
+    enum class Direction {
+        Right, Down, Left, Up;
+    }
 
     data class Point(
         val x: Int, val y: Int
@@ -100,6 +102,12 @@ object Space2D {
             val direction = this.directionTo(other)
             return (1..steps).scan(this) { last, _ -> last.move(direction) }
         }
+
+        operator fun plus(other: Point): Point =
+            Point(this.x + other.x, this.y + other.y)
+
+        operator fun minus(other: Point): Point =
+            Point(this.x - other.x, this.y - other.y)
     }
 
     context(Collection<Point>)
@@ -108,7 +116,7 @@ object Space2D {
     enum class Axis { X, Y }
 
     context(Collection<Point>)
-    private fun Axis.toRange(): IntRange {
+    fun Axis.toRange(): IntRange {
         fun Point.axisValue(axis: Axis): Int =
             when (axis) {
                 Axis.X -> this.x
