@@ -49,7 +49,7 @@ object Day09Solution {
             movedPoints.getOrElse(index - 1) { movedHead }
                 .let { prev ->
                     val movedPoint =
-                        if (point !in listOf(prev) + prev.getAdjacentWithDiagonal())
+                        if (point !in listOf(prev) + prev.adjacentWithDiagonal())
                             pointNearest(point, prev)
                         else
                             point

@@ -38,7 +38,7 @@ object Space3D {
         fun String.toPoint3D(): Point3D =
             this.split(",")
                 .map { it.filter { it.isDigit() || it == '-' }.toInt() }
-               .let { Point3D(it[0], it[1], it[2]) }
+                .let { Point3D(it[0], it[1], it[2]) }
     }
 }
 
@@ -61,6 +61,14 @@ object Space2D {
         Right, Down, Left, Up;
     }
 
+    fun Direction.opposite(): Direction =
+        when (this) {
+            Right -> Left
+            Down -> Up
+            Left -> Right
+            Up -> Down
+        }
+
     data class Point(
         val x: Int, val y: Int
     ) {
@@ -72,9 +80,9 @@ object Space2D {
                 Left -> copy(x = x - by)
             }
 
-        fun getAdjacent(): Set<Point> = Direction.values().map { this.move(it) }.toSet()
+        fun adjacent(): Set<Point> = Direction.values().map { this.move(it) }.toSet()
 
-        fun getAdjacentWithDiagonal(): Set<Point> =
+        fun adjacentWithDiagonal(): Set<Point> =
             values().flatMap { direction ->
                 this.move(direction).let { moved ->
                     listOf(moved) + listOf(moved.move(direction.next()))
@@ -111,7 +119,8 @@ object Space2D {
     }
 
     context(Collection<Point>)
-    private fun Point.draw(): String = firstOrNull { it == this }?.let { "#" } ?: "."
+    private fun Point.draw(highlight: List<Point>? = null): String =
+        firstOrNull { it == this }?.let { if (highlight?.let { this in it } == true) "*" else "#" } ?: "."
 
     enum class Axis { X, Y }
 
@@ -129,10 +138,10 @@ object Space2D {
         return min()..max()
     }
 
-    fun Collection<Point>.print(): String =
+    fun Collection<Point>.print(highlight: List<Point>? = null): String =
         Axis.Y.toRange().reversed().map { y ->
             Axis.X.toRange().map { x ->
-                Point(x, y).draw()
+                Point(x, y).draw(highlight)
             }.joinToString("")
         }.joinToString(System.lineSeparator())
 
@@ -140,7 +149,8 @@ object Space2D {
         val points: Collection<Point>
         fun move(direction: Direction, by: Int = 1): HasPoints
 
-        fun Collection<Point>.move(direction: Direction, by: Int = 1): Collection<Point> = map { it.move(direction, by) }
+        fun Collection<Point>.move(direction: Direction, by: Int = 1): Collection<Point> =
+            map { it.move(direction, by) }
     }
 
     fun Collection<Point>.height(): Int = maxOf { it.y }
@@ -189,6 +199,7 @@ object Misc {
         BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16).padStart(32, '0')
 
     fun <T> T.log(): T = also {
+        println("")
         if (this is Iterable<*>) this.forEach {
             println(it)
         }

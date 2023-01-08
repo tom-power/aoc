@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class UtilsTest {
 
     @Test
-    fun `can transpose symetric`() {
+    fun `can transpose symmetric`() {
         assertEquals(
             /* expected = */ listOf(
                 listOf(" ", "N", "Z"),
@@ -25,7 +25,7 @@ class UtilsTest {
     }
 
     @Test
-    fun `can transpose asymetric`() {
+    fun `can transpose asymmetric`() {
         assertEquals(
             /* expected = */ listOf(
                 listOf(" ", "N", "Z"),
@@ -57,7 +57,7 @@ class UtilsTest {
             Point(x = -1, y = 0),
             Point(x = 0, y = 1),
         )
-        val actual = Point(0, 0).getAdjacent()
+        val actual = Point(0, 0).adjacent()
 
         assertEquals(expected, actual)
     }
@@ -74,7 +74,7 @@ class UtilsTest {
             Point(x = 0, y = 1),
             Point(x = 1, y = 1)
         )
-        val actual = Point(0, 0).getAdjacentWithDiagonal()
+        val actual = Point(0, 0).adjacentWithDiagonal()
 
         assertEquals(expected, actual)
     }

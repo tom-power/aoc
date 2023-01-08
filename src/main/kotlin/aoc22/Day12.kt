@@ -67,7 +67,7 @@ object Day12Domain {
         }
 
         private fun neighbours(point: Point, canMove: (Int, Int) -> Boolean): List<Point> =
-            point.getAdjacent()
+            point.adjacent()
                 .filter { it !in visited }
                 .filter { it in elevations }
                 .filter { canMove(elevations.getValue(point), elevations.getValue(it)) }
