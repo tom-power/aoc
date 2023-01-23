@@ -53,7 +53,7 @@ object Day22Domain {
     data class Board(
         val items: Set<BoardItem>,
         val wrap: Wrap,
-        val monitor: Monitor = Monitor(items),
+        val monitor: StateMonitor = StateMonitor(items),
     ) {
         private val tiles: Set<Tile> = items.filterIsInstance<Tile>().toSet()
         private val points: Set<Point> = items.map { it.point }.toSet()
@@ -207,6 +207,7 @@ object Day22DomainWrapCube {
 
     class EdgePointMap(
         private val edgePoints: Set<EdgePoint>,
+        val monitor: EdgePointMapMonitor? = null
     ) : () -> Set<EdgePointPair> {
         private val edges = edgePoints.map { it.point }.toSet()
 
@@ -232,6 +233,7 @@ object Day22DomainWrapCube {
                 while (next != null) {
                     edgePointMap.add(last)
                     next = last.getNext()?.also { last = it }
+                        .also { monitor?.let { it.invoke(edgePointMap.toSet()) } }
                 }
                 edgePointMap
             }.flatten().toSet()

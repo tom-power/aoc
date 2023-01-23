@@ -11,6 +11,7 @@ dependencies {
     implementation("com.github.shiguruikai:combinatoricskt:1.6.0")
 
     testImplementation(kotlin("test"))
+    testImplementation("com.varabyte.kotter:kotter:1.0.0")
 }
 
 tasks {

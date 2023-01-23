@@ -7,9 +7,23 @@ import aoc22.Day22Domain.Wall
 import aoc22.Misc.log
 import aoc22.Space2D.Direction.*
 import aoc22.Space2D.Point
+import aoc22.Space2D.print
 import aoc22.Space2D.toRange
 
-class Monitor(
+class EdgePointMapMonitor(private val edges: Set<Point> = emptySet()) : Monitor<Set<EdgePointPair>> {
+
+    private val edgePointMaps: MutableList<Set<EdgePointPair>> = mutableListOf()
+
+    override fun invoke(p1: Set<EdgePointPair>) {
+        edgePointMaps.add(p1)
+    }
+
+    override fun print(): List<String> =
+        edgePointMaps
+            .map { pairs -> edges.print(pairs.flatMap { listOf(it.first.point, it.second.point) }) }
+}
+
+class StateMonitor(
     private val items: Set<Day22Domain.BoardItem>,
     private var states: MutableList<State> = mutableListOf(),
     private var steps: MutableList<State> = mutableListOf()

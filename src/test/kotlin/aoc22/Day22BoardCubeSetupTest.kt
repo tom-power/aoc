@@ -1,5 +1,6 @@
 package aoc22
 
+import aoc22.Day22DomainWrap.CubeWrap
 import aoc22.Day22Parser.toBoard
 import aoc22.Day22Parser.toPath
 import aoc22.Day22DomainWrap.withCubeWrap
@@ -14,7 +15,7 @@ class Day22BoardCubeSetupTest {
 
     private val exampleCubeBoard = Day22.readInputExample().toBoard().withCubeWrap()
 
-    private fun Day22DomainWrap.CubeWrap.mappingsFor(point: Point): Set<EdgePointPair> =
+    private fun CubeWrap.mappingsFor(point: Point): Set<EdgePointPair> =
         edgePointPairs
             .filter { edgePointPair ->
                 edgePointPair.run { listOf(first.point, second.point).any { it == point } }
@@ -22,13 +23,13 @@ class Day22BoardCubeSetupTest {
 
     @Test
     fun `can make CubeWrap mappings`() {
-        val cubeWrap = exampleCubeBoard.wrap as Day22DomainWrap.CubeWrap
+        val cubeWrap = exampleCubeBoard.wrap as CubeWrap
         assertEquals(25, cubeWrap.edgePointPairs.size)
     }
 
     @Test
     fun `can make CubeWrap mappings normal`() {
-        val cubeWrap = exampleCubeBoard.wrap as Day22DomainWrap.CubeWrap
+        val cubeWrap = exampleCubeBoard.wrap as CubeWrap
 
         val normalListOf = listOf(
             Pair(
@@ -41,7 +42,7 @@ class Day22BoardCubeSetupTest {
 
     @Test
     fun `can make CubeWrap mappings outside corner`() {
-        val cubeWrap = exampleCubeBoard.wrap as Day22DomainWrap.CubeWrap
+        val cubeWrap = exampleCubeBoard.wrap as CubeWrap
 
         val outsideCornerListOf = listOf(
             Pair(
