@@ -49,12 +49,14 @@ object Space2D {
                 .map { it.filter { it.isDigit() || it == '-' }.toInt() }
                 .let { Point(it[0], it[1]) }
 
-        fun List<String>.parsePointChars(): List<Pair<Point, Char>> =
-            mapIndexed { y, s ->
+        fun List<String>.parsePointChars(): List<Pair<Point, Char>> {
+            val max = this.size
+            return mapIndexed { y, s ->
                 s.mapIndexed { x, c ->
-                    Pair(Point(x, y), c)
+                    Pair(Point(x, max - y), c)
                 }
             }.flatten()
+        }
     }
 
     enum class Direction {
@@ -154,6 +156,18 @@ object Space2D {
     }
 
     fun Collection<Point>.height(): Int = maxOf { it.y }
+
+    fun Collection<Point>.toMaxPoints(): Collection<Point> {
+        val minX = this.minOfOrNull { it.x } ?: return this
+        val maxX = this.maxOfOrNull { it.x } ?: return this
+        val minY = this.minOfOrNull { it.y } ?: return this
+        val maxY = this.maxOfOrNull { it.y } ?: return this
+        return (minX..maxX).flatMap { x ->
+            (minY..maxY).map { y ->
+                Point(x, y)
+            }
+        }
+    }
 }
 
 object Collections {
@@ -302,4 +316,8 @@ object Maps {
 
     private fun <T> Map<T, Int>.operate(other: Map<T, Int>, fn: (Int, Int) -> Int): Map<T, Int> =
         this.map { it.key to fn(it.value, other.getOrDefault(it.key, 0)) }.toMap()
+}
+
+interface Monitor<T> : (T) -> Unit {
+    fun print(): List<String>
 }

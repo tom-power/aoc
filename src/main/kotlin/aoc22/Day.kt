@@ -6,10 +6,10 @@ interface Day {
     private fun name(): String? = this::class.simpleName
 
     fun readInputExample(): List<String> =
-        readInputWithFallback("${name()}_example", "aoc22")
+        readInputFor("example")
 
-    fun readInputExample2(): List<String> =
-        readInputWithFallback("${name()}_example2", "aoc22")
+    fun readInputFor(extension: String): List<String> =
+        readInputWithFallback("${name()}_${extension}", "aoc22")
 
     fun readInput(): List<String> =
         readInputWithFallback("${name()}", "aoc22")

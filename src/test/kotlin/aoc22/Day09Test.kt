@@ -24,7 +24,7 @@ class Day09Test {
 
     @Test
     fun `part two example 2`() {
-        assertEquals(36, Day09.readInputExample2().part2())
+        assertEquals(36, Day09.readInputFor("example2").part2())
     }
 
     @Test
