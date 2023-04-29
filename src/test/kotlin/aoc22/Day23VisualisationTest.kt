@@ -1,7 +1,7 @@
 package aoc22
 
 import aoc22.Day23Parser.toElves
-import aoc22.Day23Runner.spreadOut
+import aoc22.Day23Runner.SpreadOut
 import aoc22.Space2D.Point
 import aoc22.Space2D.toMaxPoints
 import aoc22.visualisation.animate
@@ -13,18 +13,18 @@ class Day23VisualisationTest {
 
 
     @Test
-//    @Disabled
+    @Disabled
     fun `part one 5 elves visualisation`() {
         framesFor(input = Day23.readInputFor("exampleFiveElves"), rounds = 4, frame = forFive())
-            .freezeAt(4)
+//            .freezeAt(4)
             .animate()
     }
 
     @Test
-//    @Disabled
+    @Disabled
     fun `part one example visualisation`() {
         framesFor(input = Day23.readInputExample(), rounds = 10)
-            .freezeAt(10)
+//            .freezeAt(10)
             .animate()
 
     }
@@ -52,8 +52,9 @@ private fun Collection<Point>.toFrame(): Collection<Point> {
 private fun framesFor(input: List<String>, rounds: Int, frame: Collection<Point> = emptySet()): List<String> =
     ElfMonitor(frame = frame.toFrame().toSet())
         .apply {
-            input
-                .toElves()
-                .spreadOut(monitor = this)
-                .invoke(rounds)
+            SpreadOut(
+                elves = input.toElves(),
+                monitor = this
+            )
+                .until(rounds)
         }.print()
