@@ -24,7 +24,9 @@ tasks {
         }
     }
     test {
-       useJUnitPlatform()
+        useJUnitPlatform {
+            excludeTags("visualisation", "slow")
+        }
     }
 }
 
