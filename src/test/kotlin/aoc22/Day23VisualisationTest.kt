@@ -6,14 +6,13 @@ import aoc22.Space2D.Point
 import aoc22.Space2D.toMaxPoints
 import aoc22.visualisation.animate
 import aoc22.visualisation.freezeAt
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
+@Tag("visualisation")
 class Day23VisualisationTest {
 
-
     @Test
-    @Disabled
     fun `part one 5 elves visualisation`() {
         framesFor(input = Day23.readInputFor("exampleFiveElves"), rounds = 4, frame = forFive())
 //            .freezeAt(4)
@@ -21,7 +20,6 @@ class Day23VisualisationTest {
     }
 
     @Test
-    @Disabled
     fun `part one example visualisation`() {
         framesFor(input = Day23.readInputExample(), rounds = 10)
 //            .freezeAt(10)
@@ -30,7 +28,6 @@ class Day23VisualisationTest {
     }
 
     @Test
-    @Disabled
     fun `part one visualisation`() {
         framesFor(input = Day23.readInput(), rounds = 10)
 //            .freezeAt(1)

@@ -3,7 +3,7 @@ package aoc22
 import aoc22.Day16.part1
 import aoc22.Day16.part2
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 class Day16Test {
@@ -19,13 +19,13 @@ class Day16Test {
     }
 
     @Test
-    @Disabled
+    @Tag("slow")
     fun `part two example`() {
         assertEquals(1707, Day16.readInputExample().part2())
     }
 
     @Test
-    @Disabled
+    @Tag("slow")
     fun `part two`() {
         assertEquals(2666, Day16.readInput().part2())
     }

@@ -3,7 +3,7 @@ package aoc22
 import aoc22.Day22.part1
 import aoc22.Day22.part2
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 class Day22Test {
