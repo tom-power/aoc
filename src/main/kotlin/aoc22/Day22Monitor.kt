@@ -5,6 +5,7 @@ import aoc22.Day22Domain.Step
 import aoc22.Day22Domain.Tile
 import aoc22.Day22Domain.Wall
 import aoc22.Misc.log
+import aoc22.Monitoring.Monitor
 import aoc22.Space2D.Direction.*
 import aoc22.Space2D.Point
 import aoc22.Space2D.print

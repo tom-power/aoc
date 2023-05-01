@@ -34,6 +34,7 @@ object Day14Domain {
         var fallingSand: Point,
         var lowestRock: Point = rock.minBy { it.y },
         var last: Point = lowestRock,
+        private val monitor: Monitoring.PointMonitor? = null
     ) {
         private var atRest: Int = 0
 
@@ -54,6 +55,7 @@ object Day14Domain {
                             atRest++
                         }
                     }
+                monitor?.invoke(rock + fallingSand)
             }
             return atRest
         }
@@ -77,11 +79,12 @@ object Day14Domain {
 }
 
 object Day14Parser {
-    fun List<String>.toCave(): Cave =
+    fun List<String>.toCave(monitor: Monitoring.PointMonitor? = null): Cave =
         Cave(
             rock = this.flatMap { row -> row.toPoints().toLine() }.toMutableSet(),
             sandStartsFrom = Point(500, 0),
             fallingSand = Point(500, 0),
+            monitor = monitor
         )
 
     private fun String.toPoints(): List<Point> =

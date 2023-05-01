@@ -32,8 +32,8 @@ object Day20Runner {
             else -> decrypt(times - 1, this.decryptWith(mixers).toMutableList())
         }
 
-    private fun List<Mixer>.decryptWith(acc: MutableList<Mixer>): List<Mixer> =
-        foldIndexed(acc) { originalIndex, acc, mixer ->
+    private fun List<Mixer>.decryptWith(mixers: MutableList<Mixer>): List<Mixer> =
+        foldIndexed(mixers) { originalIndex, acc, mixer ->
             val index = acc.indexOfFirst { it.originalIndex == originalIndex }
             acc.apply {
                 removeAt(index)

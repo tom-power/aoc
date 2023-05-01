@@ -96,7 +96,7 @@ class Day07FileSysFold {
     private fun State.cd(cd: Cd): State =
         when (cd) {
             is Down -> this.cdDown(cd)
-            Up      -> this.cdUp(cd as Up)
+            Up      -> this.cdUp()
         }
 
     private fun State.cdDown(down: Down): State =
@@ -105,7 +105,7 @@ class Day07FileSysFold {
             parents = parents + listOf(down.path)
         )
 
-    private fun State.cdUp(up: Up): State =
+    private fun State.cdUp(): State =
         copy(
             pwd = parents.last(),
             parents = parents.dropLast(1)

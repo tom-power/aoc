@@ -136,6 +136,7 @@ object Day17Runner {
 object Day17Domain {
     class Chamber(
         val jets: List<Direction>,
+        val monitor: Monitoring.PointMonitor? = null
     ) {
         val shapes = listOf(wideBar, plus, backwardsEl, longBar, square)
         private val width = 0..6
@@ -158,8 +159,7 @@ object Day17Domain {
                         .moveIfValid(direction = jets.nth(jet++))
                         .move(Down)
             }
-            floor.addAll(shape.move(Up).points)
-
+            floor.addAll(shape.move(Up).points).also { monitor?.invoke(floor.toSet()) }
         }
 
         private fun <T> List<T>.nth(n: Int): T = this[(n % size)]

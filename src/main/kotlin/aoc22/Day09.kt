@@ -24,7 +24,7 @@ object Day09Solution {
         val tailHistory: Set<Point>
     )
 
-    private fun List<Direction>.toHistory(knots: Int): State {
+    fun List<Direction>.toHistory(knots: Int, monitor: Monitoring.PointMonitor? = null): State {
         val initialState = State(Point(0, 0), listOf(Point(0, 0)), emptySet())
 
         return fold(initialState) { acc, direction ->
@@ -33,7 +33,7 @@ object Day09Solution {
 
             fun List<Point>.addTail(): List<Point> = if (this.size < knots - 1) this + initialState.rope else this
 
-            val rope = acc.rope.addTail().withMovements(movedHead)
+            val rope = acc.rope.addTail().withMovements(movedHead).also { monitor?.invoke(acc.tailHistory.toSet()) }
 
             State(
                 head = movedHead,
@@ -73,7 +73,7 @@ object Day09Solution {
             else -> error("don't know")
         }
 
-    private fun List<String>.toDirections(): List<Direction> =
+    fun List<String>.toDirections(): List<Direction> =
         map {
             it.split(" ")
                 .let { (dir, times) -> dir.toDirection() to (0 until times.toInt()) }

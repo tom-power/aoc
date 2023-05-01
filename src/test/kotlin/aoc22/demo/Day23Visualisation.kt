@@ -1,5 +1,6 @@
-package aoc22
+package aoc22.demo
 
+import aoc22.Day23
 import aoc22.Day23Parser.toElves
 import aoc22.Day23Runner.SpreadOut
 import aoc22.Monitoring.PointMonitor
@@ -9,17 +10,11 @@ import aoc22.visualisation.toFrame
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
-@Tag("visualisation")
-class Day23VisualisationTest {
-    @Test
-    fun `part one 5 elves visualisation`() {
-        framesFor(input = Day23.readInputFor("exampleFiveElves"), rounds = 4, frame = forFive())
-//            .freezeAt(4)
-            .animate()
-    }
+fun day23Visualisation() {
+    framesFor(input = Day23.readInputExample(), rounds = 10)
+        //            .freezeAt(10)
+        .animate()
 }
-
-private fun forFive() = listOf(Point(-5, -5), Point(10, 10))
 
 private fun framesFor(input: List<String>, rounds: Int, frame: Collection<Point> = emptySet()): List<String> =
     PointMonitor(frame = frame.toFrame().toSet())
