@@ -41,7 +41,8 @@ object Day12Domain {
         val start: Point,
         val end: Point,
         private val visited: MutableSet<Point> = mutableSetOf(),
-        private val pointQueue: PriorityQueue<PointCost> = PriorityQueue<PointCost>()
+        private val pointQueue: PriorityQueue<PointCost> = PriorityQueue<PointCost>(),
+        private val monitor: Monitoring.PointMonitor? = null
     ) {
         fun shortestPath(
             begin: Point,
@@ -61,6 +62,7 @@ object Day12Domain {
 
                 pointQueue.addAll(neighbors.map { PointCost(it, nextCost) })
                 visited.addAll(neighbors)
+                monitor?.invoke((visited + neighbors).toSet())
             }
 
             throw IllegalStateException("No valid path from $start to $end")
@@ -90,12 +92,13 @@ object Day12Parser {
             else -> this.code - 'a'.code
         }
 
-    fun List<String>.toHeightMap(): HeightMap =
+    fun List<String>.toHeightMap(monitor: Monitoring.PointMonitor? = null): HeightMap =
         parsePointChars().toMap().let { p ->
             HeightMap(
                 elevations = p.mapValues { it.value.toCode() },
                 start = p.filterValues { it == 'S' }.keys.first(),
-                end = p.filterValues { it == 'E' }.keys.first()
+                end = p.filterValues { it == 'E' }.keys.first(),
+                monitor = monitor
             )
         }
 }

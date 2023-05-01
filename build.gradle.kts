@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm") version "1.7.22"
 }
@@ -12,20 +14,21 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation("com.varabyte.kotter:kotter:1.0.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 }
 
 tasks {
     wrapper {
         gradleVersion = "7.6"
     }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "17"
         }
     }
     test {
         useJUnitPlatform {
-            excludeTags("visualisation", "slow")
+            excludeTags("visualisationDemo", "visualisation", "slow")
         }
     }
 }
@@ -34,6 +37,16 @@ tasks.withType<Jar>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
+tasks.register("visualisationDemo", Test::class) {
+    useJUnitPlatform {
+        includeTags("visualisationDemo")
+        setForkEvery(1)
+        maxParallelForks = 10
+        minHeapSize = "128m"
+        maxHeapSize = "4G"
+    }
+}
+
+tasks.withType(KotlinCompile::class).all {
     kotlinOptions.freeCompilerArgs = listOf("-Xcontext-receivers")
 }

@@ -2,6 +2,8 @@ package aoc22
 
 import aoc22.Misc.next
 import aoc22.Space2D.Direction.*
+import aoc22.Space2D.Point
+import aoc22.Space2D.print
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -318,6 +320,26 @@ object Maps {
         this.map { it.key to fn(it.value, other.getOrDefault(it.key, 0)) }.toMap()
 }
 
-interface Monitor<T> : (T) -> Unit {
-    fun print(): List<String>
+object Monitoring {
+    interface Monitor<T> : (T) -> Unit {
+        fun print(): List<String>
+    }
+
+
+open class PointMonitor(
+    private val frame: Set<Point> = setOf()
+) : Monitor<Set<Point>> {
+    private val pointList: MutableList<Set<Point>> = mutableListOf()
+
+    override fun invoke(points: Set<Point>) {
+        this.pointList.add(points)
+    }
+
+    override fun print(): List<String> =
+        pointList.map { points ->
+            (points.map { it } + frame).print()
+        }
+
 }
+}
+

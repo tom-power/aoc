@@ -4,6 +4,7 @@ import aoc22.Day23Parser.toElves
 import aoc22.Day23Runner.SpreadOut
 import aoc22.Day23Solution.part1Day23
 import aoc22.Day23Solution.part2Day23
+import aoc22.Monitoring.Monitor
 import aoc22.Space2D.Direction
 import aoc22.Space2D.Direction.*
 import aoc22.Space2D.Parser.parsePointChars
