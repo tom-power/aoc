@@ -59,6 +59,17 @@ object Space2D {
                 }
             }.flatten()
         }
+
+        data class PointChar(val point: Point, val char: Char)
+
+        fun List<String>.parsePointChars2(): List<PointChar> {
+            val max = this.size
+            return mapIndexed { y, s ->
+                s.mapIndexed { x, c ->
+                    PointChar(Point(x, max - y), c)
+                }
+            }.flatten()
+        }
     }
 
     enum class Direction {
@@ -325,21 +336,33 @@ object Monitoring {
         fun print(): List<String>
     }
 
+    open class PointMonitor(
+        private val frame: Set<Point> = setOf()
+    ) : Monitor<Set<Point>> {
+        private val pointList: MutableList<Set<Point>> = mutableListOf()
 
-open class PointMonitor(
-    private val frame: Set<Point> = setOf()
-) : Monitor<Set<Point>> {
-    private val pointList: MutableList<Set<Point>> = mutableListOf()
-
-    override fun invoke(points: Set<Point>) {
-        this.pointList.add(points)
-    }
-
-    override fun print(): List<String> =
-        pointList.map { points ->
-            (points.map { it } + frame).print()
+        override fun invoke(points: Set<Point>) {
+            this.pointList.add(points)
         }
 
-}
+        override fun print(): List<String> =
+            pointList.map { points ->
+                (points.map { it } + frame).print()
+            }
+    }
+
+    interface Printable<T> : List<Set<T>> {
+        fun print(): List<String>
+    }
+
+    abstract class Monitorable<T> : (Printable<T>) -> Unit {
+        private val list: MutableList<Printable<T>> = mutableListOf()
+
+        override fun invoke(points: Printable<T>) {
+            this.list.add(points)
+        }
+
+        fun print(): List<String> = list.map { it.print() }.flatten()
+    }
 }
 

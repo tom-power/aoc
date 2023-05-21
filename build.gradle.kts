@@ -11,10 +11,10 @@ repositories {
 dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
     implementation("com.github.shiguruikai:combinatoricskt:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 
     testImplementation(kotlin("test"))
     testImplementation("com.varabyte.kotter:kotter:1.0.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 }
 
 tasks {
