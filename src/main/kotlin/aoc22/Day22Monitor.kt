@@ -29,18 +29,11 @@ class StateMonitor(
     private var states: MutableList<State> = mutableListOf(),
     private var steps: MutableList<State> = mutableListOf()
 ) : (State, Step) -> State {
-//    init {
-//        print()
-//    }
-
     override fun invoke(state: State, step: Step): State =
         state
             .also { states.add(it); steps.add(it) }
-//            .also { println(state); println(step) }
 
     fun print(highlight: Point? = null) {
-//        states.map { it.log() }
-//        print("steps: ${steps.count()}, states: ${states.count()}, last: ${states.last()}")
         items.map { it.point }.print(highlight).log()
     }
 

@@ -11,6 +11,7 @@ fun main() {
         launch { day17Visualisation() }
         launch { day22Visualisation() }
         launch { day23Visualisation() }
+        launch { day24Visualisation() }
     }
 }
 
