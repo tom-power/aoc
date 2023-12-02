@@ -3,9 +3,9 @@ package template
 import template.Day00Solution.part1Day00
 import template.Day00Solution.part2Day00
 import common.Misc.log
-import common.DayYear
+import common.Year00
 
-object Day00 : DayYear() {
+object Day00 : Year00() {
     fun List<String>.part1(): Int = part1Day00()
 
     fun List<String>.part2(): Int = part2Day00()

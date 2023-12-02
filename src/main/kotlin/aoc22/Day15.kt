@@ -6,10 +6,10 @@ import aoc22.Day15RunnerPart1.part1Day15
 import aoc22.Day15RunnerPart2.part2Day15
 import common.Space2D.Point
 import common.Space2D.Parser.toPoint
-import common.Day22
+import common.Year22
 import kotlin.math.absoluteValue
 
-object Day15: Day22() {
+object Day15: Year22() {
     fun List<String>.part1(y: Int): Int = part1Day15(y)
 
     fun List<String>.part2(gridMax: Int): Long = part2Day15(gridMax)

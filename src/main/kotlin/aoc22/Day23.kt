@@ -10,9 +10,9 @@ import common.Space2D.Direction.*
 import common.Space2D.Parser.parsePointChars
 import common.Space2D.Point
 import common.Space2D.toMaxPoints
-import common.Day22
+import common.Year22
 
-object Day23: Day22() {
+object Day23: Year22() {
     fun List<String>.part1(): Int = part1Day23()
 
     fun List<String>.part2(): Int = part2Day23()

@@ -5,9 +5,9 @@ import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
 import common.Space2D.Point
 import common.Space2D.Parser.parsePointChars
-import common.Day22
+import common.Year22
 
-object Day08: Day22() {
+object Day08: Year22() {
     fun List<String>.part1(): Int = visibleTreeCount()
 
     fun List<String>.part2(): Int = maxScenicScore()

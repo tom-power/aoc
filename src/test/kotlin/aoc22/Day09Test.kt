@@ -2,6 +2,8 @@ package aoc22
 
 import aoc22.Day09.part1
 import aoc22.Day09.part2
+import common.readInput
+import common.readInputExample
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -24,7 +26,7 @@ class Day09Test {
 
     @Test
     fun `part two example 2`() {
-        assertEquals(36, Day09.readInputFor("example2").part2())
+        assertEquals(36, Day09.readInput("_example2").part2())
     }
 
     @Test

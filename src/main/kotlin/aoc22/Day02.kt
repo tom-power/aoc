@@ -9,9 +9,9 @@ import aoc22.DomainRPS.Play.*
 import aoc22.DomainRPS.Round
 import aoc22.DomainRPS.points
 import aoc22.DomainRPS.toOutcome
-import common.Day22
+import common.Year22
 
-object Day02: Day22() {
+object Day02: Year22() {
     fun List<String>.part1(): Int = toRoundsUsing(Day02Part1::toPlays).summed()
 
     fun List<String>.part2(): Int = toRoundsUsing(Day02Part2::toPlaysForOutcome).summed()

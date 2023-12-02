@@ -6,11 +6,11 @@ import aoc22.Day12Solution.part1Day12
 import aoc22.Day12Solution.part2Day12
 import common.Space2D.Point
 import common.Space2D.Parser.parsePointChars
-import common.Day22
+import common.Year22
 import common.Monitoring
 import java.util.*
 
-object Day12: Day22() {
+object Day12: Year22() {
     fun List<String>.part1(): Int = part1Day12()
 
     fun List<String>.part2(): Int = part2Day12()

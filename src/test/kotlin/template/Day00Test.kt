@@ -1,5 +1,7 @@
 package template
 
+import common.readInput
+import common.readInputExample
 import template.Day00.part1
 import template.Day00.part2
 import org.junit.jupiter.api.Assertions

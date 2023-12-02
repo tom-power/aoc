@@ -1,8 +1,8 @@
 package aoc22
 
-import common.Day22
+import common.Year22
 
-object Day03: Day22() {
+object Day03: Year22() {
     fun List<String>.part1(): Int = toCompartments().toSumOfCommon()
 
     fun List<String>.part2(): Int = toTrios().toSumOfCommon()
