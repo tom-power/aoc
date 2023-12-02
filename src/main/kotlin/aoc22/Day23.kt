@@ -10,6 +10,7 @@ import aoc22.Space2D.Direction.*
 import aoc22.Space2D.Parser.parsePointChars
 import aoc22.Space2D.Point
 import aoc22.Space2D.toMaxPoints
+import common.Day
 
 object Day23 : Day {
     fun List<String>.part1(): Int = part1Day23()

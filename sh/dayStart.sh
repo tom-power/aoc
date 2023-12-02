@@ -1,12 +1,16 @@
 #!/bin/bash
+source $PWD/sh/.env
 
-source $PWD/sh/paths.sh
+common="src/main/kotlin/common"
+main="src/main/kotlin/aoc$year"
+resources="src/main/resources/aoc$year"
+test="src/test/kotlin/aoc$year"
 
-cp "$srcMain/Day00.kt" "$srcMain/Day$1.kt" &&
-sed -i "s/00/$1/g" "$srcMain/Day$1.kt" &&
+cp "$common/Day00.kt" "$main/Day$1.kt" &&
+sed -i "s/00/$1/g" "$main/Day$1.kt" &&
 
-cp "$srcTest/Day00Test.kt" "$srcTest/Day$1Test.kt" &&
-sed -i "s/00/$1/g" "$srcTest/Day$1Test.kt" &&
+cp "$test/Day00Test.kt" "$test/Day$1Test.kt" &&
+sed -i "s/00/$1/g" "$test/Day$1Test.kt" &&
 
-touch "$srcResources/Day$1.txt"  &&
-touch "$srcResources/Day$1_example.txt"
+touch "$resources/Day$1.txt"  &&
+touch "$resources/Day$1_example.txt"

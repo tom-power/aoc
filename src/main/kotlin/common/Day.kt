@@ -1,6 +1,6 @@
-package aoc22
+package common
 
-import aoc22.Input.readInputWithFallback
+import aoc22.Input
 
 interface Day {
     private fun name(): String? = this::class.simpleName
@@ -9,8 +9,8 @@ interface Day {
         readInputFor("example")
 
     fun readInputFor(extension: String): List<String> =
-        readInputWithFallback("${name()}_${extension}", "aoc22")
+        Input.readInputWithFallback("${name()}_${extension}", "aoc22")
 
     fun readInput(): List<String> =
-        readInputWithFallback("${name()}", "aoc22")
+        Input.readInputWithFallback("${name()}", "aoc22")
 }

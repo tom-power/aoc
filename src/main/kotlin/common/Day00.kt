@@ -1,7 +1,7 @@
-package aoc22
+package common
 
-import aoc22.Day00Solution.part1Day00
-import aoc22.Day00Solution.part2Day00
+import common.Day00Solution.part1Day00
+import common.Day00Solution.part2Day00
 import aoc22.Misc.log
 
 object Day00 : Day {

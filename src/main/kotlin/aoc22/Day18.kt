@@ -7,6 +7,7 @@ import aoc22.Day18Solution.part1Day18
 import aoc22.Day18Solution.part2Day18
 import aoc22.Space3D.Parser.toPoint3D
 import aoc22.Space3D.Point3D
+import common.Day
 
 object Day18 : Day {
     fun List<String>.part1(): Int = part1Day18()

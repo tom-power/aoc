@@ -15,6 +15,7 @@ import aoc22.Space2D.Parser.PointChar
 import aoc22.Space2D.Parser.parsePointChars2
 import aoc22.Space2D.Point
 import aoc22.Space2D.toRange
+import common.Day
 
 object Day24 : Day {
     fun List<String>.part1(): Int = part1Day24()

@@ -11,6 +11,7 @@ import aoc22.Day19Solution.part1Day19
 import aoc22.Day19Solution.part2Day19
 import aoc22.Maps.minusInt
 import aoc22.Maps.plusInt
+import common.Day
 import java.util.*
 import kotlin.math.ceil
 
