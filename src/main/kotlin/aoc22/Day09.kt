@@ -5,11 +5,11 @@ import aoc22.Day09Solution.part2Day09
 import common.Space2D.Direction
 import common.Space2D.Direction.*
 import common.Space2D.Point
-import common.Day22
+import common.Year22
 import common.Monitoring
 import kotlin.math.sign
 
-object Day09: Day22() {
+object Day09: Year22() {
     fun List<String>.part1(): Int = part1Day09()
 
     fun List<String>.part2(): Int = part2Day09()

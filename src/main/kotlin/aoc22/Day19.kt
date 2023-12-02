@@ -11,11 +11,11 @@ import aoc22.Day19Solution.part1Day19
 import aoc22.Day19Solution.part2Day19
 import common.Maps.minusInt
 import common.Maps.plusInt
-import common.Day22
+import common.Year22
 import java.util.*
 import kotlin.math.ceil
 
-object Day19: Day22() {
+object Day19: Year22() {
     fun List<String>.part1(): Int = part1Day19()
 
     fun List<String>.part2(): Int = part2Day19()

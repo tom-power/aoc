@@ -7,6 +7,7 @@ import common.Monitoring.PointMonitor
 import common.Space2D.Point
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
+import common.readInputExample
 
 fun day23Visualisation() {
     framesFor(input = Day23.readInputExample(), rounds = 10)

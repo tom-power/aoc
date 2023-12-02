@@ -17,10 +17,10 @@ import common.Space2D.Direction.*
 import common.Space2D.HasPoints
 import common.Space2D.Point
 import common.Space2D.height
-import common.Day22
+import common.Year22
 import common.Monitoring
 
-object Day17: Day22() {
+object Day17: Year22() {
     fun List<String>.part1(): Long = part1Day17()
 
     fun List<String>.part2(): Long = part2Day17()

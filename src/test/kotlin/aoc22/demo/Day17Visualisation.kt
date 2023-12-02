@@ -6,6 +6,7 @@ import aoc22.Day17Parser.toJets
 import aoc22.Day17Runner
 import common.Monitoring
 import aoc22.visualisation.animate
+import common.readInputExample
 
 fun day17Visualisation() {
     framesFor(input = Day17.readInputExample())

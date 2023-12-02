@@ -1,8 +1,8 @@
 package aoc22
 
-import common.Day22
+import common.Year22
 
-object Day04: Day22() {
+object Day04: Year22() {
     fun List<String>.part1(): Int = countOfAssignmentPairsWhere(::isOverlapAll)
 
     fun List<String>.part2(): Int = countOfAssignmentPairsWhere(::isOverlapAny)

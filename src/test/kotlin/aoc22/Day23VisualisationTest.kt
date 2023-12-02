@@ -6,6 +6,7 @@ import common.Monitoring.PointMonitor
 import common.Space2D.Point
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
+import common.readInput
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.Test
 class Day23VisualisationTest {
     @Test
     fun `part one 5 elves visualisation`() {
-        framesFor(input = Day23.readInputFor("exampleFiveElves"), rounds = 4, frame = forFive())
+        framesFor(input = Day23.readInput("_exampleFiveElves"), rounds = 4, frame = forFive())
 //            .freezeAt(4)
             .animate()
     }

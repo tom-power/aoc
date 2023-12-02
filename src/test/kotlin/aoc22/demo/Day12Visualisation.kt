@@ -6,6 +6,7 @@ import common.Monitoring
 import common.Space2D
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
+import common.readInputExample
 
 fun day12Visualisation() {
     framesFor(input = Day12.readInputExample())

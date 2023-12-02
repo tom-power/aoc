@@ -15,11 +15,11 @@ import common.Space2D.Parser.PointChar
 import common.Space2D.Parser.parsePointChars2
 import common.Space2D.Point
 import common.Space2D.toRange
-import common.Day22
+import common.Year22
 import common.Monitoring
 import common.Space2D
 
-object Day24: Day22() {
+object Day24: Year22() {
     fun List<String>.part1(): Int = part1Day24()
 
     fun List<String>.part2(): Int = part2Day24()
