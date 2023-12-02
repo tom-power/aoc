@@ -6,8 +6,8 @@ plugins {
 
 repositories {
     mavenCentral()
-
 }
+
 dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
     implementation("com.github.shiguruikai:combinatoricskt:1.6.0")

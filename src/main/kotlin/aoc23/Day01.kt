@@ -18,37 +18,30 @@ object Day01Solution {
     fun List<String>.part2Day01(): Int =
         map { it.firstDigit() + it.lastDigit() }
             .sumFirstAndLast()
-
 }
 
 private fun String.filterDigits(): String = this.filter { it.isDigit() }
 
-private fun String.firstDigit(): String =
+private fun String.firstDigit(): String = findFirstDigit()
+
+private fun String.lastDigit(): String = reversed().findFirstDigit { reversed() }
+
+private fun String.findFirstDigit(fn: String.() -> String = { this }): String =
     this.fold("") { acc, c ->
         if (c.isDigit())
-            return@firstDigit c.toString()
+            return@findFirstDigit c.toString()
 
         (acc + c).let { current ->
-            current.firstWordToDigit()
-                ?.let { return@firstDigit it }
+            current.fn().firstWordDigit()
+                ?.let { return@findFirstDigit it }
                 ?: current
         }
     }
 
-private fun String.lastDigit(): String =
-    this.foldRight("") { c, acc ->
-        if (c.isDigit())
-            return@lastDigit c.toString()
-
-        (acc + c).let { current ->
-            current.reversed().firstWordToDigit()
-                ?.let { return@lastDigit it }
-                ?: current
-        }
-    }
-
-private fun String.firstWordToDigit(): String? =
-    wordsToDigits.firstOrNull { this.contains(it.first) }?.second
+private fun String.firstWordDigit(): String? =
+    wordsToDigits
+        .firstOrNull { (word, _) -> this.contains(word) }
+        ?.let { (_, digit) -> digit }
 
 private val wordsToDigits: List<Pair<String, String>> =
     listOf(
