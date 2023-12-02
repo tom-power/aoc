@@ -1,7 +1,7 @@
-package common
+package template
 
-import common.Day00.part1
-import common.Day00.part2
+import template.Day00.part1
+import template.Day00.part2
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

@@ -12,14 +12,15 @@ import aoc22.Day17Runner.DropWithSimulation.DropValues
 import aoc22.Day17Runner.LoopSimulator.Simulated
 import aoc22.Day17Solution.part1Day17
 import aoc22.Day17Solution.part2Day17
-import aoc22.Space2D.Direction
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.HasPoints
-import aoc22.Space2D.Point
-import aoc22.Space2D.height
-import common.Day
+import common.Space2D.Direction
+import common.Space2D.Direction.*
+import common.Space2D.HasPoints
+import common.Space2D.Point
+import common.Space2D.height
+import common.Day22
+import common.Monitoring
 
-object Day17 : Day {
+object Day17: Day22() {
     fun List<String>.part1(): Long = part1Day17()
 
     fun List<String>.part2(): Long = part2Day17()

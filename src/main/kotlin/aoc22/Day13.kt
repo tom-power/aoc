@@ -14,9 +14,9 @@ import aoc22.Day13Solution.part2Day13
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import common.Day
+import common.Day22
 
-object Day13 : Day {
+object Day13: Day22() {
     fun List<String>.part1(): Int = part1Day13()
 
     fun List<String>.part2(): Int = part2Day13()

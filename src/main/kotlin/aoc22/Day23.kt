@@ -4,15 +4,15 @@ import aoc22.Day23Parser.toElves
 import aoc22.Day23Runner.SpreadOut
 import aoc22.Day23Solution.part1Day23
 import aoc22.Day23Solution.part2Day23
-import aoc22.Monitoring.Monitor
-import aoc22.Space2D.Direction
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Parser.parsePointChars
-import aoc22.Space2D.Point
-import aoc22.Space2D.toMaxPoints
-import common.Day
+import common.Monitoring.Monitor
+import common.Space2D.Direction
+import common.Space2D.Direction.*
+import common.Space2D.Parser.parsePointChars
+import common.Space2D.Point
+import common.Space2D.toMaxPoints
+import common.Day22
 
-object Day23 : Day {
+object Day23: Day22() {
     fun List<String>.part1(): Int = part1Day23()
 
     fun List<String>.part2(): Int = part2Day23()

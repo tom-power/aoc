@@ -1,8 +1,8 @@
 package aoc22
 
-import common.Day
+import common.Day22
 
-object Day06 : Day {
+object Day06: Day22() {
     fun List<String>.part1(): Int = detectDistinct(4)
 
     fun List<String>.part2(): Int = detectDistinct(14)

@@ -4,10 +4,8 @@ import aoc22.Day17
 import aoc22.Day17Domain
 import aoc22.Day17Parser.toJets
 import aoc22.Day17Runner
-import aoc22.Monitoring
+import common.Monitoring
 import aoc22.visualisation.animate
-import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.Test
 
 fun day17Visualisation() {
     framesFor(input = Day17.readInputExample())

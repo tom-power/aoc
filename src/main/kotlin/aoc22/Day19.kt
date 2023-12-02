@@ -1,6 +1,6 @@
 package aoc22
 
-import aoc22.Collections.product
+import common.Collections.product
 import aoc22.Day19Domain.Blueprint
 import aoc22.Day19Domain.Material.*
 import aoc22.Day19Domain.RobotBlueprint
@@ -9,13 +9,13 @@ import aoc22.Day19Parser.toBluePrints
 import aoc22.Day19Runner.GeodeFactory
 import aoc22.Day19Solution.part1Day19
 import aoc22.Day19Solution.part2Day19
-import aoc22.Maps.minusInt
-import aoc22.Maps.plusInt
-import common.Day
+import common.Maps.minusInt
+import common.Maps.plusInt
+import common.Day22
 import java.util.*
 import kotlin.math.ceil
 
-object Day19 : Day {
+object Day19: Day22() {
     fun List<String>.part1(): Int = part1Day19()
 
     fun List<String>.part2(): Int = part2Day19()

@@ -2,13 +2,14 @@ package aoc22
 
 import aoc22.Day09Solution.part1Day09
 import aoc22.Day09Solution.part2Day09
-import aoc22.Space2D.Direction
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Point
-import common.Day
+import common.Space2D.Direction
+import common.Space2D.Direction.*
+import common.Space2D.Point
+import common.Day22
+import common.Monitoring
 import kotlin.math.sign
 
-object Day09 : Day {
+object Day09: Day22() {
     fun List<String>.part1(): Int = part1Day09()
 
     fun List<String>.part2(): Int = part2Day09()

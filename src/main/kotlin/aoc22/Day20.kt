@@ -6,9 +6,9 @@ import aoc22.Day20Solution.part2Day20
 import aoc22.Day20Parser.toMixer
 import aoc22.Day20Runner.coordinates
 import aoc22.Day20Runner.decrypt
-import common.Day
+import common.Day22
 
-object Day20 : Day {
+object Day20: Day22() {
     fun List<String>.part1(): Long = part1Day20()
 
     fun List<String>.part2(): Long = part2Day20()

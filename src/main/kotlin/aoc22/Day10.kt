@@ -9,9 +9,9 @@ import aoc22.Day10Parser.toInstructions
 import aoc22.Day10Runner.run
 import aoc22.Day10SolutionPart1.part1Day10
 import aoc22.Day10SolutionPart2.part2Day10
-import common.Day
+import common.Day22
 
-object Day10 : Day {
+object Day10: Day22() {
     fun List<String>.part1(): Int = part1Day10()
 
     fun List<String>.part2(): String = part2Day10()

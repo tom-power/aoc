@@ -5,11 +5,11 @@ import aoc22.Day18Runner.countExposedSides
 import aoc22.Day18Runner.countExposedSidesOutside
 import aoc22.Day18Solution.part1Day18
 import aoc22.Day18Solution.part2Day18
-import aoc22.Space3D.Parser.toPoint3D
-import aoc22.Space3D.Point3D
-import common.Day
+import common.Space3D.Parser.toPoint3D
+import common.Space3D.Point3D
+import common.Day22
 
-object Day18 : Day {
+object Day18: Day22() {
     fun List<String>.part1(): Int = part1Day18()
 
     fun List<String>.part2(): Int = part2Day18()

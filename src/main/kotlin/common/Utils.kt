@@ -1,9 +1,9 @@
-package aoc22
+package common
 
-import aoc22.Misc.next
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Point
-import aoc22.Space2D.print
+import common.Misc.next
+import common.Space2D.Direction.*
+import common.Space2D.Point
+import common.Space2D.print
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -11,10 +11,12 @@ import kotlin.math.absoluteValue
 import kotlin.math.sign
 
 object Input {
-    fun readInputWithFallback(name: String, fallback: String): List<String> =
-        readInput(name) ?: readInput("$fallback/$name")!!
+    fun readInputWithDirectory(name: String, directory: String): List<String> =
+        readInput(name) ?: readInput("$directory/$name")!!
 
-    private fun readInput(name: String) = File("src/main/resources", "$name.txt").takeIf { it.isFile }?.readLines()
+    private fun readInput(name: String): List<String>? =
+        File("src/main/resources", "$name.txt").takeIf { it.isFile }
+            ?.readLines()
 }
 
 object Space3D {
