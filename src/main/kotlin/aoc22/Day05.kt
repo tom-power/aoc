@@ -1,15 +1,15 @@
 package aoc22
 
-import aoc22.Collections.splitBy
-import aoc22.Collections.transpose
+import common.Collections.splitBy
+import common.Collections.transpose
 import aoc22.Day05Runner.crane9000
 import aoc22.Day05Runner.crane9001
 import aoc22.Day05Domain.Movement
 import aoc22.Day05Parser.toMovements
 import aoc22.Day05Parser.toStacks
-import common.Day
+import common.Day22
 
-object Day05 : Day {
+object Day05: Day22() {
     fun List<String>.part1(): String = moveCratesWith(::crane9000)
 
     fun List<String>.part2(): String = moveCratesWith(::crane9001)

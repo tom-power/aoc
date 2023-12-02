@@ -1,16 +1,16 @@
 package aoc22
 
-import aoc22.Collections.partitionedBy
-import aoc22.Collections.product
+import common.Collections.partitionedBy
+import common.Collections.product
 import aoc22.Day11Solution.part1Day11
 import aoc22.Day11Solution.part2Day11
 import aoc22.Day11Domain.Item
 import aoc22.Day11Domain.Monkey
 import aoc22.Day11Parser.toMonkeys
 import aoc22.Day11Runner.doRounds
-import common.Day
+import common.Day22
 
-object Day11 : Day {
+object Day11: Day22() {
     fun List<String>.part1(): Long = part1Day11()
 
     fun List<String>.part2(): Long = part2Day11()

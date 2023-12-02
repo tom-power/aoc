@@ -1,10 +1,11 @@
-package common
+package template
 
-import common.Day00Solution.part1Day00
-import common.Day00Solution.part2Day00
-import aoc22.Misc.log
+import template.Day00Solution.part1Day00
+import template.Day00Solution.part2Day00
+import common.Misc.log
+import common.DayYear
 
-object Day00 : Day {
+object Day00 : DayYear() {
     fun List<String>.part1(): Int = part1Day00()
 
     fun List<String>.part2(): Int = part2Day00()

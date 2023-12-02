@@ -11,7 +11,7 @@ import aoc22.Day13Domain.compareTo
 import aoc22.Day13Parser.toPacket
 import aoc22.Day13Parser.toPackets
 import aoc22.Day13Runner.toIsPairsInOrder
-import aoc22.Misc.log
+import common.Input
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -74,7 +74,7 @@ class Day13ComparatorTest {
     inner class ToIsPairsInOrder {
         @Test
         fun `toIsPairsInOrder compare to ginsberg`() {
-            val toPackets = Input.readInputWithFallback("Day13", "aoc22").toPackets()
+            val toPackets = Input.readInputWithDirectory("Day13", "aoc22").toPackets()
             val chunked = toPackets.chunked(2)
             val actual = toPackets.toIsPairsInOrder()
 

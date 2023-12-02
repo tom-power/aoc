@@ -4,8 +4,8 @@ import aoc22.Day22DomainWrap.CubeWrap
 import aoc22.Day22Parser.toBoard
 import aoc22.Day22Parser.toPath
 import aoc22.Day22DomainWrap.withCubeWrap
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Point
+import common.Space2D.Direction.*
+import common.Space2D.Point
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

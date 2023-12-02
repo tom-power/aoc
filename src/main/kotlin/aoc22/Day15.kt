@@ -4,12 +4,12 @@ import aoc22.Day15Domain.Sensor
 import aoc22.Day15Parser.toSensors
 import aoc22.Day15RunnerPart1.part1Day15
 import aoc22.Day15RunnerPart2.part2Day15
-import aoc22.Space2D.Point
-import aoc22.Space2D.Parser.toPoint
-import common.Day
+import common.Space2D.Point
+import common.Space2D.Parser.toPoint
+import common.Day22
 import kotlin.math.absoluteValue
 
-object Day15 : Day {
+object Day15: Day22() {
     fun List<String>.part1(y: Int): Int = part1Day15(y)
 
     fun List<String>.part2(gridMax: Int): Long = part2Day15(gridMax)

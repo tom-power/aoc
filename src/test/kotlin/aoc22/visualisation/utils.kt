@@ -1,7 +1,7 @@
 package aoc22.visualisation
 
-import aoc22.Space2D
-import aoc22.Space2D.toMaxPoints
+import common.Space2D
+import common.Space2D.toMaxPoints
 import com.varabyte.kotter.foundation.anim.text
 import com.varabyte.kotter.foundation.anim.textAnimOf
 import com.varabyte.kotter.foundation.session

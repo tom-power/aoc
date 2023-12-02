@@ -2,11 +2,9 @@ package aoc22.demo
 
 import aoc22.Day14
 import aoc22.Day14Parser
-import aoc22.Monitoring
+import common.Monitoring
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
-import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.Test
 
 fun day14Visualisation() {
     framesFor(input = Day14.readInputExample())

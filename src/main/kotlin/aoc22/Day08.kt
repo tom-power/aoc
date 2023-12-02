@@ -1,13 +1,13 @@
 package aoc22
 
-import aoc22.Collections.product
+import common.Collections.product
 import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
-import aoc22.Space2D.Point
-import aoc22.Space2D.Parser.parsePointChars
-import common.Day
+import common.Space2D.Point
+import common.Space2D.Parser.parsePointChars
+import common.Day22
 
-object Day08 : Day {
+object Day08: Day22() {
     fun List<String>.part1(): Int = visibleTreeCount()
 
     fun List<String>.part2(): Int = maxScenicScore()

@@ -1,10 +1,10 @@
 package aoc22
 
-import aoc22.Algorithm.Node
-import aoc22.Algorithm.Cost
-import aoc22.Algorithm.Dijkstra
-import aoc22.Algorithm.HasCost
-import aoc22.Algorithm.HasNode
+import common.Algorithm.Node
+import common.Algorithm.Cost
+import common.Algorithm.Dijkstra
+import common.Algorithm.HasCost
+import common.Algorithm.HasNode
 import aoc22.UtilsAlgorithmTest.MateyGrid.middle
 import aoc22.UtilsAlgorithmTest.MateyGrid.middleLonger
 import aoc22.UtilsAlgorithmTest.MateyGrid.end

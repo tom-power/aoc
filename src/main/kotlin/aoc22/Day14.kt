@@ -4,11 +4,12 @@ import aoc22.Day14Domain.Cave
 import aoc22.Day14Parser.toCave
 import aoc22.Day14Solution.part1Day14
 import aoc22.Day14Solution.part2Day14
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Point
-import common.Day
+import common.Space2D.Direction.*
+import common.Space2D.Point
+import common.Day22
+import common.Monitoring
 
-object Day14 : Day {
+object Day14: Day22() {
     fun List<String>.part1(): Int = part1Day14()
 
     fun List<String>.part2(): Int = part2Day14()

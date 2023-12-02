@@ -1,16 +1,29 @@
 package common
 
-import aoc22.Input
-
 interface Day {
+    val year: String
+
     private fun name(): String? = this::class.simpleName
 
     fun readInputExample(): List<String> =
         readInputFor("example")
 
     fun readInputFor(extension: String): List<String> =
-        Input.readInputWithFallback("${name()}_${extension}", "aoc22")
+        Input.readInputWithDirectory("${name()}_${extension}", "aoc$year")
 
     fun readInput(): List<String> =
-        Input.readInputWithFallback("${name()}", "aoc22")
+        Input.readInputWithDirectory("${name()}", "aoc$year")
 }
+
+abstract class DayYear : Day {
+    override val year: String = "Year"
+}
+
+abstract class Day22 : Day {
+    override val year: String = "22"
+}
+
+abstract class Day23 : Day {
+    override val year: String = "23"
+}
+

@@ -1,6 +1,6 @@
 package aoc22
 
-import aoc22.Collections.partitionedBy
+import common.Collections.partitionedBy
 import aoc22.Day22UtilsDirection.toScore
 import aoc22.Day22UtilsDirection.turn
 import aoc22.Day22Domain.Board
@@ -23,14 +23,14 @@ import aoc22.Day22DomainWrap.withCubeWrap
 import aoc22.Day22DomainWrap.withFlatWrap
 import aoc22.Day22Solution.part1Day22
 import aoc22.Day22Solution.part2Day22
-import aoc22.Space2D.Direction
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Point
-import aoc22.Space2D.opposite
-import common.Day
+import common.Space2D.Direction
+import common.Space2D.Direction.*
+import common.Space2D.Point
+import common.Space2D.opposite
+import common.Day22
 import kotlin.math.absoluteValue
 
-object Day22 : Day {
+object Day22: Day22() {
     fun List<String>.part1(): Int = part1Day22()
 
     fun List<String>.part2(): Int = part2Day22()

@@ -4,12 +4,13 @@ import aoc22.Day22Domain.State
 import aoc22.Day22Domain.Step
 import aoc22.Day22Domain.Tile
 import aoc22.Day22Domain.Wall
-import aoc22.Misc.log
-import aoc22.Monitoring.Monitor
-import aoc22.Space2D.Direction.*
-import aoc22.Space2D.Point
-import aoc22.Space2D.print
-import aoc22.Space2D.toRange
+import common.Misc.log
+import common.Monitoring.Monitor
+import common.Space2D
+import common.Space2D.Direction.*
+import common.Space2D.Point
+import common.Space2D.print
+import common.Space2D.toRange
 
 class EdgePointMapMonitor(private val edges: Set<Point> = emptySet()) : Monitor<Set<EdgePointPair>> {
 

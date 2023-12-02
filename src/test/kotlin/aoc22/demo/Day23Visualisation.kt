@@ -3,12 +3,10 @@ package aoc22.demo
 import aoc22.Day23
 import aoc22.Day23Parser.toElves
 import aoc22.Day23Runner.SpreadOut
-import aoc22.Monitoring.PointMonitor
-import aoc22.Space2D.Point
+import common.Monitoring.PointMonitor
+import common.Space2D.Point
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
-import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.Test
 
 fun day23Visualisation() {
     framesFor(input = Day23.readInputExample(), rounds = 10)

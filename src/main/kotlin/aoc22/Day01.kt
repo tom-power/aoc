@@ -1,9 +1,9 @@
 package aoc22
 
-import aoc22.Collections.partitionedBy
-import common.Day
+import common.Collections.partitionedBy
+import common.Day22
 
-object Day01 : Day {
+object Day01: Day22() {
     fun List<String>.part1(): Int = partitionedBy("").summed().max()
 
     fun List<String>.part2(): Int = partitionedBy("").summed().sumOfTop3()

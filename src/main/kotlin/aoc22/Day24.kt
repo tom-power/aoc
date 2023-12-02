@@ -10,14 +10,16 @@ import aoc22.Day24Monitoring.ValleyLocationMonitor
 import aoc22.Day24Parser.toValley
 import aoc22.Day24Solution.part1Day24
 import aoc22.Day24Solution.part2Day24
-import aoc22.Space2D.Direction
-import aoc22.Space2D.Parser.PointChar
-import aoc22.Space2D.Parser.parsePointChars2
-import aoc22.Space2D.Point
-import aoc22.Space2D.toRange
-import common.Day
+import common.Space2D.Direction
+import common.Space2D.Parser.PointChar
+import common.Space2D.Parser.parsePointChars2
+import common.Space2D.Point
+import common.Space2D.toRange
+import common.Day22
+import common.Monitoring
+import common.Space2D
 
-object Day24 : Day {
+object Day24: Day22() {
     fun List<String>.part1(): Int = part1Day24()
 
     fun List<String>.part2(): Int = part2Day24()
