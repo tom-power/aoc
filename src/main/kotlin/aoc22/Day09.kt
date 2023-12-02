@@ -5,6 +5,7 @@ import aoc22.Day09Solution.part2Day09
 import aoc22.Space2D.Direction
 import aoc22.Space2D.Direction.*
 import aoc22.Space2D.Point
+import common.Day
 import kotlin.math.sign
 
 object Day09 : Day {

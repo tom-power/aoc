@@ -7,6 +7,7 @@ import aoc22.Day16Parser.toValves
 import aoc22.Day16Solution.part1Day16
 import aoc22.Day16Solution.part2Day16
 import com.github.shiguruikai.combinatoricskt.combinations
+import common.Day
 
 object Day16 : Day {
     fun List<String>.part1(): Int = part1Day16()

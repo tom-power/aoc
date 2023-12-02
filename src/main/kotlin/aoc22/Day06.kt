@@ -1,5 +1,7 @@
 package aoc22
 
+import common.Day
+
 object Day06 : Day {
     fun List<String>.part1(): Int = detectDistinct(4)
 

@@ -8,6 +8,7 @@ import aoc22.Day11Domain.Item
 import aoc22.Day11Domain.Monkey
 import aoc22.Day11Parser.toMonkeys
 import aoc22.Day11Runner.doRounds
+import common.Day
 
 object Day11 : Day {
     fun List<String>.part1(): Long = part1Day11()

@@ -1,5 +1,7 @@
 package aoc22
 
+import common.Day
+
 object Day04 : Day {
     fun List<String>.part1(): Int = countOfAssignmentPairsWhere(::isOverlapAll)
 

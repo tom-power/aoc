@@ -5,6 +5,7 @@ import aoc22.Day25Domain.BaseConvertor.toDecimal
 import aoc22.Day25Domain.SnafuConvertor.toBalancedQuinary
 import aoc22.Day25Domain.SnafuConvertor.toSnafu
 import aoc22.Day25Solution.part1Day25
+import common.Day
 import kotlin.math.pow
 
 object Day25 : Day {

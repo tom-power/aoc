@@ -6,6 +6,7 @@ import aoc22.Day12Solution.part1Day12
 import aoc22.Day12Solution.part2Day12
 import aoc22.Space2D.Point
 import aoc22.Space2D.Parser.parsePointChars
+import common.Day
 import java.util.*
 
 object Day12 : Day {

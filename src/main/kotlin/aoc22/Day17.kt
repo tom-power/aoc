@@ -17,6 +17,7 @@ import aoc22.Space2D.Direction.*
 import aoc22.Space2D.HasPoints
 import aoc22.Space2D.Point
 import aoc22.Space2D.height
+import common.Day
 
 object Day17 : Day {
     fun List<String>.part1(): Long = part1Day17()

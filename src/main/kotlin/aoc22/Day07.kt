@@ -8,6 +8,7 @@ import aoc22.Day07Domain.Up
 import aoc22.Day07Parser.parseCommands
 import aoc22.Day07Solution.part1Day07
 import aoc22.Day07Solution.part2Day07
+import common.Day
 
 object Day07 : Day {
     fun List<String>.part1(): Int = part1Day07()

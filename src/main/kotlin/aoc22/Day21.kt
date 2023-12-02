@@ -11,6 +11,7 @@ import aoc22.Day21Parser.toRootMonkey
 import aoc22.Day21Runner.yellEquals
 import aoc22.Day21Solution.part1Day21
 import aoc22.Day21Solution.part2Day21
+import common.Day
 
 object Day21 : Day {
     fun List<String>.part1(): Long = part1Day21()

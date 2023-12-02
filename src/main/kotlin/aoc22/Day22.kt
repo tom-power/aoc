@@ -27,6 +27,7 @@ import aoc22.Space2D.Direction
 import aoc22.Space2D.Direction.*
 import aoc22.Space2D.Point
 import aoc22.Space2D.opposite
+import common.Day
 import kotlin.math.absoluteValue
 
 object Day22 : Day {

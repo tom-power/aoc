@@ -7,6 +7,7 @@ import aoc22.Day05Runner.crane9001
 import aoc22.Day05Domain.Movement
 import aoc22.Day05Parser.toMovements
 import aoc22.Day05Parser.toStacks
+import common.Day
 
 object Day05 : Day {
     fun List<String>.part1(): String = moveCratesWith(::crane9000)
