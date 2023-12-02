@@ -2,6 +2,7 @@ package aoc23
 
 import aoc23.Day02Domain.Bag
 import aoc23.Day02Domain.Cube
+import aoc23.Day02Domain.Cube.*
 import aoc23.Day02Domain.CubeGame
 import aoc23.Day02Domain.Round
 import aoc23.Day02Parser.toCubeGame
@@ -21,9 +22,9 @@ object Day02Solution {
         Bag(
             cubeCount =
             mapOf(
-                Cube.Red to 12,
-                Cube.Green to 13,
-                Cube.Blue to 14,
+                Red to 12,
+                Green to 13,
+                Blue to 14,
             )
         )
 
@@ -37,49 +38,45 @@ object Day02Solution {
 }
 
 object Day02Domain {
-    data class Bag(
-        val cubeCount: Map<Cube, Int>
-    ) {
-        fun powerOfCubes(): Int =
-            cubeCount.values.toList().product()
-    }
-
     data class CubeGame(
         val id: Int,
         val rounds: List<Round>
     ) {
         fun isPossibleWith(bag: Bag): Boolean =
-            bag.cubeCount.all { bagCubeCount ->
-                rounds.all { round ->
-                    (round.cubeCount[bagCubeCount.key] ?: 0) <= bagCubeCount.value
-                }
+            rounds.all { round ->
+                bag.hasEnoughCubesFor(round)
             }
 
         fun smallestBagNeeded(): Bag =
-            rounds.fold(Bag(mapOf())) { acc, round ->
-                Bag(
-                    cubeCount = mapOf(
-                        Cube.Green to maxOf(acc, round, Cube.Green),
-                        Cube.Red to maxOf(acc, round, Cube.Red),
-                        Cube.Blue to maxOf(acc, round, Cube.Blue),
-                    )
-                )
-            }
-
-        private fun maxOf(bag: Bag, round: Round, cube: Cube): Int {
-            val bagCount = bag.cubeCount[cube] ?: 0
-            val roundCount = round.cubeCount[cube] ?: 0
-            return maxOf(bagCount, roundCount)
-        }
+            Bag(
+                cubeCount =
+                Cube.entries
+                    .associateWith { cube -> rounds.maxOf { it.countFor(cube) } }
+            )
     }
+
+    data class Bag(
+        override val cubeCount: Map<Cube, Int>
+    ) : HasCubeCount
 
     data class Round(
-        val cubeCount: Map<Cube, Int>
-    )
+        override val cubeCount: Map<Cube, Int>
+    ) : HasCubeCount
 
-    enum class Cube {
-        Green, Red, Blue
+    interface HasCubeCount {
+        val cubeCount: Map<Cube, Int>
+
+        fun countFor(key: Cube): Int = (this.cubeCount[key] ?: 0)
+
+        fun hasEnoughCubesFor(other: HasCubeCount): Boolean =
+            cubeCount.all { (cube, count) ->
+                count >= other.countFor(cube)
+            }
+
+        fun powerOfCubes(): Int = cubeCount.values.toList().product()
     }
+
+    enum class Cube { Green, Red, Blue }
 }
 
 object Day02Parser {
@@ -95,9 +92,9 @@ object Day02Parser {
                             cubeCount =
                             round.split(",")
                                 .map { cubeCount ->
-                                    val cube = cubeCount.filter { it.isLetter() }
+                                    val cubeName = cubeCount.filter { it.isLetter() }.capitalize()
                                     val count = cubeCount.filter { it.isDigit() }.toInt()
-                                    Cube.valueOf(cube.capitalize()) to count
+                                    Cube.valueOf(cubeName) to count
                                 }.toMap()
                         )
                     }
