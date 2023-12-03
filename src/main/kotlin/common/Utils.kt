@@ -35,7 +35,7 @@ object Space3D {
                 Direction3D.Back -> copy(z = z - by)
             }
 
-        fun neighours(): Set<Point3D> = Direction3D.values().map { this.move(it) }.toSet()
+        fun neighors(): Set<Point3D> = Direction3D.values().map { this.move(it) }.toSet()
     }
 
     object Parser {
@@ -53,7 +53,7 @@ object Space2D {
                 .map { it.filter { it.isDigit() || it == '-' }.toInt() }
                 .let { Point(it[0], it[1]) }
 
-        fun List<String>.parsePointChars(): List<Pair<Point, Char>> {
+        fun List<String>.toPointToChar(): List<Pair<Point, Char>> {
             val max = this.size
             return mapIndexed { y, s ->
                 s.mapIndexed { x, c ->
@@ -62,9 +62,7 @@ object Space2D {
             }.flatten()
         }
 
-        data class PointChar(val point: Point, val char: Char)
-
-        fun List<String>.parsePointChars2(): List<PointChar> {
+        fun List<String>.toPointChar(): List<PointChar> {
             val max = this.size
             return mapIndexed { y, s ->
                 s.mapIndexed { x, c ->
@@ -73,6 +71,10 @@ object Space2D {
             }.flatten()
         }
     }
+
+    data class PointChar(val point: Point, val char: Char)
+
+    fun List<PointChar>.getFor(point: Point): PointChar? = this.singleOrNull { it.point == point }
 
     enum class Direction {
         Right, Down, Left, Up;
@@ -97,10 +99,10 @@ object Space2D {
                 Left -> copy(x = x - by)
             }
 
-        fun adjacent(): Set<Point> = Direction.values().map { this.move(it) }.toSet()
+        fun adjacent(): Set<Point> = Direction.entries.map { this.move(it) }.toSet()
 
         fun adjacentWithDiagonal(): Set<Point> =
-            values().flatMap { direction ->
+            Direction.entries.flatMap { direction ->
                 this.move(direction).let { moved ->
                     listOf(moved) + listOf(moved.move(direction.next()))
                 }
