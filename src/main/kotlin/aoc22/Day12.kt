@@ -5,7 +5,7 @@ import aoc22.Day12Parser.toHeightMap
 import aoc22.Day12Solution.part1Day12
 import aoc22.Day12Solution.part2Day12
 import common.Space2D.Point
-import common.Space2D.Parser.parsePointChars
+import common.Space2D.Parser.toPointToChar
 import common.Year22
 import common.Monitoring
 import java.util.*
@@ -95,7 +95,7 @@ object Day12Parser {
         }
 
     fun List<String>.toHeightMap(monitor: Monitoring.PointMonitor? = null): HeightMap =
-        parsePointChars().toMap().let { p ->
+        toPointToChar().toMap().let { p ->
             HeightMap(
                 elevations = p.mapValues { it.value.toCode() },
                 start = p.filterValues { it == 'S' }.keys.first(),
