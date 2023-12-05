@@ -23,9 +23,6 @@ object Day00Solution {
             .let { 0 }
 }
 
-object Day00Runner {
-
-}
 object Day00Domain {
     data class Day00Type(val value: String)
 }
