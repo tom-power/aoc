@@ -7,7 +7,7 @@ import common.Space2D.Point
 import common.Space2D.Parser.toPointToChar
 import common.Year22
 
-object Day08: Year22() {
+object Day08: Year22 {
     fun List<String>.part1(): Int = visibleTreeCount()
 
     fun List<String>.part2(): Int = maxScenicScore()

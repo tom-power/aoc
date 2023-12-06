@@ -11,7 +11,7 @@ import aoc23.Day02Solution.part2Day02
 import common.Collections.product
 import common.Year23
 
-object Day02 : Year23() {
+object Day02 : Year23 {
     fun List<String>.part1(): Int = part1Day02()
 
     fun List<String>.part2(): Int = part2Day02()

@@ -9,7 +9,7 @@ import common.Space2D.Parser.toPoint
 import common.Year22
 import kotlin.math.absoluteValue
 
-object Day15: Year22() {
+object Day15: Year22 {
     fun List<String>.part1(y: Int): Int = part1Day15(y)
 
     fun List<String>.part2(gridMax: Int): Long = part2Day15(gridMax)

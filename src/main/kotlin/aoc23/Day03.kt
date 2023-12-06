@@ -11,7 +11,7 @@ import common.Space2D.PointChar
 import common.Space2D.getFor
 import common.Year23
 
-object Day03 : Year23() {
+object Day03 : Year23 {
     fun List<String>.part1(): Int = part1Day03()
 
     fun List<String>.part2(): Int = part2Day03()

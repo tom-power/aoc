@@ -16,7 +16,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import common.Year22
 
-object Day13: Year22() {
+object Day13: Year22 {
     fun List<String>.part1(): Int = part1Day13()
 
     fun List<String>.part2(): Int = part2Day13()

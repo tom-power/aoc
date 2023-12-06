@@ -8,7 +8,7 @@ import aoc22.Day20Runner.coordinates
 import aoc22.Day20Runner.decrypt
 import common.Year22
 
-object Day20: Year22() {
+object Day20: Year22 {
     fun List<String>.part1(): Long = part1Day20()
 
     fun List<String>.part2(): Long = part2Day20()

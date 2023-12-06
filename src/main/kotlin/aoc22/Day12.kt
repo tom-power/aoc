@@ -10,7 +10,7 @@ import common.Year22
 import common.Monitoring
 import java.util.*
 
-object Day12: Year22() {
+object Day12: Year22 {
     fun List<String>.part1(): Int = part1Day12()
 
     fun List<String>.part2(): Int = part2Day12()

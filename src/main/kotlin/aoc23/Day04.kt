@@ -7,7 +7,7 @@ import aoc23.Day04Solution.part2Day04
 import common.Year23
 import kotlin.math.pow
 
-object Day04 : Year23() {
+object Day04 : Year23 {
     fun List<String>.part1(): Int = part1Day04()
 
     fun List<String>.part2(): Int = part2Day04()

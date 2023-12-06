@@ -9,7 +9,7 @@ import aoc23.Day05Parser.toSeedMapper
 import aoc23.Day05Solution.part1Day05
 import aoc23.Day05Solution.part2Day05
 
-object Day05 : Year23() {
+object Day05 : Year23 {
     fun List<String>.part1(): Long = part1Day05()
 
     fun List<String>.part2(): Long = part2Day05()

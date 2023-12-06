@@ -9,7 +9,7 @@ import common.Space2D.Point
 import common.Year22
 import common.Monitoring
 
-object Day14: Year22() {
+object Day14: Year22 {
     fun List<String>.part1(): Int = part1Day14()
 
     fun List<String>.part2(): Int = part2Day14()

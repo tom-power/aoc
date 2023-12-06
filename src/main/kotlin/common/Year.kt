@@ -1,20 +1,19 @@
 package common
 
+import kotlin.reflect.javaType
+
 interface Year {
+    @OptIn(ExperimentalStdlibApi::class)
     val year: String
+        get() = this::class.supertypes.first().javaType.typeName.filter { it.isDigit() }
 
-    fun name(): String? = this::class.simpleName
+    val name: String?
+        get() = this::class.simpleName
 }
 
-abstract class Year00 : Year {
-    override val year: String = "00"
-}
+interface Year00 : Year
 
-abstract class Year22 : Year {
-    override val year: String = "22"
-}
+interface Year22 : Year
 
-abstract class Year23 : Year {
-    override val year: String = "23"
-}
+interface Year23 : Year
 

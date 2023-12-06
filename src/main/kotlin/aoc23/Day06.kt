@@ -1,14 +1,13 @@
 package aoc23
 
-import common.Misc.log
-import common.Year23
 import aoc23.Day06Domain.DesertIsland
 import aoc23.Day06Parser.toDesertIsland
 import aoc23.Day06Solution.part1Day06
 import aoc23.Day06Solution.part2Day06
 import common.Collections.product
+import common.Year23
 
-object Day06 : Year23() {
+object Day06 : Year23 {
     fun List<String>.part1(): Long = part1Day06()
 
     fun List<String>.part2(): Long = part2Day06()

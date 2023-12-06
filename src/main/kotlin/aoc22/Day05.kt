@@ -9,7 +9,7 @@ import aoc22.Day05Parser.toMovements
 import aoc22.Day05Parser.toStacks
 import common.Year22
 
-object Day05: Year22() {
+object Day05: Year22 {
     fun List<String>.part1(): String = moveCratesWith(::crane9000)
 
     fun List<String>.part2(): String = moveCratesWith(::crane9001)

@@ -9,7 +9,7 @@ import common.Space3D.Parser.toPoint3D
 import common.Space3D.Point3D
 import common.Year22
 
-object Day18: Year22() {
+object Day18: Year22 {
     fun List<String>.part1(): Int = part1Day18()
 
     fun List<String>.part2(): Int = part2Day18()
