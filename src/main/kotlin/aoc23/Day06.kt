@@ -15,36 +15,38 @@ object Day06 : Year23 {
 
 object Day06Solution {
     fun List<String>.part1Day06(): Long =
-        toDesertIsland()
-            .numberOfWaysToBeatRecords()
+        with(toDesertIsland()) {
+            records.map(::numberOfWaysToBeat)
+        }.product()
+
 
     fun List<String>.part2Day06(): Long =
-        toDesertIsland()
-            .numberOfWaysToBeatRecord()
+        with(toDesertIsland()) {
+            numberOfWaysToBeat(record)
+        }
 }
 
 object Day06Domain {
     data class RaceRecord(val time: Long, val distance: Long)
-    data class Race(val buttonTime: Long, val duration: Long)
+
+    data class Race(val buttonTime: Long, val duration: Long) {
+        fun distance() = (duration - buttonTime) * buttonTime
+    }
+
     data class DesertIsland(
         val records: List<RaceRecord>
     ) {
-        private val record: RaceRecord =
+        val record: RaceRecord =
             RaceRecord(
                 time = records.joinToString("") { it.time.toString() }.toLong(),
                 distance = records.joinToString("") { it.distance.toString() }.toLong()
             )
 
-        fun numberOfWaysToBeatRecords(): Long = records.map { numberOfWaysToBeat(it) }.product()
-        fun numberOfWaysToBeatRecord(): Long = numberOfWaysToBeat(record)
-
-        private fun numberOfWaysToBeat(record: RaceRecord): Long =
+        fun numberOfWaysToBeat(record: RaceRecord): Long =
             (0..record.time).toList()
-                .filter { buttonTime -> distanceFor(buttonTime, record.time) > record.distance }
+                .filter { Race(it, record.time).distance() > record.distance }
                 .size
                 .toLong()
-
-        private fun distanceFor(buttonTime: Long, duration: Long): Long = (duration - buttonTime) * buttonTime
     }
 }
 
@@ -61,5 +63,4 @@ object Day06Parser {
             records = times.zip(distances).map { Day06Domain.RaceRecord(it.first, it.second.toLong()) }
         )
     }
-
 }
