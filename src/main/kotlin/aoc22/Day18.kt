@@ -28,7 +28,7 @@ object Day18Solution {
 object Day18Runner {
     fun List<Point3D>.countExposedSides(): Int =
         sumOf { point ->
-            point.neighors().count { it !in this }
+            point.neighbors().count { it !in this }
         }
 
     fun List<Point3D>.countExposedSidesOutside(): Int {
@@ -41,7 +41,7 @@ object Day18Runner {
                 point3D in this -> 1
                 else -> {
                     seen += point3D
-                    point3D.neighors().sumOf { next ->
+                    point3D.neighbors().sumOf { next ->
                         countExposedOutside(next)
                     }
                 }
