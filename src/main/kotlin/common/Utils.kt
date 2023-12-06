@@ -35,7 +35,7 @@ object Space3D {
                 Direction3D.Back -> copy(z = z - by)
             }
 
-        fun neighors(): Set<Point3D> = Direction3D.values().map { this.move(it) }.toSet()
+        fun neighbors(): Set<Point3D> = Direction3D.values().map { this.move(it) }.toSet()
     }
 
     object Parser {
