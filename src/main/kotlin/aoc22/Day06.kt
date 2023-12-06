@@ -2,7 +2,7 @@ package aoc22
 
 import common.Year22
 
-object Day06: Year22() {
+object Day06: Year22 {
     fun List<String>.part1(): Int = detectDistinct(4)
 
     fun List<String>.part2(): Int = detectDistinct(14)

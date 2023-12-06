@@ -15,7 +15,7 @@ import common.Year22
 import java.util.*
 import kotlin.math.ceil
 
-object Day19: Year22() {
+object Day19: Year22 {
     fun List<String>.part1(): Int = part1Day19()
 
     fun List<String>.part2(): Int = part2Day19()

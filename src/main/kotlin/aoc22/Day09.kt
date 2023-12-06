@@ -9,7 +9,7 @@ import common.Year22
 import common.Monitoring
 import kotlin.math.sign
 
-object Day09: Year22() {
+object Day09: Year22 {
     fun List<String>.part1(): Int = part1Day09()
 
     fun List<String>.part2(): Int = part2Day09()

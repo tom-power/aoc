@@ -19,7 +19,7 @@ import common.Year22
 import common.Monitoring
 import common.Space2D
 
-object Day24: Year22() {
+object Day24: Year22 {
     fun List<String>.part1(): Int = part1Day24()
 
     fun List<String>.part2(): Int = part2Day24()

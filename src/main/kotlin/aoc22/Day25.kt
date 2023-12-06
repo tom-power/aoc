@@ -8,7 +8,7 @@ import aoc22.Day25Solution.part1Day25
 import common.Year22
 import kotlin.math.pow
 
-object Day25: Year22() {
+object Day25: Year22 {
     fun List<Snafu>.part1(): Snafu = part1Day25()
 }
 

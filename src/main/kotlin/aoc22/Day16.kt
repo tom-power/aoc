@@ -9,7 +9,7 @@ import aoc22.Day16Solution.part2Day16
 import com.github.shiguruikai.combinatoricskt.combinations
 import common.Year22
 
-object Day16: Year22() {
+object Day16: Year22 {
     fun List<String>.part1(): Int = part1Day16()
 
     fun List<String>.part2(): Int = part2Day16()

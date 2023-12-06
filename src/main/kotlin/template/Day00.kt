@@ -7,7 +7,7 @@ import template.Day00Parser.toDay00
 import template.Day00Solution.part1Day00
 import template.Day00Solution.part2Day00
 
-object Day00 : Year00() {
+object Day00 : Year00 {
     fun List<String>.part1(): Int = part1Day00()
 
     fun List<String>.part2(): Int = part2Day00()
