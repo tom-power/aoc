@@ -1,13 +1,11 @@
 package aoc23
 
 import aoc23.Day05Domain.Almanac
-import aoc23.Day05Domain.Mapper
 import aoc23.Day05Domain.SeedMapper
-import aoc23.Day05Domain.SourceDestMap
-import common.Year23
 import aoc23.Day05Parser.toSeedMapper
 import aoc23.Day05Solution.part1Day05
 import aoc23.Day05Solution.part2Day05
+import common.Year23
 
 object Day05 : Year23 {
     fun List<String>.part1(): Long = part1Day05()
@@ -25,124 +23,114 @@ object Day05Solution {
             .findLowestLocationSeedRange()
 }
 
+typealias Mapper = List<Day05Domain.FromToMap>
+
 object Day05Domain {
     data class SeedMapper(
         val seeds: List<Long>,
         val almanac: Almanac,
     ) {
+        fun findLowestLocationSeed(): Long =
+            seeds.minOf { seed ->
+                almanac.mapFromTo(seed)
+            }
+
         private val seedsRanges: List<LongRange> =
             seeds.chunked(2)
                 .map { it.first()..it.first() + (it.last() - 1) }
 
         private val locations: Sequence<Long> = generateSequence(1L) { it + 1 }
 
-        fun findLowestLocationSeedRange(): Long =
-            locations
-                .first { location ->
-                    almanac.seedFrom(location).let { seed ->
-                        seedsRanges.any { seedRange -> seed in seedRange }
+        private val reversedAlmanac: Almanac by lazy {
+            Almanac(
+                mappers =
+                almanac.mappers
+                    .reversed()
+                    .map { mapper ->
+                        mapper
+                            .reversed()
+                            .map {
+                                it.copy(fromStart = it.toStart, toStart = it.fromStart)
+                            }
                     }
-                }
+            )
+        }
 
-        fun findLowestLocationSeed(): Long =
-            seeds.minOf { seed ->
-                almanac.locationFrom(seed)
+        fun findLowestLocationSeedRange(): Long =
+            locations.first { location ->
+                reversedAlmanac.mapFromTo(location).let { seed ->
+                    seedsRanges.any { seedRange -> seed in seedRange }
+                }
             }
     }
 
     data class Almanac(
         val mappers: List<Mapper>,
     ) {
-        fun locationFrom(seed: Long): Long =
+        fun mapFromTo(seed: Long): Long =
             mappers.fold(seed) { acc, mapper ->
-                mapper.mapToDestOrNull(acc) ?: acc
-            }
-
-        fun seedFrom(location: Long): Long =
-            mappers.reversed().fold(location) { acc, mapper ->
-                mapper.mapToSourceOrNull(acc) ?: acc
+                mapper
+                    .firstNotNullOfOrNull { map -> map.toOrNull(acc) } ?: acc
             }
     }
 
-    data class Mapper(
-        val sourceDestMaps: List<SourceDestMap>
-    ) {
-        fun mapToDestOrNull(source: Long): Long? =
-            sourceDestMaps
-                .firstNotNullOfOrNull { map -> map.toDestOrNull(source) }
-
-        fun mapToSourceOrNull(dest: Long): Long? =
-            sourceDestMaps
-                .reversed()
-                .firstNotNullOfOrNull { map -> map.toSourceOrNull(dest) }
-    }
-
-    data class SourceDestMap(
-        val destinationStart: Long,
-        val sourceStart: Long,
+    data class FromToMap(
+        val fromStart: Long,
+        val toStart: Long,
         val range: Long
     ) {
-        private val sourceRange =  sourceStart..(sourceStart + range)
-        private val sourceToDest = destinationStart - sourceStart
+        private val fromRange = fromStart..(fromStart + range)
+        private val fromToDelta = toStart - fromStart
 
-        fun toDestOrNull(source: Long): Long? =
+        fun toOrNull(from: Long): Long? =
             when {
-                (source in sourceRange) -> {
-                    source + sourceToDest
-                }
+                from in fromRange -> from + fromToDelta
 
                 else -> null
             }
-
-        private val destRange = destinationStart..(destinationStart + range)
-        private val destToSource = sourceStart - destinationStart
-
-        fun toSourceOrNull(dest: Long): Long? =
-            when {
-                (dest in destRange) -> {
-                    dest + destToSource
-                }
-
-                else -> null
-            }
-
     }
 }
 
 object Day05Parser {
-    fun List<String>.toSeedMapper(): SeedMapper {
-        return SeedMapper(
-            seeds =
-            first()
-                .split(":")
-                .last()
-                .split(" ")
-                .filter { it.isNotBlank() }
-                .map {
-                    it.trim().toLong()
-                },
+    fun List<String>.toSeedMapper(): SeedMapper =
+        SeedMapper(
+            seeds = parseSeeds(),
             almanac = Almanac(
-                mappers =
-                this.joinToString(System.lineSeparator())
-                    .split("${System.lineSeparator()}${System.lineSeparator()}")
-                    .drop(1)
-                    .map { convertor ->
-                        val sourceDests = convertor.split(":").last().split(System.lineSeparator()).filter { it.isNotBlank() }
-                        Mapper(
-                            sourceDestMaps =
-                            sourceDests
-                                .map { sourceDest ->
-                                    val numbers = sourceDest.split(" ").map { it.toLong() }
-                                    SourceDestMap(
-                                        destinationStart = numbers[0],
-                                        sourceStart = numbers[1],
-                                        range = numbers[2],
-                                    )
-                                }
-                        )
-                    }
+                mappers = parseMappers()
             )
         )
+
+    private fun List<String>.parseMappers(): List<Mapper> =
+        this.joinToString(System.lineSeparator())
+            .split("${System.lineSeparator()}${System.lineSeparator()}")
+            .drop(1)
+            .map { mapperString ->
+                val fromTos =
+                    mapperString
+                        .split(":")
+                        .last()
+                        .split(System.lineSeparator())
+                        .filter { it.isNotBlank() }
+                fromTos
+                    .map { fromTo -> fromTo.parseFromToMap() }
+
+            }
+
+    private fun String.parseFromToMap(): Day05Domain.FromToMap {
+        val numbers = split(" ").map { it.toLong() }
+        return Day05Domain.FromToMap(
+            fromStart = numbers[1],
+            toStart = numbers[0],
+            range = numbers[2],
+        )
     }
+
+    private fun List<String>.parseSeeds(): List<Long> =
+        first()
+            .split(":")
+            .last()
+            .split(" ")
+            .filter { it.isNotBlank() }
+            .map { it.trim().toLong() }
 
 }
