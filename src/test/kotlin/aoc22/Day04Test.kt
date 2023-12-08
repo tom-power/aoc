@@ -2,13 +2,12 @@ package aoc22
 
 import aoc22.Day04.part1
 import aoc22.Day04.part2
-import common.readInput
-import common.readInputExample
+import common.Input.readInput
+import common.Input.readInputExample
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day04Test {
-
     @Test
     fun `part one example`() {
         assertEquals(2, Day04.readInputExample().part1())

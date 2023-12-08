@@ -1,14 +1,13 @@
 package template
 
-import common.readInput
-import common.readInputExample
+import common.Input.readInput
+import common.Input.readInputExample
 import template.Day00.part1
 import template.Day00.part2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day00Test {
-
     @Test
     fun `part one example`() {
         assertEquals(0, Day00.readInputExample().part1())

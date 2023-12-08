@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day13ParserTest {
-
     @Test
     fun `parse input example`() {
         assertEquals(exampleAsPackets, input.toPackets())

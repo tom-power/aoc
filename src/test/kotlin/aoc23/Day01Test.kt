@@ -2,16 +2,15 @@ package aoc23
 
 import aoc23.Day01.part1
 import aoc23.Day01.part2
-import common.readInput
+import common.Input.readInput
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day01Test {
-
     @Test
     fun `part one example`() {
-        assertEquals(142, Day01.readInput("_example_part1").part1())
+        assertEquals(142, Day01.readInput("_example1").part1())
     }
 
     @Test
@@ -21,7 +20,7 @@ class Day01Test {
 
     @Test
     fun `part two example`() {
-         assertEquals(281, Day01.readInput("_example_part2").part2())
+         assertEquals(281, Day01.readInput("_example2").part2())
     }
 
     @Test

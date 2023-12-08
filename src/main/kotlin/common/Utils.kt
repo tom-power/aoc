@@ -7,6 +7,7 @@ import common.Space2D.print
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.util.*
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 
@@ -28,14 +29,6 @@ object Math {
     }
 
     private fun Long.isCommonMultipleOf(x: Long, y: Long): Boolean = this % x == 0L && this % y == 0L
-}
-
-object Input {
-    fun readInputWithDirectory(name: String, directory: String): List<String> =
-        readInput(name) ?: readInput("$directory/$name")!!
-
-    private fun readInput(name: String): List<String>? =
-        File("src/main/resources", "$name.txt").takeIf { it.isFile }?.readLines()
 }
 
 object Space3D {
@@ -257,6 +250,9 @@ object Misc {
         }
         else println(this)
     }
+
+    fun String.capitalise(): String =
+        this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
     inline fun <reified T : Enum<T>> T.next(): T {
         val values = enumValues<T>()

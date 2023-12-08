@@ -7,9 +7,7 @@ import aoc22.Day22DomainWrapCube.EdgePoints
 import aoc22.Day22Parser.toPoints
 import aoc22.EdgePointMapMonitor
 import aoc22.visualisation.animate
-import common.readInputExample
-import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.Test
+import common.Input.readInputExample
 
 fun day22Visualisation() {
     framesFor(Day22.readInputExample())

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day14ParserTest {
-
     @Test
     fun `parse a cave`() {
         val expected = Cave(

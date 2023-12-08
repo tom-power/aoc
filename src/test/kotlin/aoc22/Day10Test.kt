@@ -5,13 +5,12 @@ import aoc22.Day10.part2
 import aoc22.Day10Domain.Cycle
 import aoc22.Day10Domain.Register
 import aoc22.Day10Parser.toInstructions
-import common.readInput
-import common.readInputExample
+import common.Input.readInput
+import common.Input.readInputExample
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day10Test {
-
     @Test
     fun `part one example`() {
         assertEquals(13140, Day10.readInputExample().part1())

@@ -5,7 +5,7 @@ import aoc22.Day14Parser
 import common.Monitoring
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
-import common.readInputExample
+import common.Input.readInputExample
 
 fun day14Visualisation() {
     framesFor(input = Day14.readInputExample())
