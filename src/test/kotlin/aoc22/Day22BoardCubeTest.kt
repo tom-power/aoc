@@ -6,7 +6,7 @@ import aoc22.Day22Parser.toPath
 import aoc22.Day22DomainWrap.withCubeWrap
 import common.Space2D.Direction.*
 import common.Space2D.Point
-import common.readInputExample
+import common.Input.readInputExample
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

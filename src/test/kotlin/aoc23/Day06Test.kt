@@ -1,14 +1,13 @@
 package aoc23
 
-import common.readInput
-import common.readInputExample
+import common.Input.readInput
+import common.Input.readInputExample
 import aoc23.Day06.part1
 import aoc23.Day06.part2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day06Test {
-
     @Test
     fun `part one example`() {
         assertEquals(288, Day06.readInputExample().part1())

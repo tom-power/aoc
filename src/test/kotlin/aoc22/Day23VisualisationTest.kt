@@ -6,7 +6,7 @@ import common.Monitoring.PointMonitor
 import common.Space2D.Point
 import aoc22.visualisation.animate
 import aoc22.visualisation.toFrame
-import common.readInput
+import common.Input.readInput
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 

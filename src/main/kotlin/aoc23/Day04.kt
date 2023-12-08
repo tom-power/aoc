@@ -54,7 +54,7 @@ object Day04Parser {
     fun List<String>.toScratchCards(): ScratchCards =
         ScratchCards(
             cards = map { line ->
-                line.split(":").let { (id, cards) ->
+                line.split(":").let { (_, cards) ->
                     cards.split(" | ").let { (winning, yours) ->
                         Day04Domain.Card(
                             winning = winning.toInts(),

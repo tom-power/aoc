@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class UtilsTest {
-
     @Test
     fun `can transpose symmetric`() {
         assertEquals(

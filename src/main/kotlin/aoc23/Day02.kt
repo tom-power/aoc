@@ -9,6 +9,7 @@ import aoc23.Day02Parser.toCubeGame
 import aoc23.Day02Solution.part1Day02
 import aoc23.Day02Solution.part2Day02
 import common.Collections.product
+import common.Misc.capitalise
 import common.Year23
 
 object Day02 : Year23 {
@@ -92,7 +93,7 @@ object Day02Parser {
                             cubeCount =
                             round.split(",")
                                 .map { cubeCount ->
-                                    val cubeName = cubeCount.filter { it.isLetter() }.capitalize()
+                                    val cubeName = cubeCount.filter { it.isLetter() }.capitalise()
                                     val count = cubeCount.filter { it.isDigit() }.toInt()
                                     Cube.valueOf(cubeName) to count
                                 }.toMap()

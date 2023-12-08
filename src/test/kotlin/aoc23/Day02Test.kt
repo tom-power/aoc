@@ -1,7 +1,7 @@
 package aoc23
 
-import common.readInput
-import common.readInputExample
+import common.Input.readInput
+import common.Input.readInputExample
 import aoc23.Day02.part1
 import aoc23.Day02.part2
 import org.junit.jupiter.api.Assertions
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day02Test {
-
     @Test
     fun `part one example`() {
         assertEquals(8, Day02.readInputExample().part1())
