@@ -10,13 +10,32 @@ import java.security.MessageDigest
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 
+object Math {
+    fun List<Long>.toLowestCommonMultiple(): Long =
+        this.fold(first()) { acc, l ->
+            lowestCommonMultiple(acc, l)
+        }
+
+    private fun lowestCommonMultiple(x: Long, y: Long): Long {
+        val increment = maxOf(x, y)
+        val maxCommonMultiple = x * y
+        return generateSequence(increment) { current ->
+            when {
+                current >= maxCommonMultiple || current.isCommonMultipleOf(x, y) -> null
+                else -> current + increment
+            }
+        }.last()
+    }
+
+    private fun Long.isCommonMultipleOf(x: Long, y: Long): Boolean = this % x == 0L && this % y == 0L
+}
+
 object Input {
     fun readInputWithDirectory(name: String, directory: String): List<String> =
         readInput(name) ?: readInput("$directory/$name")!!
 
     private fun readInput(name: String): List<String>? =
-        File("src/main/resources", "$name.txt").takeIf { it.isFile }
-            ?.readLines()
+        File("src/main/resources", "$name.txt").takeIf { it.isFile }?.readLines()
 }
 
 object Space3D {
@@ -35,7 +54,7 @@ object Space3D {
                 Direction3D.Back -> copy(z = z - by)
             }
 
-        fun neighbors(): Set<Point3D> = Direction3D.values().map { this.move(it) }.toSet()
+        fun neighbors(): Set<Point3D> = Direction3D.entries.map { this.move(it) }.toSet()
     }
 
     object Parser {
@@ -43,6 +62,8 @@ object Space3D {
             this.split(",")
                 .map { it.filter { it.isDigit() || it == '-' }.toInt() }
                 .let { Point3D(it[0], it[1], it[2]) }
+
+        fun Regex.valuesFor(input: String): List<String> = find(input)?.groupValues?.drop(1)!!
     }
 }
 

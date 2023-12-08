@@ -58,8 +58,8 @@ class UtilsAlgorithmTest {
         val start =
             MateyNode(
                 Matey("start"),
-                listOf(Cost(middle, 2), Cost(noNeighbours, 1)))
-
+                listOf(Cost(middle, 2), Cost(noNeighbours, 1))
+            )
     }
 
     @Test
