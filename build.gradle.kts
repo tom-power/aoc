@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.20"
 }
 
 repositories {
@@ -19,11 +19,11 @@ dependencies {
 
 tasks {
     wrapper {
-        gradleVersion = "7.6"
+        gradleVersion = "8.5"
     }
     withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "17"
+            jvmTarget = "21"
         }
     }
     test {
