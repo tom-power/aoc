@@ -4,7 +4,6 @@ import common.Misc.next
 import common.Space2D.Direction.*
 import common.Space2D.Point
 import common.Space2D.print
-import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.*
@@ -67,7 +66,7 @@ object Space2D {
                 .map { it.filter { it.isDigit() || it == '-' }.toInt() }
                 .let { Point(it[0], it[1]) }
 
-        fun List<String>.toPointToChar(): List<Pair<Point, Char>> {
+        fun List<String>.toPointToChars(): List<Pair<Point, Char>> {
             val max = this.size
             return mapIndexed { y, s ->
                 s.mapIndexed { x, c ->
@@ -76,7 +75,7 @@ object Space2D {
             }.flatten()
         }
 
-        fun List<String>.toPointChar(): List<PointChar> {
+        fun List<String>.toPointChars(): List<PointChar> {
             val max = this.size
             return mapIndexed { y, s ->
                 s.mapIndexed { x, c ->

@@ -7,7 +7,7 @@ import aoc22.Day23Solution.part2Day23
 import common.Monitoring.Monitor
 import common.Space2D.Direction
 import common.Space2D.Direction.*
-import common.Space2D.Parser.toPointToChar
+import common.Space2D.Parser.toPointToChars
 import common.Space2D.Point
 import common.Space2D.toMaxPoints
 import common.Year22
@@ -131,7 +131,7 @@ typealias Elf = Point
 
 object Day23Parser {
     fun List<String>.toElves(): Elves =
-        toPointToChar()
+        toPointToChars()
             .filter { it.second == '#' }
             .map { (point, _) -> point }
             .toSet()

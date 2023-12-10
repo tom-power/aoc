@@ -5,7 +5,7 @@ import aoc23.Day03Solution.part1Day03
 import aoc23.Day03Solution.part2Day03
 import common.Collections.product
 import common.Space2D
-import common.Space2D.Parser.toPointChar
+import common.Space2D.Parser.toPointChars
 import common.Space2D.Point
 import common.Space2D.PointChar
 import common.Space2D.getFor
@@ -95,5 +95,5 @@ object Day03Domain {
 
 object Day03Parser {
     fun List<String>.toSchema(): Day03Domain.Schematic =
-        Day03Domain.Schematic(input = toPointChar())
+        Day03Domain.Schematic(input = toPointChars())
 }

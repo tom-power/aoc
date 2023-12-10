@@ -12,7 +12,7 @@ import aoc22.Day24Solution.part1Day24
 import aoc22.Day24Solution.part2Day24
 import common.Space2D.Direction
 import common.Space2D.PointChar
-import common.Space2D.Parser.toPointChar
+import common.Space2D.Parser.toPointChars
 import common.Space2D.Point
 import common.Space2D.toRange
 import common.Year22
@@ -171,7 +171,7 @@ object Day24Parser {
         }
 
     fun List<String>.toValley(monitor: ValleyLocationMonitor? = null): Valley =
-        toPointChar().let { pc ->
+        toPointChars().let { pc ->
             val locations = pc.toValleyLocations().toSet()
             Valley(
                 locations = locations.toSet(),
