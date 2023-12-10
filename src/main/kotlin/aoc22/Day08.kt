@@ -4,7 +4,7 @@ import common.Collections.product
 import aoc22.Day08Solution.visibleTreeCount
 import aoc22.Day08Solution.maxScenicScore
 import common.Space2D.Point
-import common.Space2D.Parser.toPointToChar
+import common.Space2D.Parser.toPointToChars
 import common.Year22
 
 object Day08: Year22 {
@@ -40,7 +40,7 @@ object Day08Solution {
     }
 
     private fun List<String>.toTrees(): List<Tree> =
-        toPointToChar()
+        toPointToChars()
             .map { (p, c) -> Tree(p, c.digitToInt()) }
 
     private data class Tree(
