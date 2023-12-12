@@ -30,4 +30,4 @@ private fun framesFor(input: List<String>, rounds: Int, frame: Collection<Point>
                 monitor = this
             )
                 .until(rounds)
-        }.print()
+        }.toLoggable()

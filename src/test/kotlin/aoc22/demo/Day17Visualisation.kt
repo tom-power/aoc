@@ -20,4 +20,4 @@ private fun framesFor(input: List<String>): List<String> =
                 chamber = Day17Domain.Chamber(jets = input.toJets(), monitor = this),
                 maxDrops = 10,
             ).invoke()
-        }.print()
+        }.toLoggable()

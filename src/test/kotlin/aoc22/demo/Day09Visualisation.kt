@@ -13,11 +13,10 @@ fun day09Visualisation() {
         .animate()
 }
 
-
 private fun framesFor(input: List<String>): List<String> =
     Monitoring.PointMonitor(frame = forFive().toFrame().toSet())
         .also { monitor ->
             with(Day09Solution) { input.toDirections().toHistory(knots = 2, monitor = monitor) }
-        }.print()
+        }.toLoggable()
 
 private fun forFive() = listOf(Space2D.Point(-5, -5), Space2D.Point(5, 5))

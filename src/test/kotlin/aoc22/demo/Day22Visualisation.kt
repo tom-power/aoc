@@ -18,5 +18,5 @@ private fun framesFor(input: List<String>): List<String> {
     val edgePoints = EdgePoints(input.toBoard().items.toPoints()).invoke()
     val monitor = EdgePointMapMonitor(edges = edgePoints.map { it.point }.toSet())
     val map = EdgePointMap(edgePoints = edgePoints, monitor = monitor)
-    return map.apply { invoke() }.monitor!!.print()
+    return map.apply { invoke() }.monitor!!.toLoggable()
 }

@@ -20,5 +20,5 @@ private fun framesFor(input: List<String>): List<String> {
             with(Day14Parser) {
                 cave.copy(monitor = monitor).fillUpAndCount()
             }
-        }.print()
+        }.toLoggable()
 }

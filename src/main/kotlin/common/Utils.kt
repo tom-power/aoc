@@ -3,7 +3,7 @@ package common
 import common.Misc.next
 import common.Space2D.Direction.*
 import common.Space2D.Point
-import common.Space2D.print
+import common.Space2D.toLoggable
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.*
@@ -187,7 +187,7 @@ object Space2D {
         return min()..max()
     }
 
-    fun Collection<Point>.print(highlight: List<Point>? = null): String =
+    fun Collection<Point>.toLoggable(highlight: List<Point>? = null): String =
         Axis.Y.toRange().reversed().map { y ->
             Axis.X.toRange().map { x ->
                 Point(x, y).draw(highlight)
@@ -370,7 +370,7 @@ object Maps {
 
 object Monitoring {
     interface Monitor<T> : (T) -> Unit {
-        fun print(): List<String>
+        fun toLoggable(): List<String>
     }
 
     open class PointMonitor(
@@ -382,24 +382,10 @@ object Monitoring {
             this.pointList.add(points)
         }
 
-        override fun print(): List<String> =
+        override fun toLoggable(): List<String> =
             pointList.map { points ->
-                (points.map { it } + frame).print()
+                (points.map { it } + frame).toLoggable()
             }
-    }
-
-    interface Printable<T> : List<Set<T>> {
-        fun print(): List<String>
-    }
-
-    abstract class Monitorable<T> : (Printable<T>) -> Unit {
-        private val list: MutableList<Printable<T>> = mutableListOf()
-
-        override fun invoke(points: Printable<T>) {
-            this.list.add(points)
-        }
-
-        fun print(): List<String> = list.map { it.print() }.flatten()
     }
 }
 

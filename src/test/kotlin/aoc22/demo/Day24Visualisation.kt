@@ -20,5 +20,5 @@ private fun framesFor(input: List<String>): List<String> =
                     isDestination = { this == end },
                 )
             }
-        }.print()
+        }.toLoggable()
 
