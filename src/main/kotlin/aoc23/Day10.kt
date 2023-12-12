@@ -30,6 +30,8 @@ object Day10Solution {
 }
 
 object Day10Domain {
+
+
     data class Pipes(
         private val pipeMap: MutableMap<Point, Char>
     ) {
@@ -41,13 +43,13 @@ object Day10Domain {
         private val groundPoints: MutableSet<Point> = mutableSetOf()
         private val pipePoints: MutableSet<Point> = mutableSetOf()
 
-        private val points: Points = Points()
+        private val pointCounter: PointCounter = PointCounter()
 
         fun stepsToFarthestPoint(): Int {
             setupStart()
             walkThePipes(checkRight = false)
 
-            return points.stepsToFarthest()
+            return pointCounter.stepsToFarthest()
         }
 
         fun numberOfEnclosedTiles(): Int {
@@ -58,14 +60,16 @@ object Day10Domain {
             setupStart()
             walkThePipes(checkRight = true)
 
-            return points.groundInside()
+            return pointCounter.groundInside()
         }
 
-        private val directions: Directions = Directions()
+        private val directions: Directions = Directions(pipeMap)
 
         private fun setupStart() {
             start = pipeMap.filter { it.value == 'S' }.keys.first()
-            entryDirection = directions.start()
+            entryDirection = entries.first { direction ->
+                directions.entryFor(start.move(direction), direction) != null
+            }
         }
 
         private fun removeTheJunk() {
@@ -92,7 +96,7 @@ object Day10Domain {
         }
 
         private fun walkAPipe() {
-            entryDirection = directions.nextExit()!!
+            entryDirection = directions.exitFor(next, entryDirection)!!
             current = next
             next = current.move(entryDirection)
         }
@@ -104,7 +108,7 @@ object Day10Domain {
             }
         }
 
-        inner class Points {
+        inner class PointCounter {
             fun stepsToFarthest(): Int = pipePoints.size / 2
 
             fun groundInside(): Int =
@@ -116,34 +120,34 @@ object Day10Domain {
             private val groundPointsInverse: Set<Point>
                 get() = (pipeMap.keys - groundPoints - pipePoints)
         }
+    }
 
-        inner class Directions {
-            fun start(): Direction =
-                Direction.entries.first { direction ->
-                    directionFor(start.move(direction), where = { it == direction.opposite() }) != null
-                }
+    class Directions(
+        private val pipeMap: Map<Point, Char>
+    ) {
+        fun entryFor(point: Point, direction: Direction) =
+            directionFor(point, where = { it == direction.opposite() })
 
-            fun nextExit(): Direction? =
-                directionFor(next, where = { it != entryDirection.opposite() })
+        fun exitFor(point: Point, direction: Direction): Direction? =
+            directionFor(point, where = { it != direction.opposite() })
 
-            private fun directionFor(point: Point, where: (Direction) -> Boolean): Direction? =
-                directionsFor(point)
-                    ?.filter { where(it) }
-                    ?.firstOrNull()
+        private fun directionFor(point: Point, where: (Direction) -> Boolean): Direction? =
+            directionsFor(point)
+                ?.filter { where(it) }
+                ?.firstOrNull()
 
-            private fun directionsFor(point: Point): List<Direction>? =
-                pipeDirectionMap[pipeMap[point]]?.toList()
+        private fun directionsFor(point: Point): List<Direction>? =
+            pipeDirectionMap[pipeMap[point]]?.toList()
 
-            private val pipeDirectionMap: Map<Char, Pair<Direction, Direction>> =
-                mapOf(
-                    '7' to Pair(Left, Down),
-                    'J' to Pair(Up, Left),
-                    'L' to Pair(Up, Right),
-                    'F' to Pair(Right, Down),
-                    '|' to Pair(Up, Down),
-                    '-' to Pair(Right, Left),
-                )
-        }
+        private val pipeDirectionMap: Map<Char, Pair<Direction, Direction>> =
+            mapOf(
+                '7' to Pair(Left, Down),
+                'J' to Pair(Up, Left),
+                'L' to Pair(Up, Right),
+                'F' to Pair(Right, Down),
+                '|' to Pair(Up, Down),
+                '-' to Pair(Right, Left),
+            )
     }
 }
 
