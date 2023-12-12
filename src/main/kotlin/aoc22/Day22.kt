@@ -1,13 +1,8 @@
 package aoc22
 
 import common.Collections.partitionedBy
-import aoc22.Day22UtilsDirection.toScore
-import aoc22.Day22UtilsDirection.turn
 import aoc22.Day22Domain.Board
 import aoc22.Day22Domain.BoardItem
-import aoc22.Day22Domain.Side
-import aoc22.Day22Domain.Side.L
-import aoc22.Day22Domain.Side.R
 import aoc22.Day22Domain.State
 import aoc22.Day22Domain.Step
 import aoc22.Day22Domain.Tile
@@ -23,10 +18,13 @@ import aoc22.Day22DomainWrap.withCubeWrap
 import aoc22.Day22DomainWrap.withFlatWrap
 import aoc22.Day22Solution.part1Day22
 import aoc22.Day22Solution.part2Day22
+import common.Space2D
 import common.Space2D.Direction
 import common.Space2D.Direction.*
 import common.Space2D.Point
+import common.Space2D.Side
 import common.Space2D.opposite
+import common.Space2D.turn
 import common.Year22
 import kotlin.math.absoluteValue
 
@@ -48,6 +46,8 @@ object Day22Solution {
         ((1000 * (point.y.absoluteValue + 1))
             + (4 * (point.x.absoluteValue + 1))
             + facing.toScore())
+
+    fun Direction.toScore(): Int = Space2D.clockWiseDirections.indexOf(this)
 }
 
 object Day22Domain {
@@ -100,8 +100,6 @@ object Day22Domain {
             return tiles.filter { it.point.y == minY }.minBy { it.point.x }
         }
     }
-
-    enum class Side { R, L }
 
     sealed interface Step
     data class Tiles(val tiles: Int) : Step
@@ -289,24 +287,6 @@ object Day22UtilsPoint {
 
     private fun Set<Point>.rowFor(point: Point): List<Point> = filter { it.y == point.y }
     private fun Set<Point>.colFor(point: Point): List<Point> = filter { it.x == point.x }
-}
-
-object Day22UtilsDirection {
-    private val clockWiseDirections = listOf(Right, Down, Left, Up)
-
-    fun Direction.toScore(): Int = clockWiseDirections.indexOf(this)
-
-    fun Direction.turn(side: Side): Direction =
-        clockWiseDirections.let {
-            val i = it.indexOf(this) + side.toInt()
-            it[(i % it.size + it.size) % it.size]
-        }
-
-    private fun Side.toInt(): Int =
-        when (this) {
-            R -> +1
-            L -> -1
-        }
 }
 
 object Day22Parser {

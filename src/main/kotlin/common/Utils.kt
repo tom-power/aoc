@@ -101,6 +101,23 @@ object Space2D {
             Up -> Down
         }
 
+    val clockWiseDirections = listOf(Right, Down, Left, Up)
+
+    fun Direction.turn(side: Side): Direction =
+        clockWiseDirections.let {
+            val i = it.indexOf(this) + side.toInt()
+            it[(i % it.size + it.size) % it.size]
+        }
+
+    private fun Side.toInt(): Int =
+        when (this) {
+            Side.Right -> +1
+            Side.Left -> -1
+        }
+
+
+    enum class Side { Right, Left }
+
     data class Point(
         val x: Int, val y: Int
     ) {
