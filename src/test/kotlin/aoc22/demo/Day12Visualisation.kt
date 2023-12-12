@@ -24,6 +24,6 @@ private fun framesFor(input: List<String>): List<String> =
                     canMove = { from, to -> to - from <= 1 }
                 )
             }
-        }.print()
+        }.toLoggable()
 
 private fun forFive() = listOf(Space2D.Point(-1, 6), Space2D.Point(8, 0))

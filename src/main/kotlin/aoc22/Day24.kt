@@ -190,7 +190,7 @@ object Day24Monitoring {
             this.listOfVls.add(vls)
         }
 
-        override fun print(): List<String> = listOfVls.map { it.print() }
+        override fun toLoggable(): List<String> = listOfVls.map { it.print() }
     }
 
     context(Collection<ValleyLocation>)

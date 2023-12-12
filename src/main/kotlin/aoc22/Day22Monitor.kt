@@ -9,7 +9,7 @@ import common.Monitoring.Monitor
 import common.Space2D
 import common.Space2D.Direction.*
 import common.Space2D.Point
-import common.Space2D.print
+import common.Space2D.toLoggable
 import common.Space2D.toRange
 
 class EdgePointMapMonitor(private val edges: Set<Point> = emptySet()) : Monitor<Set<EdgePointPair>> {
@@ -20,9 +20,9 @@ class EdgePointMapMonitor(private val edges: Set<Point> = emptySet()) : Monitor<
         edgePointMaps.add(p1)
     }
 
-    override fun print(): List<String> =
+    override fun toLoggable(): List<String> =
         edgePointMaps
-            .map { pairs -> edges.print(pairs.flatMap { listOf(it.first.point, it.second.point) }) }
+            .map { pairs -> edges.toLoggable(pairs.flatMap { listOf(it.first.point, it.second.point) }) }
 }
 
 class StateMonitor(
