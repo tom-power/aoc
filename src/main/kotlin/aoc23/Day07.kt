@@ -7,6 +7,7 @@ import aoc23.Day07Parser.toCamelCards
 import aoc23.Day07Solution.part1Day07
 import aoc23.Day07Solution.part2Day07
 import com.github.shiguruikai.combinatoricskt.permutationsWithRepetition
+import common.Strings.replaceAt
 
 object Day07 : Year23 {
     fun List<String>.part1(): Int = part1Day07()
@@ -104,9 +105,6 @@ object Day07Domain {
             this.maxOf { it.type }.let { maxType ->
                 this.filter { it.type == maxType }
             }
-
-        private fun String.replaceAt(index: Int, replacement: Char) =
-            this.substring(0, index) + replacement + this.substring(index + 1)
     }
 
     class Card(private val char: Char) : Comparable<Card> {
