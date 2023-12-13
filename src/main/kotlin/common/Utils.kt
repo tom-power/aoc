@@ -115,7 +115,6 @@ object Space2D {
             Side.Left -> -1
         }
 
-
     enum class Side { Right, Left }
 
     data class Point(
@@ -389,3 +388,10 @@ object Monitoring {
     }
 }
 
+object Strings {
+    fun String.replaceFirst(toReplace: Char, replacement: Char): String =
+        replaceAt(this.indexOfFirst { it == toReplace }, replacement)
+
+    fun String.replaceAt(index: Int, replacement: Char) =
+        this.substring(0, index) + replacement + this.substring(index + 1)
+}
