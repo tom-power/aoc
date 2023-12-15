@@ -1,12 +1,12 @@
 package aoc22
 
-import common.Collections.splitBy
 import common.Collections.transpose
 import aoc22.Day05Runner.crane9000
 import aoc22.Day05Runner.crane9001
 import aoc22.Day05Domain.Movement
 import aoc22.Day05Parser.toMovements
 import aoc22.Day05Parser.toStacks
+import common.Collections.partitionedBy
 import common.Year22
 
 object Day05: Year22 {
@@ -16,7 +16,7 @@ object Day05: Year22 {
 }
 
 private fun List<String>.moveCratesWith(crane: (List<Stack>, List<Movement>) -> List<Stack>): String =
-    splitBy("")
+    partitionedBy("")
         .let { crane(it[0].dropLast(1).toStacks(), it[1].toMovements()) }
         .joinToString("") { it.last().toString() }
 
