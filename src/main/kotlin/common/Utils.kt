@@ -1,5 +1,6 @@
 package common
 
+import common.Collections.transpose
 import common.Misc.next
 import common.Space2D.Direction.*
 import common.Space2D.Point
@@ -227,17 +228,14 @@ object Collections {
         }.toList()
     }
 
-    fun List<String>.splitBy(delimiter: String): List<List<String>> =
-        listOf(subList(0, this.indexOf(delimiter)), subList(this.indexOf(delimiter) + 1, this.count()))
-
     fun List<String>.partitionedBy(delimiter: String): List<List<String>> {
-        val indexes = this.indexesOf(delimiter)
-        return listOf(this.subList(0, indexes.first())) + partitionAt(indexes) + listOf(
-            this.subList(
-                indexes.last() + 1,
-                this.lastIndex + 1
-            )
-        )
+        val indexes =
+            this.indexesOf(delimiter)
+                .takeIf { it.isNotEmpty() }
+                ?: return listOf(this)
+        val first = this.subList(0, indexes.first())
+        val last = this.subList(indexes.last() + 1, this.lastIndex + 1)
+        return listOf(first) + partitionAt(indexes) + listOf(last)
     }
 
     private fun <T> List<T>.indexesOf(delimiter: T) =
@@ -245,7 +243,7 @@ object Collections {
             index.takeIf { t == delimiter }
         }
 
-    private fun <T> List<T>.partitionAt(indexes: List<Int>) =
+    private fun <T> List<T>.partitionAt(indexes: List<Int>): List<List<T>> =
         indexes.zipWithNext { a, b ->
             this.subList(a + 1, b)
         }
@@ -394,4 +392,9 @@ object Strings {
 
     fun String.replaceAt(index: Int, replacement: Char) =
         this.substring(0, index) + replacement + this.substring(index + 1)
+
+    fun List<String>.transpose(): List<String> =
+        map { it.toList() }
+            .transpose()
+            .map { it.joinToString() }
 }
