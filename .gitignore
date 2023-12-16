@@ -2,5 +2,6 @@
 .idea
 build
 out
-src/**/*.txt
+src/test/resources/**/*.txt
+!src/test/resources/**/*_example*.txt
 sh/.env
