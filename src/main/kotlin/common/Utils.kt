@@ -120,7 +120,7 @@ object Space2D {
 
     data class Point(
         val x: Int, val y: Int
-    ) {
+    ) : Comparable<Point> {
         fun move(direction: Direction, by: Int = 1): Point =
             when (direction) {
                 Up -> copy(y = y + by)
@@ -165,6 +165,11 @@ object Space2D {
 
         operator fun minus(other: Point): Point =
             Point(this.x - other.x, this.y - other.y)
+
+        override fun compareTo(other: Point): Int =
+            y.compareTo(other.y)
+                .takeIf { it != 0 }
+                ?: x.compareTo(other.x)
     }
 
     context(Collection<Point>)
