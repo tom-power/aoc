@@ -5,3 +5,4 @@ out
 src/test/resources/**/*.txt
 !src/test/resources/**/*_example*.txt
 sh/.env
+.mob
