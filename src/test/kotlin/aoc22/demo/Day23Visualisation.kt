@@ -5,9 +5,9 @@ import aoc22.Day23Parser.toElves
 import aoc22.Day23Runner.SpreadOut
 import common.Monitoring.PointMonitor
 import common.Space2D.Point
-import aoc22.visualisation.animate
-import aoc22.visualisation.toFrame
+import visualisation.animate
 import common.Input.readInputExample
+import common.Space2D.toEdges
 
 fun day23Visualisation() {
     framesFor(input = Day23.readInputExample(), rounds = 10)
@@ -16,7 +16,7 @@ fun day23Visualisation() {
 }
 
 private fun framesFor(input: List<String>, rounds: Int, frame: Collection<Point> = emptySet()): List<String> =
-    PointMonitor(frame = frame.toFrame().toSet())
+    PointMonitor(canvas = frame.toEdges().toSet())
         .apply {
             SpreadOut(
                 elves = input.toElves(),

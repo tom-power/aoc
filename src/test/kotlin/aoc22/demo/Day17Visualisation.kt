@@ -5,7 +5,7 @@ import aoc22.Day17Domain
 import aoc22.Day17Parser.toJets
 import aoc22.Day17Runner
 import common.Monitoring
-import aoc22.visualisation.animate
+import visualisation.animate
 import common.Input.readInputExample
 
 fun day17Visualisation() {

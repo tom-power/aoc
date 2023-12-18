@@ -3,7 +3,7 @@ package aoc22.demo
 import aoc22.Day24
 import aoc22.Day24Monitoring.ValleyLocationMonitor
 import aoc22.Day24Parser.toValley
-import aoc22.visualisation.animate
+import visualisation.animate
 import common.Input.readInput
 
 fun day24Visualisation() {

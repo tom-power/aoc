@@ -4,9 +4,9 @@ import aoc22.Day12
 import aoc22.Day12Parser.toHeightMap
 import common.Monitoring
 import common.Space2D
-import aoc22.visualisation.animate
-import aoc22.visualisation.toFrame
+import visualisation.animate
 import common.Input.readInputExample
+import common.Space2D.toEdges
 
 fun day12Visualisation() {
     framesFor(input = Day12.readInputExample())
@@ -15,7 +15,7 @@ fun day12Visualisation() {
 
 
 private fun framesFor(input: List<String>): List<String> =
-    Monitoring.PointMonitor(frame = forFive().toFrame().toSet())
+    Monitoring.PointMonitor(canvas = forFive().toEdges().toSet())
         .also { monitor ->
             input.toHeightMap(monitor = monitor).run {
                 shortestPath(

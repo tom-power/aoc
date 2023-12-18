@@ -170,7 +170,8 @@ object Day17Domain {
     data class Shape(
         override val points: Set<Point>
     ) : HasPoints {
-        override fun move(direction: Direction, by: Int): Shape = copy(points = points.move(direction, by).toSet())
+        override fun move(direction: Direction, by: Int): Shape =
+            copy(points = points.move(direction, by).toSet())
     }
 
     object Shapes {
