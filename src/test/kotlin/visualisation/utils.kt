@@ -1,4 +1,4 @@
-package aoc22.visualisation
+package visualisation
 
 import common.Space2D
 import common.Space2D.toMaxPoints
@@ -22,11 +22,3 @@ internal fun List<String>.animate(frameDuration: Long = 100) {
 }
 
 internal fun List<String>.freezeAt(round: Int): List<String> = listOf(this[round-1])
-
-internal fun Collection<Space2D.Point>.toFrame(): Collection<Space2D.Point> {
-    val minX = this.minOfOrNull { it.x }
-    val maxX = this.maxOfOrNull { it.x }
-    val minY = this.minOfOrNull { it.y }
-    val maxY = this.maxOfOrNull { it.y }
-    return toMaxPoints().filter { it.x == minX || it.x == maxX || it.y == minY || it.y == maxY}
-}

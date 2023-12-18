@@ -1,40 +1,50 @@
 package aoc23
 
-import common.Misc.log
 import common.Year23
 import aoc23.Day14Domain.ParabolicReflectorDish
 import aoc23.Day14Parser.toParabolicReflectorDish
 import common.Monitoring
 import common.Space2D.Direction
+import common.Space2D.Direction.*
 import common.Space2D.Parser.toPointToChars
 import common.Space2D.Point
-import common.Space2D.toLoggable
+import java.util.*
 
 object Day14 : Year23 {
     fun List<String>.part1(): Int =
         toParabolicReflectorDish()
-            .apply { tiltNorth() }
+            .apply { tiltTo(Up) }
             .calculateLoad()
 
     fun List<String>.part2(): Int =
-        toParabolicReflectorDish().log()
-            .let { 0 }
+        toParabolicReflectorDish(maxSpinCycles = 1000000000)
+            .apply { spinCycles() }
+            .calculateLoad()
 }
+
+fun ParabolicReflectorDish.calculateLoad(): Int =
+    rockSpaceMap
+        .filterValues { it == 'O' }
+        .map { (point, _) -> point.y }
+        .sum()
 
 object Day14Domain {
     data class ParabolicReflectorDish(
-        val rockSpaceMap: MutableMap<Point, Char>
+        val rockSpaceMap: MutableMap<Point, Char>,
+        val maxSpinCycles: Int,
+        val monitor: Monitoring.PointMonitor? = null,
     ) {
-        fun tiltNorth() {
+        fun tiltTo(direction: Direction) {
             rockSpaceMap
-                .toSortedMap()
-                .reversed()
+                .sortFor(direction = direction)
                 .forEach { (point, rockSpace) ->
                     if (rockSpace == 'O') {
-                        var next: Point? = moveRock(point, Direction.Up)
-                        while(next != null)
-                            next = moveRock(next, Direction.Up)
+                        var next: Point? = moveRock(point, direction)
+                        while (next != null)
+                            next = moveRock(next, direction)
                     }
+                }.also {
+                    monitor?.invoke(rockSpaceMap.filterValues { it == 'O' }.keys)
                 }
         }
 
@@ -50,18 +60,57 @@ object Day14Domain {
                     }
                 }
 
-        fun calculateLoad(): Int =
-            rockSpaceMap
-                .filterValues { it == 'O' }
-                .map { (point, _) -> point.y }
-                .sum()
+        private var spinCycleNumber = 0
+        private val pastStates: MutableList<String> = mutableListOf()
+        private val currentState: String
+            get() = rockSpaceMap.toString()
 
+        fun spinCycles() {
+            while (spinCycleNumber < maxSpinCycles) {
+                pastStates.add(currentState)
+
+                singleSpinCycle().also {
+                    spinCycleNumber++
+                    if (currentState in pastStates)
+                        spinCycleNumber = lastCycleNumber()
+                }
+            }
+        }
+
+        private fun lastCycleNumber(): Int {
+            val stateCycleLength = pastStates.size - pastStates.indexOf(currentState)
+            val spinCyclesLeft = (maxSpinCycles - spinCycleNumber) % stateCycleLength
+            return maxSpinCycles - spinCyclesLeft
+        }
+
+        private fun singleSpinCycle() {
+            listOf(Up, Left, Down, Right).forEach(::tiltTo)
+        }
     }
 }
 
+private fun MutableMap<Point, Char>.sortFor(direction: Direction): SortedMap<Point, Char> =
+    when (direction) {
+        Right -> this.toSortedMap(rightComparator).reversed()
+        Down -> this.toSortedMap()
+        Left -> this.toSortedMap(rightComparator)
+        Up -> this.toSortedMap().reversed()
+    }
+
+private val rightComparator = Comparator<Point> { o1, o2 ->
+    o1.x.compareTo(o2.x)
+        .takeIf { it != 0 }
+        ?: o1.y.compareTo(o2.y)
+}
+
 object Day14Parser {
-    fun List<String>.toParabolicReflectorDish(): ParabolicReflectorDish =
+    fun List<String>.toParabolicReflectorDish(
+        maxSpinCycles: Int = 0,
+        monitor: Monitoring.PointMonitor? = null
+    ): ParabolicReflectorDish =
         ParabolicReflectorDish(
-            rockSpaceMap = toPointToChars().toMap().toMutableMap()
+            rockSpaceMap = toPointToChars().toMap().toMutableMap(),
+            maxSpinCycles = maxSpinCycles,
+            monitor = monitor,
         )
 }

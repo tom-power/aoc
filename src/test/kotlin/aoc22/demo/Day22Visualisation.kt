@@ -6,7 +6,7 @@ import aoc22.Day22DomainWrapCube.EdgePointMap
 import aoc22.Day22DomainWrapCube.EdgePoints
 import aoc22.Day22Parser.toPoints
 import aoc22.EdgePointMapMonitor
-import aoc22.visualisation.animate
+import visualisation.animate
 import common.Input.readInputExample
 
 fun day22Visualisation() {

@@ -22,7 +22,9 @@ class EdgePointMapMonitor(private val edges: Set<Point> = emptySet()) : Monitor<
 
     override fun toLoggable(): List<String> =
         edgePointMaps
-            .map { pairs -> edges.toLoggable(pairs.flatMap { listOf(it.first.point, it.second.point) }) }
+            .map { pairs -> edges.toLoggable(
+                pairs.flatMap { listOf(it.first.point, it.second.point) }.toSet(),
+            ) }
 }
 
 class StateMonitor(

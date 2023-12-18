@@ -172,9 +172,9 @@ object Space2D {
                 ?: x.compareTo(other.x)
     }
 
+
     context(Collection<Point>)
-    private fun Point.draw(highlight: List<Point>? = null): String =
-        firstOrNull { it == this }?.let { if (highlight?.let { this in it } == true) "*" else "#" } ?: "."
+    private fun Point.isEdge(): Boolean = this in toMaxPoints()
 
     enum class Axis { X, Y }
 
@@ -192,12 +192,29 @@ object Space2D {
         return min()..max()
     }
 
-    fun Collection<Point>.toLoggable(highlight: List<Point>? = null): String =
-        Axis.Y.toRange().reversed().map { y ->
-            Axis.X.toRange().map { x ->
-                Point(x, y).draw(highlight)
-            }.joinToString("")
-        }.joinToString(System.lineSeparator())
+    fun Collection<Point>.toLoggable(
+        highlight: Set<Point>? = null,
+        highlightWith: String = "*",
+        edges: Set<Point> = emptySet(),
+        showEdge: Boolean = false
+    ): String {
+        return Axis.Y.toRange().reversed().joinToString(System.lineSeparator()) { y ->
+            Axis.X.toRange().joinToString("") { x ->
+                val point = Point(x, y)
+                when {
+                    highlight?.contains(point) == true -> highlightWith
+                    point in this -> "#"
+                    point in edges ->
+                        when {
+                            showEdge -> "#"
+                            else -> "."
+                        }
+
+                    else -> "."
+                }
+            }
+        }
+    }
 
     interface HasPoints {
         val points: Collection<Point>
@@ -208,6 +225,15 @@ object Space2D {
     }
 
     fun Collection<Point>.height(): Int = maxOf { it.y }
+
+
+    fun Collection<Space2D.Point>.toEdges(): Collection<Space2D.Point> {
+        val minX = this.minOfOrNull { it.x }
+        val maxX = this.maxOfOrNull { it.x }
+        val minY = this.minOfOrNull { it.y }
+        val maxY = this.maxOfOrNull { it.y }
+        return toMaxPoints().filter { it.x == minX || it.x == maxX || it.y == minY || it.y == maxY }
+    }
 
     fun Collection<Point>.toMaxPoints(): Collection<Point> {
         val minX = this.minOfOrNull { it.x } ?: return this
@@ -376,17 +402,25 @@ object Monitoring {
     }
 
     open class PointMonitor(
-        private val frame: Set<Point> = setOf()
+        private val canvas: Set<Point> = setOf(),
+        private val edges: Set<Point> = setOf(),
+        private val highlightWith: String = "*",
+        private val showEdge: Boolean = false,
     ) : Monitor<Set<Point>> {
-        private val pointList: MutableList<Set<Point>> = mutableListOf()
+        private val frames: MutableList<Set<Point>> = mutableListOf()
 
-        override fun invoke(points: Set<Point>) {
-            this.pointList.add(points)
+        override fun invoke(frame: Set<Point>) {
+            this.frames += frame
         }
 
         override fun toLoggable(): List<String> =
-            pointList.map { points ->
-                (points.map { it } + frame).toLoggable()
+            frames.map { frame ->
+                (this.canvas).toLoggable(
+                    highlight = frame,
+                    highlightWith = highlightWith,
+                    edges = edges,
+                    showEdge = showEdge,
+                )
             }
     }
 }
