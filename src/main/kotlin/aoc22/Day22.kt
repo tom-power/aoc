@@ -93,7 +93,7 @@ object Day22Domain {
 
         private fun boardItem(point: Point): BoardItem? = items.singleOrNull { it.point == point }
 
-        private fun initialState(): State = State(topLeftTile().point, Right)
+        private fun initialState(): State = State(topLeftTile().point, East)
 
         private fun topLeftTile(): Tile {
             val minY = tiles.maxOf { it.point.y }
@@ -176,16 +176,16 @@ object Day22DomainWrapCube {
             edgePointsFor(
                 groupBy = { it.x },
                 minMaxBy = { it.y },
-                minDirection = Up,
-                maxDirection = Down
+                minDirection = North,
+                maxDirection = South
             )
 
         private fun Set<Point>.rowEdgePoints(): Set<EdgePoint> =
             edgePointsFor(
                 groupBy = { it.y },
                 minMaxBy = { it.x },
-                minDirection = Right,
-                maxDirection = Left
+                minDirection = East,
+                maxDirection = West
             )
 
         private fun Set<Point>.edgePointsFor(
@@ -279,10 +279,10 @@ object Day22DomainWrapCube {
 object Day22UtilsPoint {
     fun Set<Point>.oppositeFor(point: Point, direction: Direction): Point =
         when (direction) {
-            Right -> rowFor(point).minBy { it.x }
-            Down -> colFor(point).maxBy { it.y }
-            Left -> rowFor(point).maxBy { it.x }
-            Up -> colFor(point).minBy { it.y }
+            East -> rowFor(point).minBy { it.x }
+            South -> colFor(point).maxBy { it.y }
+            West -> rowFor(point).maxBy { it.x }
+            North -> colFor(point).minBy { it.y }
         }
 
     private fun Set<Point>.rowFor(point: Point): List<Point> = filter { it.y == point.y }

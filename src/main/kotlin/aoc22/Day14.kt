@@ -73,9 +73,9 @@ object Day14Domain {
 
         private fun Point.movesBelow() =
             listOf(
-                move(Down),
-                move(Down).move(Left),
-                move(Down).move(Right)
+                move(South),
+                move(South).move(West),
+                move(South).move(East)
             )
     }
 }

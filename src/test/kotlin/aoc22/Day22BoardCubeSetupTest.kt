@@ -34,8 +34,8 @@ class Day22BoardCubeSetupTest {
 
         val normalListOf = listOf(
             Pair(
-                EdgePoint(point = Point(x = 5, y = -4), directionOnEnter = Down),
-                EdgePoint(point = Point(x = 8, y = -1), directionOnEnter = Right)
+                EdgePoint(point = Point(x = 5, y = -4), directionOnEnter = South),
+                EdgePoint(point = Point(x = 8, y = -1), directionOnEnter = East)
             ),
         )
         assertEquals(normalListOf.toSet(), cubeWrap.mappingsFor(Point(8, -1)))
@@ -47,12 +47,12 @@ class Day22BoardCubeSetupTest {
 
         val outsideCornerListOf = listOf(
             Pair(
-                EdgePoint(point = Point(x = 4, y = -4), directionOnEnter = Down),
-                EdgePoint(point = Point(x = 8, y = 0), directionOnEnter = Right)
+                EdgePoint(point = Point(x = 4, y = -4), directionOnEnter = South),
+                EdgePoint(point = Point(x = 8, y = 0), directionOnEnter = East)
             ),
             Pair(
-                EdgePoint(point = Point(x = 3, y = -4), directionOnEnter = Down),
-                EdgePoint(point = Point(x = 8, y = 0), directionOnEnter = Down)
+                EdgePoint(point = Point(x = 3, y = -4), directionOnEnter = South),
+                EdgePoint(point = Point(x = 8, y = 0), directionOnEnter = South)
             )
         )
 

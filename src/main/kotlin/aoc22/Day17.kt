@@ -147,7 +147,7 @@ object Day17Domain {
         var drop: Long = 0
         var jet = 0
 
-        private fun Shape.moveToStart(): Shape = move(Up, by = floor.height() + 4).move(Right, by = 2)
+        private fun Shape.moveToStart(): Shape = move(North, by = floor.height() + 4).move(East, by = 2)
         private fun Shape.isInAir(): Boolean = floor.takeLast(200).intersect(points).isEmpty()
         private fun Shape.isInChamber(): Boolean = points.map { it.x }.all { it in width }
         private fun Shape.moveIfValid(direction: Direction): Shape =
@@ -159,9 +159,9 @@ object Day17Domain {
                 shape =
                     shape
                         .moveIfValid(direction = jets.nth(jet++))
-                        .move(Down)
+                        .move(South)
             }
-            floor.addAll(shape.move(Up).points).also { monitor?.invoke(floor.toSet()) }
+            floor.addAll(shape.move(North).points).also { monitor?.invoke(floor.toSet()) }
         }
 
         private fun <T> List<T>.nth(n: Int): T = this[(n % size)]
@@ -242,8 +242,8 @@ object Day17Parser {
     fun List<String>.toJets(): List<Direction> =
         this[0].map {
             when (it) {
-                '>' -> Right
-                '<' -> Left
+                '>' -> East
+                '<' -> West
                 else -> error("direction $it not found")
             }
         }

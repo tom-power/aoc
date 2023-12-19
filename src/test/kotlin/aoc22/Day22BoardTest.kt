@@ -24,7 +24,7 @@ class Day22BoardTest {
 
     @Test
     fun `can move with rights`() {
-        assertEquals(State(Point(x = 0, y = 0), Up), openBoard.follow("3R3R3R3".toPath()))
+        assertEquals(State(Point(x = 0, y = 0), North), openBoard.follow("3R3R3R3".toPath()))
 //        board.monitor.print()
 //        ^..>
 //        ....
@@ -34,7 +34,7 @@ class Day22BoardTest {
 
     @Test
     fun `can move with lefts`() {
-        assertEquals(State(Point(x = 0, y = 0), Left), openBoard.follow("R3L3L3L3".toPath()))
+        assertEquals(State(Point(x = 0, y = 0), West), openBoard.follow("R3L3L3L3".toPath()))
 //         board.monitor.print()
 //         v..^
 //         ....

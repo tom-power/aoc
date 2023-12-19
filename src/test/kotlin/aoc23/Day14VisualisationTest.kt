@@ -14,25 +14,25 @@ import visualisation.animate
 class Day14VisualisationTest {
     @Test
     fun `part one visualisation up`() {
-        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.Up)
+        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.North)
             .animate(frameDuration = 1000)
     }
 
     @Test
     fun `part one visualisation left`() {
-        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.Left)
+        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.West)
             .animate(frameDuration = 1000)
     }
 
     @Test
     fun `part one visualisation down`() {
-        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.Down)
+        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.South)
             .animate(frameDuration = 1000)
     }
 
     @Test
     fun `part one visualisation right`() {
-        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.Right)
+        framesFor(input = Day14.readInputExample(), cycles = 1, direction = Space2D.Direction.East)
             .animate(frameDuration = 1000)
     }
 

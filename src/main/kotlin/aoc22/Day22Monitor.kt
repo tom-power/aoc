@@ -49,10 +49,10 @@ class StateMonitor(
                     ?: states.lastOrNull { it.point == point }
                         ?.let {
                             when (it.facing) {
-                                Right -> ">"
-                                Down -> "v"
-                                Left -> "<"
-                                Up -> "^"
+                                East -> ">"
+                                South -> "v"
+                                West -> "<"
+                                North -> "^"
                             }
                         }
                     ?: items.lastOrNull { it.point == point }?.let {

@@ -56,11 +56,11 @@ object Day11Domain {
         this.map { point ->
             point
                 .move(
-                    direction = Space2D.Direction.Up,
+                    direction = Space2D.Direction.North,
                     by = (expandUpFromY.count { it < point.y } * (emptySpaceMultiplier - 1))
                 )
                 .move(
-                    direction = Space2D.Direction.Right,
+                    direction = Space2D.Direction.East,
                     by = (expandRightFromX.count { it < point.x } * (emptySpaceMultiplier - 1))
                 )
         }.toSet()

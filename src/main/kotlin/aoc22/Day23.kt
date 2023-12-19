@@ -39,8 +39,8 @@ object Day23Runner {
         private val stopAtNoMove: Boolean = false,
         private val monitor: Monitor<Elves>? = null,
     ) {
-        private var startingDirection: Direction = Up
-        private val directions: List<Direction> = listOf(Up, Down, Left, Right)
+        private var startingDirection: Direction = North
+        private val directions: List<Direction> = listOf(North, South, West, East)
 
         fun until(round: Int): State =
             (1..round).fold(State(elves, 1)) { acc, index ->
@@ -98,8 +98,8 @@ object Day23Runner {
 
             private fun perpendicularDirections(direction: Direction): List<Direction> =
                 when (direction) {
-                    Right, Left -> listOf(Up, Down)
-                    Up, Down -> listOf(Left, Right)
+                    East, West -> listOf(North, South)
+                    North, South -> listOf(West, East)
                 }
 
             private fun List<Direction>.startingAt(direction: Direction): List<Direction> {

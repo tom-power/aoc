@@ -18,7 +18,7 @@ class Day22BoardCubeTest {
 
     @Test
     fun `can wrap`() {
-        assertEquals(State(Point(x = 4, y = -4), Down), exampleCubeBoard.follow("RR1".toPath()))
+        assertEquals(State(Point(x = 4, y = -4), South), exampleCubeBoard.follow("RR1".toPath()))
 //        exampleCubeBoard.monitor.print()
 //                <..#
 //                .#..
@@ -36,7 +36,7 @@ class Day22BoardCubeTest {
 
     @Test
     fun `can wrap 2`() {
-        assertEquals(State(Point(x = 14, y = -10), Down), exampleCubeBoard.follow("10R5L5".toPath()))
+        assertEquals(State(Point(x = 14, y = -10), South), exampleCubeBoard.follow("10R5L5".toPath()))
 //        exampleCubeBoard.monitor.print()
 //                ..v#
 //                .#..
