@@ -13,7 +13,7 @@ import java.util.*
 object Day14 : Year23 {
     fun List<String>.part1(): Int =
         toParabolicReflectorDish()
-            .apply { tiltTo(Up) }
+            .apply { tiltTo(North) }
             .calculateLoad()
 
     fun List<String>.part2(): Int =
@@ -84,17 +84,17 @@ object Day14Domain {
         }
 
         private fun singleSpinCycle() {
-            listOf(Up, Left, Down, Right).forEach(::tiltTo)
+            listOf(North, West, South, East).forEach(::tiltTo)
         }
     }
 }
 
 private fun MutableMap<Point, Char>.sortFor(direction: Direction): SortedMap<Point, Char> =
     when (direction) {
-        Right -> this.toSortedMap(rightComparator).reversed()
-        Down -> this.toSortedMap()
-        Left -> this.toSortedMap(rightComparator)
-        Up -> this.toSortedMap().reversed()
+        East -> this.toSortedMap(rightComparator).reversed()
+        South -> this.toSortedMap()
+        West -> this.toSortedMap(rightComparator)
+        North -> this.toSortedMap().reversed()
     }
 
 private val rightComparator = Comparator<Point> { o1, o2 ->

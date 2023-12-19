@@ -68,10 +68,10 @@ object Day09Solution {
 
     private fun String.toDirection(): Direction =
         when (this) {
-            "U" -> Up
-            "R" -> Right
-            "D" -> Down
-            "L" -> Left
+            "U" -> North
+            "R" -> East
+            "D" -> South
+            "L" -> West
             else -> error("don't know")
         }
 

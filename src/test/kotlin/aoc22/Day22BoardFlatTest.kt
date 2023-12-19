@@ -28,7 +28,7 @@ class Day22BoardFlatTest {
 
     @Test
     fun `can wrap offset`() {
-        assertEquals(State(Point(x = 6, y = -6), Up), offsetBoard.follow("3R5R1R2".toPath()))
+        assertEquals(State(Point(x = 6, y = -6), North), offsetBoard.follow("3R5R1R2".toPath()))
 //        offsetBoard.monitor.print()
 //        ...v
 //        ....
@@ -51,7 +51,7 @@ class Day22BoardFlatTest {
 
     @Test
     fun `can wrap wall`() {
-        assertEquals(State(Point(x = 2, y = 0), Right), wallBoard.follow("3".toPath())) // blocked by wall
-        assertEquals(State(Point(x = 0, y = 0), Left), wallBoard.follow("RR1".toPath())) // blocked by wall on loop
+        assertEquals(State(Point(x = 2, y = 0), East), wallBoard.follow("3".toPath())) // blocked by wall
+        assertEquals(State(Point(x = 0, y = 0), West), wallBoard.follow("RR1".toPath())) // blocked by wall on loop
     }
 }

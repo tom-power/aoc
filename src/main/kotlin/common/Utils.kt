@@ -91,18 +91,18 @@ object Space2D {
     fun List<PointChar>.getFor(point: Point): PointChar? = this.singleOrNull { it.point == point }
 
     enum class Direction {
-        Right, Down, Left, Up;
+        East, South, West, North;
     }
 
     fun Direction.opposite(): Direction =
         when (this) {
-            Right -> Left
-            Down -> Up
-            Left -> Right
-            Up -> Down
+            East -> West
+            South -> North
+            West -> East
+            North -> South
         }
 
-    val clockWiseDirections = listOf(Right, Down, Left, Up)
+    val clockWiseDirections = listOf(East, South, West, North)
 
     fun Direction.turn(side: Side): Direction =
         clockWiseDirections.let {
@@ -123,10 +123,10 @@ object Space2D {
     ) : Comparable<Point> {
         fun move(direction: Direction, by: Int = 1): Point =
             when (direction) {
-                Up -> copy(y = y + by)
-                Right -> copy(x = x + by)
-                Down -> copy(y = y - by)
-                Left -> copy(x = x - by)
+                North -> copy(y = y + by)
+                East -> copy(x = x + by)
+                South -> copy(y = y - by)
+                West -> copy(x = x - by)
             }
 
         fun adjacent(): Set<Point> = Direction.entries.map { this.move(it) }.toSet()
@@ -146,10 +146,10 @@ object Space2D {
             val yDelta = (other.y - y).sign
 
             return when {
-                yDelta > 0 -> Up
-                xDelta > 0 -> Right
-                yDelta < 0 -> Down
-                xDelta < 0 -> Left
+                yDelta > 0 -> North
+                xDelta > 0 -> East
+                yDelta < 0 -> South
+                xDelta < 0 -> West
                 else -> error("no direction")
             }
         }
@@ -180,17 +180,22 @@ object Space2D {
 
     context(Collection<Point>)
     fun Axis.toRange(): IntRange {
-        fun Point.axisValue(axis: Axis): Int =
-            when (axis) {
-                Axis.X -> this.x
-                Axis.Y -> this.y
-            }
-
-        fun min(): Int = minByOrNull { it.axisValue(this) }?.axisValue(this) ?: 0
-        fun max(): Int = maxByOrNull { it.axisValue(this) }?.axisValue(this) ?: 0
-
         return min()..max()
     }
+
+    context(Collection<Point>)
+    fun Axis.min(): Int = minByOrNull { it.axisValue(this) }?.axisValue(this) ?: 0
+
+    context(Collection<Point>)
+    fun Axis.max(): Int = maxByOrNull { it.axisValue(this) }?.axisValue(this) ?: 0
+
+    private
+    fun Point.axisValue(axis: Axis): Int =
+        when (axis) {
+            Axis.X -> this.x
+            Axis.Y -> this.y
+        }
+
 
     fun Collection<Point>.toLoggable(
         highlight: Set<Point>? = null,
@@ -227,7 +232,7 @@ object Space2D {
     fun Collection<Point>.height(): Int = maxOf { it.y }
 
 
-    fun Collection<Space2D.Point>.toEdges(): Collection<Space2D.Point> {
+    fun Collection<Point>.toEdges(): Collection<Point> {
         val minX = this.minOfOrNull { it.x }
         val maxX = this.maxOfOrNull { it.x }
         val minY = this.minOfOrNull { it.y }

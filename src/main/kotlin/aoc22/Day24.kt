@@ -130,10 +130,10 @@ object Day24Domain {
 
             private fun Blizzard.wallJumpPoint(): Point =
                 when (this.direction) {
-                    Direction.Up -> this.point.copy(y = wallPoints.minBy { it.y }.y + 1)
-                    Direction.Right -> this.point.copy(x = wallPoints.minBy { it.x }.x + 1)
-                    Direction.Down -> this.point.copy(y = wallPoints.maxBy { it.y }.y - 1)
-                    Direction.Left -> this.point.copy(x = wallPoints.maxBy { it.x }.x - 1)
+                    Direction.North -> this.point.copy(y = wallPoints.minBy { it.y }.y + 1)
+                    Direction.East -> this.point.copy(x = wallPoints.minBy { it.x }.x + 1)
+                    Direction.South -> this.point.copy(y = wallPoints.maxBy { it.y }.y - 1)
+                    Direction.West -> this.point.copy(x = wallPoints.maxBy { it.x }.x - 1)
                 }
 
             private fun List<ValleyLocation>.updateClear(): Set<ValleyLocation> {
@@ -163,10 +163,10 @@ object Day24Parser {
 
     private fun Char.toDirection(): Direction =
         when (this) {
-            '>' -> Direction.Right
-            '^' -> Direction.Up
-            '<' -> Direction.Left
-            'v' -> Direction.Down
+            '>' -> Direction.East
+            '^' -> Direction.North
+            '<' -> Direction.West
+            'v' -> Direction.South
             else -> error("argh")
         }
 
@@ -198,10 +198,10 @@ object Day24Monitoring {
         when (this) {
             is Day24Domain.Floor -> when (this) {
                 is Blizzard -> when (this.direction) {
-                    Direction.Right -> ">"
-                    Direction.Down -> "V"
-                    Direction.Left -> "<"
-                    Direction.Up -> "^"
+                    Direction.East -> ">"
+                    Direction.South -> "V"
+                    Direction.West -> "<"
+                    Direction.North -> "^"
                 }
 
                 is Clear -> "."

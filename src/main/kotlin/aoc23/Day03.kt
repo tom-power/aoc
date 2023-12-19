@@ -77,7 +77,7 @@ object Day03Domain {
 
         private fun getDigitsToRightOf(pointCharThatHasDigit: PointChar): List<PointChar> =
             generateSequence(pointCharThatHasDigit) { pointChar ->
-                input.getFor(pointChar.point.move(Space2D.Direction.Right))?.takeIf { it.isDigit() }
+                input.getFor(pointChar.point.move(Space2D.Direction.East))?.takeIf { it.isDigit() }
             }.toList()
 
         private fun PointChar.isSymbol(): Boolean = !char.isDigit() && char != '.'

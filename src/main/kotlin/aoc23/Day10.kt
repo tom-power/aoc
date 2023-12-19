@@ -141,12 +141,12 @@ object Day10Domain {
 
         private val pipeDirectionMap: Map<Char, Pair<Direction, Direction>> =
             mapOf(
-                '7' to Pair(Left, Down),
-                'J' to Pair(Up, Left),
-                'L' to Pair(Up, Right),
-                'F' to Pair(Right, Down),
-                '|' to Pair(Up, Down),
-                '-' to Pair(Right, Left),
+                '7' to Pair(West, South),
+                'J' to Pair(North, West),
+                'L' to Pair(North, East),
+                'F' to Pair(East, South),
+                '|' to Pair(North, South),
+                '-' to Pair(East, West),
             )
     }
 }
