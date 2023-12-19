@@ -8,17 +8,19 @@ testYear="src/test/kotlin/aoc$year"
 testResourcesYear="src/test/resources/aoc$year"
 
 mkdir -p "$mainYear" &&
-cp "$mainTemplate/Day00.kt" "$mainYear/Day$1.kt" &&
-sed -i "s/Year00/Year$year/g" "$mainYear/Day$1.kt" &&
-sed -i "s/00/$1/g" "$mainYear/Day$1.kt" &&
-sed -i "s/template/aoc$year/" "$mainYear/Day$1.kt" &&
+cp "$mainTemplate/Day00.kt" "$mainYear/Day$day.kt" &&
+sed -i "s/Year00/Year$year/g" "$mainYear/Day$day.kt" &&
+sed -i "s/00/$day/g" "$mainYear/Day$day.kt" &&
+sed -i "s/template/aoc$year/" "$mainYear/Day$day.kt" &&
 
 mkdir -p "$testYear" &&
-cp "$testTemplate/Day00Test.kt" "$testYear/Day$1Test.kt" &&
-sed -i "s/Year00/Year$year/g" "$testYear/Day$1Test.kt" &&
-sed -i "s/00/$1/g" "$testYear/Day$1Test.kt" &&
-sed -i "s/template/aoc$year/" "$testYear/Day$1Test.kt" &&
+cp "$testTemplate/Day00Test.kt" "$testYear/Day$dayTest.kt" &&
+sed -i "s/Year00/Year$year/g" "$testYear/Day$dayTest.kt" &&
+sed -i "s/00/$day/g" "$testYear/Day$dayTest.kt" &&
+sed -i "s/template/aoc$year/" "$testYear/Day$dayTest.kt" &&
 
 mkdir -p "$testResourcesYear"  &&
-touch "$testResourcesYear/Day$1.txt" &&
-touch "$testResourcesYear/Day$1_example.txt"
+touch "$testResourcesYear/Day$day.txt" &&
+touch "$testResourcesYear/Day$day_example.txt" &&
+
+mob start  --include-uncommitted-changes --branch "day$day"
