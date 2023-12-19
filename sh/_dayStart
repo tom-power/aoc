@@ -1,0 +1,11 @@
+#compdef dayStart.sh
+
+_adventDays() {
+  days=()
+    for i in {1..25}; do
+      days+=("$i")
+    done
+  compadd -a days
+}
+
+_arguments ": :_adventDays"
