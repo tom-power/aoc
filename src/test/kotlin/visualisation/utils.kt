@@ -1,18 +1,17 @@
 package visualisation
 
-import common.Space2D
-import common.Space2D.toMaxPoints
 import com.varabyte.kotter.foundation.anim.text
 import com.varabyte.kotter.foundation.anim.textAnimOf
 import com.varabyte.kotter.foundation.session
 import java.time.Duration
 
-internal fun List<String>.animate(frameDuration: Long = 100) {
+internal fun List<String>.animate(frameDuration: Long = 100, looping: Boolean = true) {
     session {
         val framesAnim =
             textAnimOf(
                 frames = this@animate,
                 frameDuration = Duration.ofMillis(frameDuration),
+                looping = looping,
             )
 
         section {

@@ -4,6 +4,13 @@ import common.Input.readInput
 import common.Input.readInputExample
 import aoc23.Day16.part1
 import aoc23.Day16.part2
+import common.Space2D
+import common.Space2D.Direction.*
+import common.Space2D.Parser.toPointToChars
+import common.Space2D.lastIn
+import common.Space2D.max
+import common.Space2D.min
+import common.Space2D.nextIn
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
