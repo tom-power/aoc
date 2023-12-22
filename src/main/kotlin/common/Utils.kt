@@ -1,6 +1,7 @@
 package common
 
 import common.Collections.transpose
+import common.Misc.log
 import common.Misc.next
 import common.Space2D.Direction.*
 import common.Space2D.Point
@@ -172,9 +173,33 @@ object Space2D {
                 ?: x.compareTo(other.x)
     }
 
-
     context(Collection<Point>)
     private fun Point.isEdge(): Boolean = this in toMaxPoints()
+
+    context(Collection<Point>)
+    fun Point.nextIn(direction: Direction): Point? =
+        when (direction) {
+            East -> filter { it.y == this.y && it.x > this.x }.minByOrNull { it.x }
+            South -> filter { it.x == this.x && it.y < this.y }.maxByOrNull { it.y }
+            West -> filter { it.y == this.y && it.x < this.x }.maxByOrNull { it.x }
+            North -> filter { it.x == this.x && it.y > this.y }.minByOrNull { it.y }
+        }
+
+    context(Collection<Point>)
+    fun Point.lastIn(direction: Direction): Point =
+        when (direction) {
+            East -> Point(Axis.X.max(), this.y)
+            South -> Point(this.x, Axis.Y.min())
+            West -> Point(Axis.X.min(), this.y)
+            North -> Point(this.x, Axis.Y.max())
+        }
+
+    val Collection<Point>.topLeft: Point
+        get() =
+            Point(
+                x = Axis.X.min(),
+                y = Axis.Y.max()
+            )
 
     enum class Axis { X, Y }
 
@@ -195,7 +220,6 @@ object Space2D {
             Axis.X -> this.x
             Axis.Y -> this.y
         }
-
 
     fun Collection<Point>.toLoggable(
         highlight: Set<Point>? = null,
@@ -221,6 +245,23 @@ object Space2D {
         }
     }
 
+    fun Map<Point, Char>.toLoggable(
+        highlight: Set<Point>? = null,
+        highlightWith: String = "*",
+    ): String {
+        return with(this.keys) {
+            Axis.Y.toRange().reversed().joinToString(System.lineSeparator()) { y ->
+                Axis.X.toRange().joinToString("") { x ->
+                    val point = Point(x, y)
+                    when {
+                        highlight?.contains(point) == true -> highlightWith
+                        else -> this@toLoggable[point].toString()
+                    }
+                }
+            }
+        }
+    }
+
     interface HasPoints {
         val points: Collection<Point>
         fun move(direction: Direction, by: Int = 1): HasPoints
@@ -230,7 +271,6 @@ object Space2D {
     }
 
     fun Collection<Point>.height(): Int = maxOf { it.y }
-
 
     fun Collection<Point>.toEdges(): Collection<Point> {
         val minX = this.minOfOrNull { it.x }
@@ -404,6 +444,29 @@ object Maps {
 object Monitoring {
     interface Monitor<T> : (T) -> Unit {
         fun toLoggable(): List<String>
+    }
+
+    class PointCharMonitor(
+        private val canvas: Map<Point, Char> = mapOf(),
+        private val edges: Set<Point> = setOf(),
+        private val highlightWith: String = "*",
+    ) : Monitor<Map<Point, Char>> {
+        private val frames: MutableList<Set<Point>> = mutableListOf()
+        override fun toLoggable(): List<String> =
+            frames.map { frame ->
+                canvas.toLoggable(
+                    highlight = frame,
+                    highlightWith = highlightWith,
+                )
+            }
+
+        override fun invoke(p1: Map<Point, Char>) {
+            TODO("Not yet implemented")
+        }
+
+        operator fun invoke(frame: Set<Point>) {
+            frames.add(frame)
+        }
     }
 
     open class PointMonitor(
