@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 import visualisation.animate
 import kotlin.test.assertEquals
 
-@Tag("visualisation")
+@Tag("slow")
 class Day16VisualisationTest {
     @Nested
     inner class PartOne {
