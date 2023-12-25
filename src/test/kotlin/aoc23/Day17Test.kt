@@ -46,12 +46,12 @@ class Day17Test {
     inner class PartTwo {
         @Test
         fun `part two example`() {
-            assertEquals(0, Day17.readInputExample().part2())
+            assertEquals(94, Day17.readInputExample().part2())
         }
 
         @Test
         fun `part two`() {
-            assertEquals(0, Day17.readInput().part2())
+            assertEquals(1268, Day17.readInput().part2())
         }
     }
 }
