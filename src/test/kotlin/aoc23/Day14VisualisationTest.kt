@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import visualisation.animate
 
-@Tag("visualisation")
+@Tag("slow")
 class Day14VisualisationTest {
     @Test
     fun `part one visualisation up`() {

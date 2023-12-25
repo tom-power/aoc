@@ -5,6 +5,7 @@ import aoc23.Day16Domain.Contraption
 import aoc23.Day16Domain.PointDir
 import aoc23.Day16Parser.toContraption
 import common.Monitoring
+import common.Parallel.forEachParallel
 import common.Space2D
 import common.Space2D.Direction
 import common.Space2D.Direction.*
@@ -18,6 +19,7 @@ import common.Space2D.max
 import common.Space2D.min
 import common.Space2D.nextIn
 import common.Space2D.toEdges
+import common.Space2D.topLeft
 import common.Space2D.turn
 import kotlinx.coroutines.*
 
@@ -149,11 +151,6 @@ private fun PointDir.pointDirsUntil(nextPoint: Point): List<PointDir> =
             )
         }
 
-private fun <T> Iterable<T>.forEachParallel(fn: suspend (T) -> Unit): Unit =
-    runBlocking {
-        forEach { async(Dispatchers.Default) { fn(it) } }
-    }
-
 context(Collection<Point>)
 private fun Point.toDirectionFromEdge(): Direction =
     when {
@@ -163,13 +160,6 @@ private fun Point.toDirectionFromEdge(): Direction =
         this.y == Space2D.Axis.Y.max() -> South
         else -> error("bad")
     }
-
-private val Collection<Point>.topLeft: Point
-    get() =
-        Point(
-            x = Space2D.Axis.X.min(),
-            y = Space2D.Axis.Y.max()
-        )
 
 private val tileDiversionMap: Map<Char, Map<List<Direction>, List<Side>>> =
     mapOf(
