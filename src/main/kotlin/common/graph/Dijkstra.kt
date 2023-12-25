@@ -30,12 +30,12 @@ abstract class Dijkstra<T, NodeT : Node<T>>(
             queue.add(State(Edge(start(), 0), 0, listOf()))
 
             while (queue.isNotEmpty()) {
-                val (current, acc, list) = queue.poll()
+                val (current, cost, nodes) = queue.poll()
 
                 if (isEnd(current.node)) {
-                    return (acc + current.cost).also {
+                    return (cost + current.cost).also {
                         if (monitoring) {
-                            shortestPaths.add(Pair(list + current.node, acc + current.cost))
+                            shortestPaths.add(Pair(nodes + current.node, cost + current.cost))
                         }
                     }
                 }
@@ -46,8 +46,8 @@ abstract class Dijkstra<T, NodeT : Node<T>>(
                         .map { next ->
                             State(
                                 edge = next,
-                                cost = acc + current.cost,
-                                path = if (monitoring) list + current.node else listOf()
+                                cost = cost + current.cost,
+                                nodes = if (monitoring) nodes + current.node else listOf()
                             )
                         }
 
@@ -61,7 +61,7 @@ abstract class Dijkstra<T, NodeT : Node<T>>(
     data class State<T, NodeT : Node<T>>(
         val edge: Edge<T, NodeT>,
         val cost: Int,
-        val path: List<Node<T>>
+        val nodes: List<Node<T>>
     ) : Comparable<State<T, NodeT>> {
         override fun compareTo(other: State<T, NodeT>): Int =
             value().compareTo(other.value())

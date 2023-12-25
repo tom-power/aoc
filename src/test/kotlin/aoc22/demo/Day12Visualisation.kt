@@ -19,8 +19,8 @@ private fun framesFor(input: List<String>): List<String> =
         .also { monitor ->
             input.toHeightMap(monitor = monitor).run {
                 shortestPath(
-                    begin = start,
-                    isDestination = { it == end },
+                    begin = startPoint,
+                    isDestination = { it == endPoint },
                     canMove = { from, to -> to - from <= 1 }
                 )
             }
