@@ -1,9 +1,10 @@
 package aoc23
 
 import aoc23.Day17Domain.City
+import aoc23.Day17Domain.City.BlockNode
 import aoc23.Day17Parser.toCity
-import aoc23.Day17Solution.part2Day17
-import common.Misc.log
+import aoc23.Day17Solution.fourToTenStepsDirectionPredicate
+import aoc23.Day17Solution.threeStepsDirectionPredicate
 import common.Monitoring
 import common.Space2D
 import common.Space2D.Direction
@@ -21,15 +22,30 @@ import common.graph.Node
 object Day17 : Year23 {
     fun List<String>.part1(): Int =
         toCity()
-            .leastHeatLoss()
+            .leastHeatLoss(threeStepsDirectionPredicate)
 
-    fun List<String>.part2(): Int = part2Day17()
+    fun List<String>.part2(): Int =
+        toCity()
+            .leastHeatLoss(fourToTenStepsDirectionPredicate)
 }
 
+typealias DirectionPredicate = (BlockNode, Direction) -> Boolean
+
 object Day17Solution {
-    fun List<String>.part2Day17(): Int =
-        toCity().log()
-            .let { 0 }
+    val threeStepsDirectionPredicate: DirectionPredicate = { node, nextDirection ->
+        when {
+            node.directionCount > 2 -> nextDirection != node.direction
+            else -> true
+        }
+    }
+
+    val fourToTenStepsDirectionPredicate: DirectionPredicate = { node, nextDirection ->
+        when {
+            node.directionCount < 4 -> nextDirection == node.direction
+            node.directionCount > 9 -> nextDirection != node.direction
+            else -> true
+        }
+    }
 }
 
 object Day17Domain {
@@ -37,8 +53,8 @@ object Day17Domain {
         val blockMap: Map<Point, Int>,
         val monitor: Monitoring.PointCharMonitor? = null
     ) {
-        fun leastHeatLoss(): Int =
-            BlockDijkstra().run {
+        fun leastHeatLoss(directionPredicate: DirectionPredicate): Int =
+            BlockDijkstra(directionPredicate).run {
                 shortestPath()
                     .also {
                         monitor?.invoke(shortestPaths.last().first.map { it.value }.toSet())
@@ -51,7 +67,9 @@ object Day17Domain {
             val direction: Direction,
         ) : Node<Point>
 
-        inner class BlockDijkstra : Dijkstra<Point, BlockNode>(monitoring = monitor != null) {
+        inner class BlockDijkstra(
+            private val directionPredicate: DirectionPredicate
+        ) : Dijkstra<Point, BlockNode>(monitoring = monitor != null) {
             private val topLeft = blockMap.keys.topLeft
             private val bottomRight = blockMap.keys.bottomRight
 
@@ -69,10 +87,8 @@ object Day17Domain {
             override fun next(node: BlockNode): List<Edge<Point, BlockNode>> =
                 with(node) {
                     Space2D.Direction.entries
-                        .filter { nextDirection ->
-                            nextDirection != direction.opposite() &&
-                                (nextDirection != direction || directionCount < 3)
-                        }
+                        .filter { nextDirection -> nextDirection != direction.opposite() }
+                        .filter { nextDirection -> directionPredicate(node, nextDirection) }
                         .map { value.move(it) to it }
                         .mapNotNull { (nextPoint, nextDirection) ->
                             blockMap[nextPoint]?.let { nextCost ->
