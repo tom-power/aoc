@@ -1,0 +1,2 @@
+in{a<3:rfg,m>1:A,rfg}
+rfg{s<3:A,x<1:A,A}
